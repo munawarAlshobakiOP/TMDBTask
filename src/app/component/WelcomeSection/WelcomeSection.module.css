@@ -1,0 +1,188 @@
+.welcomeSection {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin: 0;
+  background: linear-gradient(135deg, #032541, #01b4e4);
+  background-color: #0077a3;
+  animation: fadeIn 0.8s ease-out;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 60px;
+  text-align: left;
+  color: white;
+}
+
+.welcomeContainer {
+  max-width: 800px;
+  margin: 0;
+  text-align: left;
+}
+
+.welcomeTitle {
+  font-size: 3.5rem;
+  font-weight: 300;
+  margin: 0 0 20px 0;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: white;
+}
+
+.welcomeSubtitle {
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin: 0 0 40px 0;
+  line-height: 1.4;
+  opacity: 0.9;
+  color: white;
+}
+
+.searchForm {
+  margin-top: 30px;
+}
+
+.searchContainer {
+  display: flex;
+  max-width: 500px;
+  margin: 0;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.searchInput {
+  flex: 1;
+  border: none;
+  padding: 16px 20px;
+  font-size: 1rem;
+  outline: none;
+  background: transparent;
+  color: #333;
+}
+
+.searchInput::placeholder {
+  color: #666;
+  opacity: 0.8;
+}
+
+.searchInput:focus {
+  background: rgba(255, 255, 255, 1);
+}
+
+.searchButton {
+  background: #01b4e4;
+  color: white;
+  border: none;
+  padding: 16px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  min-width: 100px;
+}
+
+.searchButton:hover {
+  background: #0099cc;
+}
+
+.searchButton:active {
+  background: #0077a3;
+}
+
+.searchButton:focus {
+  outline: 2px solid #01b4e4;
+  outline-offset: 2px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .welcomeSection {
+    height: 400px;
+    padding: 20px 0;
+  }
+  
+  .content {
+    padding: 0 40px;
+  }
+  
+  .welcomeTitle {
+    font-size: 2.8rem;
+    margin-bottom: 15px;
+  }
+  
+  .welcomeSubtitle {
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+  }
+  
+  .searchContainer {
+    flex-direction: column;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .welcomeSection {
+    height: 350px;
+  }
+  
+  .content {
+    padding: 0 20px;
+  }
+  
+  .welcomeTitle {
+    font-size: 2.2rem;
+  }
+  
+  .welcomeSubtitle {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+  }
+  
+  .searchContainer {
+    max-width: 350px;
+  }
+  
+  .searchInput {
+    padding: 14px 18px;
+    font-size: 0.95rem;
+  }
+  
+  .searchButton {
+    padding: 14px 18px;
+    font-size: 0.95rem;
+  }
+}

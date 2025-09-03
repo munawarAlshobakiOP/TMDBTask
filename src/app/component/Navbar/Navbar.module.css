@@ -1,0 +1,344 @@
+/* Force navbar to maintain dark background and prevent white elements */
+.navbar {
+  background: #032541 !important;
+  background-color: #032541 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 0;
+  margin: 0;
+  border: none !important;
+  border-top: none !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+  background: #032541 !important;
+  background-color: #032541 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: none !important;
+}
+
+nav.navbar {
+  background: #032541 !important;
+  background-color: #032541 !important;
+  border-top: none !important;
+}
+
+nav.navbar.scrolled {
+  background: #032541 !important;
+  background-color: #032541 !important;
+  border-top: none !important;
+}
+
+.navbar,
+.navbar .navContainer,
+.navbar .brand,
+.navbar .searchSection,
+.navbar .userActions {
+  background: #032541 !important;
+  background-color: #032541 !important;
+  border-top: none !important;
+}
+
+.navbar * {
+  border-top: none !important;
+}
+
+.navbar::before,
+.navbar::after {
+  display: none !important;
+  content: none !important;
+}
+
+.navContainer::before,
+.navContainer::after {
+  display: none !important;
+  content: none !important;
+}
+
+.navbar,
+.navbar *,
+.navContainer,
+.navContainer * {
+  background-color: transparent !important;
+}
+
+.navbar {
+  background: #032541 !important;
+  background-color: #032541 !important;
+}
+
+.navContainer {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+.brand,
+.desktopNav,
+.userActions,
+.mobileMenuBtn {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+.navContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 64px;
+  transition: all 0.3s ease;
+  border-top: none !important;
+}
+
+.navbar.scrolled .navContainer {
+  height: 64px !important;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.logo {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.navbar.scrolled .logoContainer {
+  transform: scale(1) !important;
+}
+
+.logoText {
+  font-size: 24px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #01b4e4, #01d4aa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 1px;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
+  transition: all 0.3s ease;
+}
+
+.navbar.scrolled .logoText {
+  font-size: 24px !important;
+}
+
+.logoB {
+  font-size: 24px;
+  font-weight: 700;
+  color: #01b4e4;
+  letter-spacing: 1px;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
+  transition: all 0.3s ease;
+}
+
+.navbar.scrolled .logoB {
+  font-size: 24px !important;
+}
+
+.logoExtension {
+  width: 20px;
+  height: 8px;
+  background: #01b4e4;
+  border-radius: 4px;
+  margin-left: 2px;
+  transition: all 0.3s ease;
+}
+
+.navbar.scrolled .logoExtension {
+  width: 20px !important;
+  height: 8px !important;
+}
+
+.desktopNav {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+}
+
+.navList {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 0;
+}
+
+.navItem {
+  position: relative;
+}
+
+.navLink {
+  color: #fff;
+  text-decoration: none;
+  padding: 20px 16px;
+  display: block;
+  font-weight: 500;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
+  position: relative;
+  letter-spacing: 0.3px;
+}
+
+.navbar.scrolled .navLink {
+  padding: 20px 16px !important;
+  font-size: 15px !important;
+}
+
+
+
+.userActions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.navbar.scrolled .userActions {
+  gap: 16px !important;
+}
+
+.plusIcon, .searchIcon {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+}
+
+.navbar.scrolled .plusIcon, .navbar.scrolled .searchIcon {
+  width: 36px !important;
+  height: 36px !important;
+  font-size: 18px !important;
+}
+
+
+.languageSelector {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 4px;
+  padding: 6px 12px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
+  background: transparent;
+}
+
+.navbar.scrolled .languageSelector {
+  padding: 6px 12px !important;
+  font-size: 13px !important;
+}
+
+.languageSelector:hover {
+  background: #fff !important;
+  color: #032541 !important;
+  border-color: #fff !important;
+  transform: translateY(-1px);
+}
+
+.loginBtn, .joinBtn {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
+}
+
+.navbar.scrolled .loginBtn, .navbar.scrolled .joinBtn {
+  padding: 8px 16px !important;
+  font-size: 13px !important;
+}
+
+
+@media (max-width: 1024px) {
+  .navContainer {
+    padding: 0 15px;
+  }
+  
+  .navLink {
+    padding: 18px 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .desktopNav, .userActions {
+    display: none;
+  }
+  
+  .mobileMenuBtn {
+    display: flex;
+  }
+  
+  .navContainer {
+    height: 64px;
+    position: relative;
+  }
+  
+  .logoText, .logoB {
+    font-size: 20px;
+  }
+  
+  .logoExtension {
+    width: 16px;
+    height: 6px;
+  }
+  
+ 
+}
+
+@media (max-width: 480px) {
+  .navContainer {
+    padding: 0 10px;
+  }
+  
+  .logoText, .logoB {
+    font-size: 18px;
+  }
+  
+  .logoExtension {
+    width: 14px;
+    height: 5px;
+  }
+  
+  .mobileNavLink,
+  .mobileLoginBtn,
+  .mobileJoinBtn {
+    padding: 15px 15px;
+  }
+}

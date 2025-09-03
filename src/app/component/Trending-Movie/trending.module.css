@@ -1,0 +1,232 @@
+.trendingContainer {
+  padding: 2rem;
+  font-family: Arial;
+}
+
+.trendingTitle {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.buttonContainer {
+  margin-bottom: 1rem;
+}
+
+.periodButton {
+  padding: 0.5rem 1rem;
+  margin-right: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.periodButton.active {
+  background-color: #0070f3;
+  color: #fff;
+}
+
+.periodButton.inactive {
+  background-color: #eaeaea;
+  color: #000;
+}
+
+.periodButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.moviesContainer {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: #0070f3 #f0f0f0;
+}
+
+.moviesContainer::-webkit-scrollbar {
+  height: 8px;
+}
+
+.moviesContainer::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 4px;
+}
+
+.moviesContainer::-webkit-scrollbar-thumb {
+  background: #0070f3;
+  border-radius: 4px;
+}
+
+.moviesContainer::-webkit-scrollbar-thumb:hover {
+  background: #0056b3;
+}
+
+.movieCard {
+  width: 200px;
+  min-width: 200px;
+  max-width: 200px;
+  height: 420px;
+  text-align: center;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.movieCard:hover {
+  transform: translateY(-5px);
+}
+
+.moviePoster {
+  border-radius: 8px;
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s ease;
+}
+
+.movieCard:hover .moviePoster {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.movieTitle {
+  margin: 10px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.2;
+  max-width: 180px;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.movieRating {
+  margin: 5px 0;
+  color: #0070f3;
+  font-weight: 500;
+  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  min-height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.movieYear {
+  font-size: 14px;
+  color: #666;
+  margin: 5px 0;
+  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  min-height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.noImage {
+  width: 200px;
+  height: 300px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-size: 14px;
+  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .trendingContainer {
+    padding: 1rem;
+  }
+  
+  .trendingTitle {
+    font-size: 1.5rem;
+  }
+  
+  .periodButton {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+  
+  .movieCard {
+    width: 160px;
+    min-width: 160px;
+    max-width: 160px;
+    height: 340px;
+  }
+  
+  .moviePoster {
+    width: 160px;
+    height: 240px;
+  }
+  
+  .movieTitle {
+    font-size: 14px;
+  }
+}
+
+#trending_scroller.media.discover.scroller_wrap.should_fade.is_fading {
+  width: 100%;
+  max-width: 600px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+.column_content.flex.scroller.loaded {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 1rem;
+  box-sizing: border-box;
+}
+
+.card.style_1 {
+  background: #fff;
+  border-radius: var(--imageBorderRadius);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  width: 180px;
+  min-width: 180px;
+  max-width: 180px;
+  flex: 0 0 180px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.image {
+  position: relative;
+  width: 180px;
+  height: 270px;
+  overflow: hidden;
+  border-radius: var(--imageBorderRadius) var(--imageBorderRadius) 0 0;
+  box-sizing: border-box;
+}
+
+.poster {
+  width: 180px;
+  height: 270px;
+  object-fit: cover;
+  border-radius: var(--imageBorderRadius) var(--imageBorderRadius) 0 0;
+}
