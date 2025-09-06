@@ -1,12 +1,16 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import DonutChart from '../../DonutChart/DonutChart';
+import styles from '../trending.module.css';
 
 const API_KEY = 'e2161fa6a40f29be185672567ac4df00';
+
 
 const TrendingWeekMovies = () => {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const scrollContainerRef = useRef(null);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -14,7 +18,7 @@ const TrendingWeekMovies = () => {
         setLoading(true);
         setError(null);
         
-  const url = `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`;
+        const url = `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`;
         
         const response = await fetch(url);
         
@@ -35,8 +39,9 @@ const TrendingWeekMovies = () => {
     fetchMovies();
   }, []);
 
+
   return (
-    <div style={{ padding: '1rem', fontFamily: 'Arial' }}>
+    <div style={{ padding: '1rem', fontFamily: 'Arial', maxWidth: '100%', overflow: 'hidden' }}>
       
       {error && (
         <p style={{ color: 'red', textAlign: 'center' }}>
@@ -49,21 +54,13 @@ const TrendingWeekMovies = () => {
       ) : movies.length === 0 ? (
         <p style={{ textAlign: 'center' }}>No movies found.</p>
       ) : (
-        <div style={{ 
-          display: 'flex', 
-          overflowX: 'auto', 
-          gap: '1rem', 
-          paddingBottom: '1rem',
-          scrollBehavior: 'smooth',
-          WebkitOverflowScrolling: 'touch'
-        }}>
+        <div ref={scrollContainerRef} className={styles.trendingScroller}>
           {movies.map(movie => (
-            <div key={movie.id} style={{ minWidth: '180px', maxWidth: '180px', textAlign: 'center', flexShrink: 0 }}>
+            <div key={movie.id} className={styles.trendingCard}>
               {movie.poster_path ? (
                 <img
                   src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
                   alt={movie.title}
-                  style={{ borderRadius: '8px', width: '180px', height: '270px', objectFit: 'cover' }}
                 />
               ) : (
                 <div style={{ 
@@ -79,10 +76,17 @@ const TrendingWeekMovies = () => {
                   No Image
                 </div>
               )}
-              <h4 style={{ margin: '10px 0', fontSize: '16px' }}>{movie.title}</h4>
-              <p style={{ margin: '5px 0' }}> {movie.vote_average ? Math.round(movie.vote_average * 10) / 10 : 'N/A'}</p>
-              <p style={{ fontSize: '0.9rem', color: '#555', margin: '5px 0' }}>
-                {movie.release_date ? new Date(movie.release_date).getFullYear() : 'Unknown'}
+              <h4>{movie.title}</h4>
+              <div className={styles.movieRating}>
+                <DonutChart percentage={movie.vote_average ? Math.round(movie.vote_average * 10) : 0} size={34} />
+              </div>
+              <p>
+                {movie.release_date ? 
+                  new Date(movie.release_date).toLocaleDateString('en-US', { 
+                    day: 'numeric',
+                    month: 'long', 
+                    year: 'numeric' 
+                  }) : 'Unknown'}
               </p>
             </div>
           ))}

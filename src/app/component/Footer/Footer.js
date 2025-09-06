@@ -7,12 +7,12 @@ const Footer = () => {
     <footer className={styles.footer}>
       <div className={styles.footerContainer}>
         <div className={styles.footerBottomContentMain}>
-          <div className={styles.footerLogoLeft}>
-            <Image src="/icon/logoF.png" alt="Logo" width={80} height={80} />
-            <span className={styles.footerLogoSubtext}>Join the Community</span>
-          </div>
           <div className={styles.footerContentRight}>
             <div className={styles.footerContent}>
+              <div className={styles.footerLogoSection}>
+                <Image src="/assests/icon/footerlogo.svg" alt="Logo" width={130} height={90} />
+                <button className={styles.joinCommunityBtn}>Join the Community</button>
+              </div>
               <div className={styles.footerSection}>
                 <h3 className={styles.footerTitle}>The Basics</h3>
                 <ul className={styles.footerList}>

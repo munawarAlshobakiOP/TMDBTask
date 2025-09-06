@@ -5,7 +5,7 @@ import { FetchingCast, FetchingDetails } from "@/app/component/Details/fetching/
 import MediaDetailsContainer from "@/app/component/Details/cardDetails";
 import CastSection from "@/app/component/Details/casts/castsDetail";
 import Navbar from "../../component/Navbar/Navbar";
-
+import Footer from "../../component/Footer/Footer";
 export default function MoviePage({ params }) {
   const { movieDslug } = use(params);
   const mediaType = "movie"; 
@@ -41,16 +41,6 @@ export default function MoviePage({ params }) {
     }
   }, [movieDslug, mediaType]);
 
-  if (isLoading) {
-    return (
-      <div style={{ backgroundColor: '#ffffff', minHeight: '100vh' }}>
-        <Navbar />
-        <div style={{ padding: '20px', textAlign: 'center' }}>
-          <p>Loading movie details and cast...</p>
-        </div>
-      </div>
-    );
-  }
 
   if (error) {
     return (
@@ -93,6 +83,7 @@ export default function MoviePage({ params }) {
           <CastSection cast={castData} />
         </div>
       </main>
+      <Footer />
     </div>
   );
 }

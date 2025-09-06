@@ -5,7 +5,7 @@ import { FetchingCast, FetchingDetails } from "@/app/component/Details/fetching/
 import MediaDetailsContainer from "@/app/component/Details/cardDetails";
 import CastSection from "@/app/component/Details/casts/castsDetail";
 import Navbar from "../../component/Navbar/Navbar";
-
+import Footer from "../../component/Footer/Footer";
 export default function TVPage({ params }) {
   const { tvSlug } = use(params);
   const mediaType = "tv"; 
@@ -80,11 +80,11 @@ export default function TVPage({ params }) {
         
         <div style={{ padding: '20px', marginTop: '20px' }}>
           <h2 style={{ marginBottom: '20px', fontSize: '24px', fontWeight: 'bold' }}>
-            Cast & Crew
-          </h2>
+Top Billed Cast          </h2>
           <CastSection cast={castData} />
         </div>
       </main>
+      <Footer />
     </div>
   );
 }

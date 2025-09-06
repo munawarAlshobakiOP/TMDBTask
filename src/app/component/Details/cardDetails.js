@@ -4,9 +4,7 @@ import Image from "next/image";
 import DonutChart from "../DonutChart/DonutChart";
 import Link from "next/link";
 export default function MediaDetailsContainer({ mediaData }) {
-  if (!mediaData) {
-    return <p className={styles.loadingText}>Loading media details...</p>;
-  }
+ 
 
   const data = mediaData;
 
@@ -32,19 +30,28 @@ export default function MediaDetailsContainer({ mediaData }) {
         backgroundSize: "cover",
         backgroundPosition: "center",
         position: "relative",
+        minHeight: "70vh",
       }}
     >
       <div
         style={{
           position: "absolute",
           inset: 0,
-          background: "rgba(17,24,39,0.85)",
+          background: "rgba(0, 0, 0, 0.6)",
           zIndex: 0,
         }}
       />
       <div
         className={styles.content}
-        style={{ position: "relative", zIndex: 1 }}
+        style={{ 
+          position: "relative", 
+          zIndex: 1,
+          display: "flex",
+          alignItems: "flex-start",
+          minHeight: "60vh",
+          padding: "1rem 1rem",
+          paddingTop: "3rem",
+        }}
       >
         <div className={styles.layout}>
           <div className={styles.poster}>
@@ -60,12 +67,12 @@ export default function MediaDetailsContainer({ mediaData }) {
 
           <div className={styles.details}>
             <h1 className={styles.title}>
-              {data.title || data.name} (
-              <span>
-                {(data.release_date || data.first_air_date)?.slice(0, 4) ??
-                  "Unknown"}
+              <span className={styles.titleName}>{data.title || data.name} </span> 
+              <span className={styles.year}>
+               ( {(data.release_date || data.first_air_date)?.slice(0, 4) ??
+                  "Unknown"} )
               </span>
-              )
+              
             </h1>
 
             <div className={styles.INfoSection}>
@@ -74,7 +81,7 @@ export default function MediaDetailsContainer({ mediaData }) {
                   {data.certificate ?? "N/A"}
                 </span>
 
-                <span className={styles.date}>
+                <span className={styles.genres}>
                   {(data.release_date || data.first_air_date) &&
                     new Date(
                       data.release_date || data.first_air_date
@@ -85,7 +92,7 @@ export default function MediaDetailsContainer({ mediaData }) {
                     })}
                 </span>
 
-                <span className={styles.separator}>•</span>
+                <span className={styles.genres}>•</span>
 
                 <span>
                   {data.genres?.length > 0 && (
@@ -97,9 +104,9 @@ export default function MediaDetailsContainer({ mediaData }) {
                   )}
                 </span>
 
-                <span className={styles.separator}>•</span>
+                <span className={styles.genres}>•</span>
 
-                <span>
+                <span className={styles.genres}>
                   {data.runtime && <p>{formatRuntime(data.runtime)}</p>}
                 </span>
               </div>
@@ -126,7 +133,7 @@ export default function MediaDetailsContainer({ mediaData }) {
                   <li title="Login to create and edit custom lists">
                     <span className="iconCircle">
                       <span
-                        className={styles.iconList}
+                        className={styles.iconHeart}
                         title="Login to create and edit custom lists"
                       >
                         <Link href="#">
@@ -137,6 +144,7 @@ export default function MediaDetailsContainer({ mediaData }) {
                             height={24}
                           />
                         </Link>
+                        <div className={styles.tooltip}>Login to create and edit custom lists</div>
                       </span>
                     </span>
                   </li>
@@ -151,6 +159,7 @@ export default function MediaDetailsContainer({ mediaData }) {
                             height={24}
                           />
                         </Link>
+                        <div className={styles.tooltip}>Add to favourites</div>
                       </span>
                     </span>
                   </li>
@@ -165,6 +174,7 @@ export default function MediaDetailsContainer({ mediaData }) {
                             height={24}
                           />
                         </Link>
+                        <div className={styles.tooltip}>Add to watchlist</div>
                       </span>
                     </span>
                   </li>

@@ -1,9 +1,14 @@
 'use client';
 import Link from 'next/link';
+import Image from 'next/image';
+import { useState, useEffect, useRef } from 'react';
 import styles from './MediaCard.module.css';
 import DonutChart from '../DonutChart/DonutChart';
 
 export default function MediaCard({ media, media_type }) {
+  const [showMoreBox, setShowMoreBox] = useState(false);
+  const cardRef = useRef(null);
+
   const imageUrl = media.poster_path
     ? `https://image.tmdb.org/t/p/w300${media.poster_path}`
     : 'https://via.placeholder.com/300x450?text=No+Image';
@@ -14,22 +19,76 @@ export default function MediaCard({ media, media_type }) {
 
   let linkUrl;
   if (media_type?.toLowerCase() === 'tv') {
-    linkUrl = `/TV/${media.id}`; 
+    linkUrl = `/TV/${media.id}`;
   } else {
-    linkUrl = `/movie/${media.id}`; 
+    linkUrl = `/movie/${media.id}`;
   }
-  
-  console.log('MediaCard - media_type:', media_type, 'media.id:', media.id, 'Generated URL:', linkUrl);
+  ////////////////////////
+  const handleMoreClick = (e) => {
+    e.preventDefault();
+    setShowMoreBox(!showMoreBox);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (cardRef.current && !cardRef.current.contains(event.target)) {
+        setShowMoreBox(false);
+      }
+    };
+    ///////////////////////////////////////////////////////////////
+    if (showMoreBox) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showMoreBox]);
+
 
   return (
-    <Link href={linkUrl} className={styles.card}>
-      <div className={styles.imageWrapper}>
-        <img src={imageUrl} alt={displayTitle} className={styles.poster} loading="lazy" />
-      </div>
-      <h3 className={styles.title}>{displayTitle}</h3>
-      <p className={styles.date}>{displayDate}</p>
-      
-      <div className={styles.score}><DonutChart percentage={score}/></div>
-    </Link>
+    <div className={styles.card} ref={cardRef}>
+      <Link href={linkUrl} className={`${styles.cardLink} ${showMoreBox ? styles.blurred : ''}`}>
+        <div className={`${styles.imageWrapper}`}>
+          <img src={imageUrl} alt={displayTitle} className={styles.poster} loading="lazy" />
+        </div>
+        <h3 className={styles.title}>{displayTitle}</h3>
+        <p className={styles.date}>{displayDate}</p>
+
+        <div className={styles.score}><DonutChart percentage={score} /></div>
+      </Link>
+
+      <button
+        onClick={handleMoreClick}
+        className={styles.moreButton}
+        type="button"
+      >
+        <Image
+          src="/assests/icon/more.png"
+          alt="more"
+          width={16}
+          height={16}
+          className={styles.more}
+        />
+      </button>
+      {showMoreBox && (
+        <div className={styles.moreBox}>
+          <div className={styles.moreBoxContent}>
+            <div>
+              <p>Want to rate or add this item to a list?
+              </p>
+              <Link href="/login" className={styles.moreBoxItem}>login</Link>
+
+            </div>
+            <div>
+              <p>Not a member?
+              </p>
+              <Link href="" className={styles.moreBoxItem}>signup </Link>
+
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }

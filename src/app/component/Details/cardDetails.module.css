@@ -1,42 +1,34 @@
 .iconHeart {
-  width: 32px;
-  height: 32px;
-  display: inline-block;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-.iconList {
-  tab-size: 4;
   font-feature-settings: normal;
   font-variation-settings: normal;
   line-height: inherit;
-  font-size: 1rem;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  border-width: 0;
-  border-style: solid;
   box-sizing: border-box;
-  padding: 0;
-
-  margin: 0;
-  list-style-type: none;
-  margin-bottom: 0;
-  width: 100%;
-  height: 68px;
+   list-style-type: none;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  color: #fff;
+  justify-content: center;
   position: relative;
+  background-color: rgb(3, 37, 65);
+  border-radius: 50%;
 }
+
+.iconHeart img {
+  filter: brightness(0) saturate(100%) invert(100%);
+}
+
 .iconPlay {
   display: flex;
   align-items: center;
   gap: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
-.iconPlay:hover{
-color:#666;
+.iconPlay:hover {
+  color: #01b4e4;
+  transform: scale(1.05);
+  transition: all 0.3s ease;
 }
 .actionList:hover{
   transform: none;
@@ -45,27 +37,32 @@ color:#666;
   visibility: hidden;
   opacity: 0;
   position: absolute;
-  left: 110%;
-  top: 50%;
-  transform: translateY(-50%);
-  background: #222;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  margin-top: 5px;
+  background:  rgb(3, 37, 65);
   color: #fff;
-  padding: 6px 12px;
-  border-radius: 4px;
-  font-size: 13px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
   white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   z-index: 10;
   transition: opacity 0.2s, visibility 0.2s;
-  pointer-events: none;
 }
 
 .iconList:hover .tooltip {
   visibility: visible;
   opacity: 1;
 }
+
+.iconHeart:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
 .vibeText {
-  font-feature-settings: normal;
-  font-variation-settings: normal;
   -webkit-tap-highlight-color: transparent;
   -webkit-text-size-adjust: 100%;
   border-radius: 9999px;
@@ -76,8 +73,6 @@ color:#666;
   cursor: pointer;
   align-items: center;
   justify-content: center;
-  transition-property: color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(.4,0,.2,1);
   font-size: 1rem;
   font-weight: 400;
 }
@@ -85,11 +80,13 @@ color:#666;
   transform: translateX(2px);
 }
 .vibeText:hover {
-  transform: translateX(2px);
+  transform: translateX(2px) scale(1.00);
+  z-index: 10;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 .Spanvibes{
   text-decoration: underline  #01b4e4;
-    text-decoration-thickness: 3px ;
+    text-decoration-thickness: 2.5px ;
 
 }
 
@@ -100,8 +97,8 @@ color:#666;
   transition: filter 0.3s, opacity 0.3s;
 }
 .poster:hover .posterImage {
-  filter: blur(1px);
-  opacity: 0.7;
+  filter: blur(0.5px);
+  opacity: 0.4;
 }
 .posterOverlay {
   position: absolute;
@@ -126,15 +123,19 @@ color:#666;
   padding: 0.75rem 1.5rem;
 }
 .certificate {
-  display: inline-block;
-  background:transparent;
-  color: #fff;
+  background: transparent;
+  color: #9ca3af;
   border-radius: 6px;
-  padding: 0.25rem 0.75rem;
-  font-size: 0.95rem;
+  padding: 0.15rem 0.65rem;
+  font-size: 0.75rem;
   font-weight: 600;
   margin-right: 0.5rem;
+  border: 1px solid #9ca3af;
   box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
 }
 .headerInfo {
   display: flex;
@@ -143,8 +144,9 @@ color:#666;
   gap: 1rem;
   font-size: 1rem;
   color: #fff;
-  padding: 0.75rem 1.25rem;
+  padding: 0.25rem 0;
   margin-bottom: 1rem;
+  margin-top: -0.5rem;
 }
 .container {
   min-height: 100vh;
@@ -180,11 +182,16 @@ color:#666;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 @media (min-width: 768px) {
   .layout {
     flex-direction: row;
+    align-items: flex-start;
+    gap: 3rem;
   }
 }
 
@@ -206,7 +213,7 @@ color:#666;
 }
 
 .cardDetails:hover .posterImage {
-  opacity: 0.8;
+  opacity: 0.5;
 }
 
 .expandOverlay {
@@ -255,10 +262,19 @@ color:#666;
   margin-bottom: 1rem;
 }
 
+.titleName:hover {
+  color:#b5bac2;
+}
+
+.year {
+color:#b5bac2;
+}
+
+
 .ratingSection {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.5rem;
   margin-bottom: 1.5rem;
 }
 
@@ -268,10 +284,6 @@ color:#666;
   gap: 0.5rem;
 }
 
-.star {
-  color: #fbbf24;
-  font-size: 1.25rem;
-}
 
 .rating {
   font-size: 1.125rem;
@@ -280,15 +292,6 @@ color:#666;
 .voteCount {
   color: #9ca3af;
 }
-
-.separator {
-  color: #9ca3af;
-}
-
-.date {
-  color: #d1d5db;
-}
-
 .genres {
   display: flex;
   flex-wrap: wrap;
@@ -306,6 +309,7 @@ color:#666;
 
 .overviewSection {
   margin-bottom: 1.5rem;
+  margin-top: 2.5rem;
 }
 
 .overviewTitle {
@@ -332,36 +336,10 @@ color:#666;
   }
 }
 
-.errorContainer {
-  min-height: 100vh;
-  background-color: #111827;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.errorContent {
-  text-align: center;
-}
-
-.errorTitle {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-
-.errorText {
-  color: #9ca3af;
-}
-
-.loadingText {
-  color: #9ca3af;
-}
 .LiSection {
   display: flex;
   flex-direction: row;
-  gap: 18px;
+  gap: 32px;
   align-items: center;
   margin-top: 18px;
 }
@@ -369,9 +347,8 @@ color:#666;
 .actionList {
   display: flex;
   flex-direction: row;
-  gap: 12px;
-  padding: 0;
-  margin: 0;
+  gap: 24px;
+
   list-style: none;
 }
 
@@ -379,8 +356,7 @@ color:#666;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0;
-  padding: 0;
+ 
 }
 .playText {
   font-size: 16px;
@@ -396,14 +372,11 @@ color:#666;
   border-radius: 50%;
   background: #1a2233;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  margin: 0;
-  padding: 0;
+ 
 }
 
 .iconCircle img {
   width: 24px;
   height: 24px;
 }
-.iconCircle:hover {
-  background: #25304a;
-}
+

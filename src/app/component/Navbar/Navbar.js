@@ -58,7 +58,7 @@ const Navbar = () => {
         <div className={styles.brand}>
           <Link href="/" className={styles.logo}>
             <div className={styles.logoContainer}>
-              <Image src="../assests/icon/logoNAv.svg" alt="Logo" width={40} height={40} style={{ display: 'block' }} />
+              <Image src="../assests/icon/logoNAv.svg" alt="Logo" width={140} height={80} style={{ display: 'block' }} />
             </div>
           </Link>
         </div>
@@ -84,7 +84,9 @@ const Navbar = () => {
           <div className={styles.languageSelector}>
             <span>EN</span>
           </div>
-          <button className={styles.loginBtn}>Login</button>
+          <Link href="/login" className={styles.loginBtn}>
+            Login
+          </Link>
           <button className={styles.joinBtn}>Join TMDB</button>
         </div>
 
@@ -105,9 +107,9 @@ const Navbar = () => {
           <ul className={styles.mobileNavList}>
             <li><Link href="/movie" className={styles.mobileNavLink}>Movies</Link></li>
             <li><Link href="/TV" className={styles.mobileNavLink}>TV Shows</Link></li>
-            <li><Link href="/people" className={styles.mobileNavLink}>People</Link></li>
-            <li><Link href="/more" className={styles.mobileNavLink}>More</Link></li>
-            <li><button className={styles.mobileLoginBtn}>Login</button></li>
+            <li><Link href="/login" className={styles.mobileLoginBtn}>
+              Login
+            </Link></li>
             <li><button className={styles.mobileJoinBtn}>Join TMDB</button></li>
           </ul>
         </div>

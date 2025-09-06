@@ -1,8 +1,9 @@
 'use client';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import MediaCard from '@/app/component/mediaCard/mediaCard';
 import Navbar from '../component/Navbar/Navbar';
-
+import MediaFilters from '../component/MediaFilters/MediaFilters';
+import Footer from '../component/Footer/Footer';
 const API_KEY = 'e2161fa6a40f29be185672567ac4df00';
 
 export default function TVGrid() {
@@ -10,7 +11,15 @@ export default function TVGrid() {
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const loaderRef = useRef(null);
+  const [totalPages, setTotalPages] = useState(0);
+  const [autoLoadEnabled, setAutoLoadEnabled] = useState(false);
+  const [loadMoreTimeout, setLoadMoreTimeout] = useState(null);
+  
+  const [sortBy, setSortBy] = useState('popularity.desc');
+  const [selectedGenres, setSelectedGenres] = useState([]);
+  const [selectedYear, setSelectedYear] = useState('');
+  const [fromDate, setFromDate] = useState('');
+  const [toDate, setToDate] = useState('');
 
   useEffect(() => {
     const fetchShows = async () => {
@@ -18,7 +27,27 @@ export default function TVGrid() {
       setError(null);
       
       try {
-        const url = `https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}&language=en-US&page=${page}`;
+        // Build URL with filters
+        let url = `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&language=en-US&page=${page}`;
+        
+        // Add sorting
+        if (sortBy) {
+          url += `&sort_by=${sortBy}`;
+        }
+        
+        // Add year filter (for TV shows, use first_air_date)
+        if (selectedYear) {
+          url += `&first_air_date_year=${selectedYear}`;
+        }
+        
+        // Add date range filters
+        if (fromDate) {
+          url += `&first_air_date.gte=${fromDate}`;
+        }
+        if (toDate) {
+          url += `&first_air_date.lte=${toDate}`;
+        }
+        
         const res = await fetch(url);
         
         if (!res.ok) {
@@ -38,6 +67,7 @@ export default function TVGrid() {
 
             return Array.from(uniqueShowsMap.values());
           });
+          setTotalPages(data.total_pages);
         } else {
           console.error('Invalid data structure:', data);
           setError('Invalid data received from API');
@@ -51,18 +81,64 @@ export default function TVGrid() {
     };
 
     fetchShows();
-  }, [page]);
+  }, [page, sortBy, selectedYear, fromDate, toDate]);
+
+  const loadMoreShows = () => {
+    if (!isLoading) {
+      setPage(prev => prev + 1);
+    }
+  };
+
+  const handleLoadMoreClick = () => {
+    loadMoreShows();
+    setAutoLoadEnabled(true);
+  };
+
+  const handleScroll = () => {
+    if (!autoLoadEnabled || isLoading) return;
+    
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    
+    if (scrollTop + windowHeight >= documentHeight - 200) {
+      if (loadMoreTimeout) {
+        clearTimeout(loadMoreTimeout);
+      }
+      
+      const timeout = setTimeout(() => {
+        loadMoreShows();
+      }, 500);
+      
+      setLoadMoreTimeout(timeout);
+    }
+  };
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      entries => {
-        entries[0].isIntersecting && setPage(prev => prev + 1);
-      },
-      { threshold: 1 }
-    );
-    loaderRef.current && observer.observe(loaderRef.current);
-    return () => observer.disconnect();
-  }, []);
+    if (autoLoadEnabled) {
+      window.addEventListener('scroll', handleScroll);
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+        if (loadMoreTimeout) {
+          clearTimeout(loadMoreTimeout);
+        }
+      };
+    }
+  }, [autoLoadEnabled, isLoading, loadMoreTimeout]);
+
+  const handleClearFilters = () => {
+    setSortBy('popularity.desc');
+    setSelectedYear('');
+    setFromDate('');
+    setToDate('');
+    setPage(1);
+    setShows([]);
+  };
+
+  const handleSearch = () => {
+    setPage(1);
+    setShows([]);
+  };
 
   if (error) {
     return (
@@ -78,28 +154,91 @@ export default function TVGrid() {
   }
 
   return (
-    <div style={{ backgroundColor: '#ffffff', minHeight: '100vh' }}>
+    <div>
       <Navbar />
-      <div style={{ padding: '20px', backgroundColor: '#ffffff', minHeight: 'calc(100vh - 64px)' }}>
-        <h2 style={{ color: '#333', fontSize: '28px', fontWeight: '600', marginBottom: '30px' }}>📺 Popular TV Shows</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '20px', backgroundColor: '#ffffff' }}>
-          {shows.map(show => (
-            <MediaCard 
-              key={show.id} 
-              media={show} 
-              media_type="TV" 
-            />
-          ))}
+      <div style={{ display: 'flex', marginTop: '80px' }}>
+        <div style={{ width: '300px', padding: '20px' }}>
+          <MediaFilters 
+            mediaType="tv"
+            sortBy={sortBy}
+            setSortBy={setSortBy}
+            selectedGenres={selectedGenres}
+            setSelectedGenres={setSelectedGenres}
+            selectedYear={selectedYear}
+            setSelectedYear={setSelectedYear}
+            fromDate={fromDate}
+            setFromDate={setFromDate}
+            toDate={toDate}
+            setToDate={setToDate}
+            filteredCount={shows.length}
+            onClearFilters={handleClearFilters}
+            onSearch={handleSearch}
+          />
         </div>
-        
-        {isLoading && (
-          <div style={{ textAlign: 'center', padding: '20px', backgroundColor: '#ffffff' }}>
-            <p>Loading more TV shows...</p>
+        <div style={{ flex: 1, padding: '20px' }}>
+          <div style={{ marginBottom: '20px' }}>
           </div>
-        )}
-        
-        <div ref={loaderRef} style={{ height: '50px', marginTop: '20px' }} />
+
+          {shows.length === 0 && !isLoading ? (
+            <div style={{ textAlign: 'center', padding: '40px', color: '#666', backgroundColor: '#ffffff' }}>
+              <h3>No TV shows found</h3>
+              <p>Try refreshing the page to see more results.</p>
+            </div>
+          ) : (
+            <div>
+              {shows.map(show => (
+                <div key={show.id} style={{ 
+                  display: 'inline-block', 
+                  width: '200px', 
+                  margin: '10px',
+                  verticalAlign: 'top'
+                }}>
+                  <MediaCard media={show} media_type="TV" />
+                </div>
+              ))}
+            </div>
+          )}
+
+          {isLoading && (
+            <div style={{ textAlign: 'center', padding: '40px', color: '#666' }}>
+              <div style={{ 
+                display: 'inline-block',
+                width: '40px',
+                height: '40px',
+                border: '4px solid #f3f3f3',
+                borderTop: '4px solid #01b4e4',
+                borderRadius: '50%',
+                animation: 'spin 1s linear infinite',
+                marginBottom: '20px'
+              }}></div>
+              <p style={{ fontSize: '16px', fontWeight: '500' }}>Loading TV shows...</p>
+            </div>
+          )}
+
+          {!isLoading && (
+            <div style={{ textAlign: 'center', padding: '30px' }}>
+              <button
+                onClick={handleLoadMoreClick}
+                style={{
+                  backgroundColor: '#01b4e4',
+                  color: 'white',
+                  border: 'none',
+                  padding: '12px 30px',
+                  borderRadius: '15px',
+                  fontSize: '16px',
+                  fontWeight: 'bold',
+                  width: '100%',
+                  textAlign: 'center'
+                }}
+              >
+                Load More
+              </button>
+           
+            </div>
+          )}
+        </div>
       </div>
+      <Footer />
     </div>
   );
 }

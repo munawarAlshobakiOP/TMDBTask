@@ -1,3 +1,18 @@
+.column_wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.content_wrapper {
+  width: 100%;
+}
+
+.column {
+  width: 100%;
+}
+
 .trendingContainer {
   padding: 2rem;
   font-family: Arial;
@@ -12,13 +27,22 @@
 
 .buttonContainer {
   margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.buttonContainer p {
+  font-weight: bold;
+  margin: 0;
+  font-size: 1.3rem;
 }
 
 .periodButton {
   padding: 0.5rem 1rem;
   margin-right: 1rem;
   border: none;
-  border-radius: 5px;
+  border-radius: 25px;
   cursor: pointer;
   font-size: 1rem;
   font-weight: 500;
@@ -31,13 +55,86 @@
 }
 
 .periodButton.inactive {
-  background-color: #eaeaea;
+  background-color: transparent;
   color: #000;
 }
 
-.periodButton:hover {
+.switchContainer {
+  position: relative;
+  display: flex;
+  border: 1px solid #000;
+  border-radius: 25px;
+  padding: 2px;
+  gap: 0;
+}
+
+.switchButton {
+  padding: 0.3rem 1.2rem;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  background: transparent;
+  color: #000;
+  position: relative;
+  z-index: 2;
+  min-width: 70px;
+}
+
+.switchActive {
+  background: linear-gradient(135deg, #01b4e4, #01d4aa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.switchInactive {
+  color: #000;
+  background: transparent;
+}
+
+.switchSlider {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: calc(50% - 2px);
+  height: calc(100% - 4px);
+  background: #032541;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.sliderLeft {
+  transform: translateX(0);
+}
+
+.sliderRight {
+  transform: translateX(100%);
+}
+  
+.rightButton {
+  padding: 0.5rem 1.5rem;
+  border: 1px solid #0070f3;
+  border-radius: 25px;
+  background: transparent;
+  color: #0070f3;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  margin-left: auto;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.rightButton:hover {
+  background: #0070f3;
+  color: #fff;
   transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 112, 243, 0.3);
 }
 
 .moviesContainer {
@@ -82,11 +179,6 @@
   align-items: center;
   justify-content: flex-start;
 }
-
-.movieCard:hover {
-  transform: translateY(-5px);
-}
-
 .moviePoster {
   border-radius: 8px;
   width: 200px;
@@ -101,11 +193,10 @@
 }
 
 .movieTitle {
-  margin: 10px 0;
-  font-size: 16px;
+  margin: 30px 0 5px 0;
+  font-size: 14px;
   font-weight: 600;
   color: #333;
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   line-height: 1.2;
   max-width: 180px;
   min-height: 40px;
@@ -116,22 +207,21 @@
 }
 
 .movieRating {
-  margin: 5px 0;
+  margin: -60px 0 5px 0;
   color: #0070f3;
   font-weight: 500;
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-size: 14px;
-  min-height: 20px;
+  min-height: 40px;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding-left: 10px;
 }
 
 .movieYear {
   font-size: 14px;
   color: #666;
   margin: 5px 0;
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   min-height: 20px;
   display: flex;
   align-items: center;
@@ -148,7 +238,6 @@
   justify-content: center;
   color: #666;
   font-size: 14px;
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 /* Responsive Design */
@@ -179,33 +268,22 @@
   }
   
   .movieTitle {
-    font-size: 14px;
+    font-size: 12px;
   }
 }
 
 #trending_scroller.media.discover.scroller_wrap.should_fade.is_fading {
   width: 100%;
-  max-width: 600px;
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: hidden;
   box-sizing: border-box;
-  margin: 0 auto;
 }
 
 .column_content.flex.scroller.loaded {
-  display: flex;
-  gap: 1rem;
   width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding-bottom: 1rem;
-  box-sizing: border-box;
 }
 
+
 .card.style_1 {
-  background: #fff;
-  border-radius: var(--imageBorderRadius);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   width: 180px;
   min-width: 180px;
   max-width: 180px;
@@ -230,3 +308,65 @@
   object-fit: cover;
   border-radius: var(--imageBorderRadius) var(--imageBorderRadius) 0 0;
 }
+
+.trendingScroller {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  overflow-y: hidden;
+  gap: 8px;
+  padding: 10px;
+  scroll-snap-type: x mandatory;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+  height: 350px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.trendingScroller::-webkit-scrollbar {
+  height: 8px;
+}
+
+.trendingScroller::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.trendingCard {
+  width: 160px;
+  min-width: 160px;
+  max-width: 160px;
+  flex: 0 0 160px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  scroll-snap-align: start;
+}
+
+.trendingCard img {
+  width: 160px;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.trendingCard h4 {
+  font-size: 0.83rem;
+  font-weight: 600;
+  margin: 10px 0;
+  color: #1f1f1f;
+  max-width: 130px;
+}
+
+.trendingCard p {
+  font-size: 0.8rem;
+  color: #555;
+  margin: 10px 0 0 0;
+}
+

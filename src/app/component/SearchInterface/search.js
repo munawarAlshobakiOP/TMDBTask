@@ -1,114 +1,35 @@
 'use client';
-////////////////////////////////////Review it  (display)/////////////////
-////the image  of the background (hero section) 
-///// search bar////dropdown search option 
-/////////////////////////
 import { useState, useEffect } from 'react';
 import MediaCard from '../mediaCard/mediaCard';
 import classes from './search.module.css';
 
-const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY || 'e2161fa6a40f29be185672567ac4df00';
+const SearchIcon = () => (
+  <svg 
+    width="20" 
+    height="20" 
+    fill="currentColor" 
+    viewBox="0 0 20 20"
+  >
+    <path 
+      fillRule="evenodd" 
+      d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" 
+      clipRule="evenodd" 
+    />
+  </svg>
+);
 
-export default function TMDBSearch() {
-  const [query, setQuery] = useState('');
-  const [results, setResults] = useState([]);
+export default function TMDBSearch({ searchResults = [] }) {
+  const [results, setResults] = useState(searchResults);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const searchMovies = async () => {
-    if (query.trim() === '') {
-      setResults([]);
-      setError(null);
-      return;
-    }
-    
-    setLoading(true);
-    setError(null);
-    
-    try {
-      const url = `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${encodeURIComponent(query.trim())}&language=en-US&page=1`;
-      
-      const response = await fetch(url);
-      
-      if (!response.ok) {
-        throw new Error(`Search failed: ${response.status}`);
-      }
-      
-      const data = await response.json();
-      
-      const processedResults = (data.results || []).map(item => {
-        if (!item.media_type) {
-          item.media_type = item.title ? 'movie' : 'tv';
-        }
-        return item;
-      });
-      
-      setResults(processedResults);
-    } catch (error) {
-      console.error('Error searching:', error);
-      setError(error.message);
-      setResults([]);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    const timeoutId = setTimeout(searchMovies, 500);
-    return () => clearTimeout(timeoutId);
-  }, [query]);
+    setResults(searchResults);
+  }, [searchResults]);
 
 
   return (
-    <>
-      <section className={classes.heroSection}>
-        <div className={classes.mediaDiscover}>
-          <div className={classes.columnWrapper}>
-            <div className={classes.contentWrapper}>
-              <div className={classes.titleContainer + ' ' + classes.leftAlign}>
-                <div className={classes.title}>
-                  <h2>Welcome.</h2>
-                  <h3>Millions of movies, TV shows and people to discover. Explore now.</h3>
-                </div>
-              </div>
-
-              <div className={classes.search}>
-                <form 
-                  className={classes.searchForm}
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    searchMovies();
-                  }}
-                >
-                  <label className={classes.searchWrapper}>
-                    <span className={classes.searchInput}>
-                      <input 
-                        type="text" 
-                        placeholder="search for a person, movie, tv..." 
-                        value={query}
-                        onChange={(e) => setQuery(e.target.value)}
-                        className={classes.searchInputInner}
-                        autoCorrect="off" 
-                        autoComplete="off" 
-                        spellCheck="false"
-                      />
-                    </span>
-                  </label>
-
-                  <button 
-                    type="submit" 
-                    className={classes.searchButton}
-                  >
-                    Search
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      <div className={classes.resultsContainer}>
+    <div className={classes.resultsContainer}>
         {loading && (
           <div className={classes.loadingIndicator}>
             <div className={classes.loadingSpinner}></div>
@@ -158,12 +79,11 @@ export default function TMDBSearch() {
           </div>
         )}
         
-        {!loading && !error && results.length === 0 && query.trim() !== '' && (
+        {!loading && !error && results.length === 0 && (
           <div className={classes.errorMessage}>
-            <p>No results found for "{query}"</p>
+            <p>No results found</p>
           </div>
         )}
-      </div>
-    </>
+    </div>
   );
 }
