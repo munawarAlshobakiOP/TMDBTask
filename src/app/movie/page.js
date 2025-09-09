@@ -4,7 +4,7 @@ import MediaCard from '@/app/component/mediaCard/mediaCard';
 import Navbar from '../component/Navbar/Navbar';
 import MediaFilters from '../component/MediaFilters/MediaFilters';
 import Footer from '../component/Footer/Footer';
-const API_KEY = 'e2161fa6a40f29be185672567ac4df00';
+const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 
 export default function MovieGrid() {
   const [movies, setMovies] = useState([]);
@@ -14,51 +14,48 @@ export default function MovieGrid() {
   const [totalPages, setTotalPages] = useState(0);
   const [autoLoadEnabled, setAutoLoadEnabled] = useState(false);
   const [loadMoreTimeout, setLoadMoreTimeout] = useState(null);
-  
   const [sortBy, setSortBy] = useState('popularity.desc');
   const [selectedGenres, setSelectedGenres] = useState([]);
-  const [selectedYear, setSelectedYear] = useState('');
   const [fromDate, setFromDate] = useState('');
   const [toDate, setToDate] = useState('');
-
+  const [selectedLang, setSelectedLang] = useState(''); 
+const BASE_URL = process.env.NEXT_PUBLIC_API_BASE;
+const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
   useEffect(() => {
+  
     const fetchMovies = async () => {
       setIsLoading(true);
       setError(null);
-      
       try {
-        let url = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&page=${page}`;
-        
+
+        let url = `${BASE_URL}/discover/movie?api_key=${API_KEY}&language=${selectedLang || 'en-US'}&page=${page}&with_original_language=${selectedLang || 'en'}`;
         if (sortBy) {
           url += `&sort_by=${sortBy}`;
         }
-        if (selectedYear) {
-          url += `&year=${selectedYear}`;
-        }
-        
         if (fromDate) {
-          url += `&release_date.gte=${fromDate}`;
+          url += `&primary_release_date.gte=${fromDate}`;
         }
         if (toDate) {
-          url += `&release_date.lte=${toDate}`;
+          url += `&primary_release_date.lte=${toDate}`;
         }
-        
+        if (selectedGenres && selectedGenres.length > 0) {
+          url += `&with_genres=${selectedGenres.join(',')}`;
+        }
         const res = await fetch(url);
-        
+
         if (!res.ok) {
           throw new Error(`Failed to fetch movies: ${res.status}`);
         }
-        
         const data = await res.json();
-        
         setMovies(prev => {
+          if (page === 1) {
+            return data.results;
+          }
           const allMovies = [...prev, ...data.results];
           const uniqueMoviesMap = new Map();
-
           allMovies.forEach(movie => {
             uniqueMoviesMap.set(movie.id, movie);
           });
-
           return Array.from(uniqueMoviesMap.values());
         });
         setTotalPages(data.total_pages);
@@ -69,9 +66,8 @@ export default function MovieGrid() {
         setIsLoading(false);
       }
     };
-
     fetchMovies();
-  }, [page, sortBy, selectedYear, fromDate, toDate]);
+  }, [page, sortBy, fromDate, toDate, selectedLang, selectedGenres]);
 
   const loadMoreMovies = () => {
     if (!isLoading) {
@@ -118,10 +114,8 @@ export default function MovieGrid() {
 
 
   const handleSearch = () => {
-     setPage(1);
+    setPage(1);
     setMovies([]);
-    
-    
   };
 
 
@@ -149,13 +143,19 @@ export default function MovieGrid() {
             setSortBy={setSortBy}
             selectedGenres={selectedGenres}
             setSelectedGenres={setSelectedGenres}
-            selectedYear={selectedYear}
-            setSelectedYear={setSelectedYear}
             fromDate={fromDate}
             setFromDate={setFromDate}
             toDate={toDate}
             setToDate={setToDate}
-            onSearch={handleSearch}
+            selectedLang={selectedLang}
+            onSearch={({ language, genres, fromDate, toDate, sortBy }) => {
+              setSelectedLang(language);
+              setSelectedGenres(Array.isArray(genres) ? genres : []);
+              setFromDate(fromDate);
+              setToDate(toDate);
+              setSortBy(sortBy);
+              handleSearch();
+            }}
           />
         </div>
         <div style={{ flex: 1, padding: '20px' }}>

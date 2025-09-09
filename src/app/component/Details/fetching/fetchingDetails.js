@@ -1,11 +1,13 @@
-const API_KEY = 'e2161fa6a40f29be185672567ac4df00';
-
+const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
+const baseurl = process.env.NEXT_PUBLIC_API_BASE;
+  const IMAGE_BASE = process.env.NEXT_PUBLIC_IMAGE_BASE;
+const DEFAULT_IMAGE = process.env.NEXT_PUBLIC_DEFAULT_IMAGE;
 export async function FetchingDetails(mediaType, mediaId) {
   if (!mediaType || !mediaId || isNaN(mediaId)) {
     throw new Error("Invalid media type or ID");
   }
 
-  const url = `https://api.themoviedb.org/3/${mediaType}/${mediaId}?api_key=${API_KEY}&language=en-US`;
+  const url = `${baseurl}/${mediaType}/${mediaId}?api_key=${API_KEY}&language=en-US`;
 
   const options = {
     headers: {
@@ -35,7 +37,7 @@ export async function FetchingCast(mediaType, mediaId) {
     throw new Error("Invalid cast type or ID");
   }
 
-  const url = `https://api.themoviedb.org/3/${mediaType}/${mediaId}/credits?api_key=${API_KEY}&language=en-US`;
+  const url = `${baseurl}/${mediaType}/${mediaId}/credits?api_key=${API_KEY}&language=en-US`;
 
   const options = {
     headers: {
@@ -59,8 +61,8 @@ export async function FetchingCast(mediaType, mediaId) {
       name: person.name,
       character: person.character,
       image: person.profile_path
-        ? `https://image.tmdb.org/t/p/w185${person.profile_path}`
-        : "https://via.placeholder.com/185x278?text=No+Image"
+        ? `${IMAGE_BASE}/w185${person.profile_path}`
+        : `${DEFAULT_IMAGE}`,
     }));
   } catch (error) {
     console.error("FetchingCast error:", error);

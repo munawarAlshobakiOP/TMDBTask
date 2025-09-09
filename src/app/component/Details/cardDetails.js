@@ -4,16 +4,16 @@ import Image from "next/image";
 import DonutChart from "../DonutChart/DonutChart";
 import Link from "next/link";
 export default function MediaDetailsContainer({ mediaData }) {
- 
-
+ const DEFAULT_IMAGE = process.env.NEXT_PUBLIC_DEFAULT_IMAGE;
+const IMAGE_BASE = process.env.NEXT_PUBLIC_IMAGE_BASE;
   const data = mediaData;
 
   const imageUrl = data.poster_path
-    ? `https://image.tmdb.org/t/p/w500${data.poster_path}`
-    : "https://via.placeholder.com/500x750?text=No+Image";
+    ? `${IMAGE_BASE}/w500${data.poster_path}`
+    :`${DEFAULT_IMAGE}`;
 
   const backdropUrl = data.backdrop_path
-    ? `https://image.tmdb.org/t/p/original${data.backdrop_path}`
+    ? `${IMAGE_BASE}/original${data.backdrop_path}`
     : null;
 
   function formatRuntime(minutes) {

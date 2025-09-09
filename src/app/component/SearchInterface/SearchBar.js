@@ -2,8 +2,8 @@
 import { useState, useEffect } from 'react';
 import classes from './SearchBar.module.css';
 
-const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY || 'e2161fa6a40f29be185672567ac4df00';
-
+const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY ;
+const BaseUrl = process.env.NEXT_PUBLIC_API_BASE ;
 const SearchIcon = () => (
   <svg 
     width="20" 
@@ -39,7 +39,7 @@ export default function SearchBar({ onSearchResults }) {
     setError(null);
     
     try {
-      const url = `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${encodeURIComponent(query.trim())}&language=en-US&page=1`;
+      const url = `${BaseUrl}/search/multi?api_key=${API_KEY}&query=${encodeURIComponent(query.trim())}&language=en-US&page=1`;
       
       const response = await fetch(url);
       

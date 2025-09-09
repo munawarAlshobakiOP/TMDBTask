@@ -1,312 +1,262 @@
-
 'use client';
-import { useState } from 'react';
-
-const MediaFilters = ({ 
-  mediaType = 'movie',
-  sortBy, 
-  setSortBy, 
-  
-  selectedYear, 
-  setSelectedYear, 
+import Styles from "./MediaFilter.module.css";
+import { useState, useEffect, useRef } from "react";
+import { fetchGenres, fetchLanguages } from "./fetching";
+const MediaFilters = ({
+  mediaType = "movie",
+  sortBy,
+  setSortBy,
   fromDate,
   setFromDate,
   toDate,
   setToDate,
-
-  onSearch
+  selectedLang,
+  onSearch,
 }) => {
+  const sortOptions = [
+    { value: "popularity.desc", label: "Popularity Descending" },
+    { value: "popularity.asc", label: "Popularity Ascending" },
+    { value: "vote_average.desc", label: "Rating Descending" },
+    { value: "vote_average.asc", label: "Rating Ascending" },
+    { value: "title.asc", label: "Title (A-Z)" },
+    { value: "title.desc", label: "Title (Z-A)" },
+  ];
+
   const [expandedSections, setExpandedSections] = useState({
     sort: true,
-    year: false,
-    dateRange: false
+    Filter: false,
   });
 
+  const [fetchedGenres, setFetchedGenres] = useState([]);
+  const [selectedGenres, setSelectedGenres] = useState([]);
+  const [languages, setLanguages] = useState([]);
+  const [selectedLanguage, setSelectedLanguage] = useState(selectedLang || "en");
+  const [languageSearch, setLanguageSearch] = useState("");
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const dropdownRef = useRef();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const langs = await fetchLanguages();
+      setLanguages(langs);
+
+      const genreData = await fetchGenres(mediaType, selectedLanguage);
+      setFetchedGenres(genreData);
+    };
+
+    fetchData();
+  }, [mediaType, selectedLanguage]);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   const toggleSection = (section) => {
-    setExpandedSections(prev => ({
+    setExpandedSections((prev) => ({
       ...prev,
-      [section]: !prev[section]
+      [section]: !prev[section],
     }));
   };
 
-  const sortOptions = [
-    { value: 'popularity.desc', label: 'Popularity Descending' },
-    { value: 'popularity.asc', label: 'Popularity Ascending' },
-    { value: 'vote_average.desc', label: 'Rating Descending' },
-    { value: 'vote_average.asc', label: 'Rating Ascending' },
-    { value: 'release_date.desc', label: 'Release Date Descending' },
-    { value: 'release_date.asc', label: 'Release Date Ascending' },
-    { value: 'title.asc', label: 'Title (A-Z)' },
-    { value: 'title.desc', label: 'Title (Z-A)' }
-  ];
-
-
-
-  const getDateLabel = () => {
-    return mediaType === 'tv' ? 'Air Date Range' : 'Release Date Range';
+  const toggleGenre = (genreId) => {
+    setSelectedGenres((prev) =>
+      prev.includes(genreId) ? prev.filter((g) => g !== genreId) : [...prev, genreId]
+    );
   };
 
-  
-  const getYearLabel = () => {
-    return mediaType === 'tv' ? 'Air Date' : 'Release Year';
-  };
+  const filteredLanguages = languages.filter((lang) =>
+    lang.english_name.toLowerCase().includes(languageSearch.toLowerCase())
+  );
 
-  const getCountLabel = () => {
-    return mediaType === 'tv' ? 'shows found' : 'movies found';
+  const getSelectedLanguageName = () => {
+    const selected = languages.find((lang) => lang.iso_639_1 === selectedLanguage);
+    return selected ? selected.english_name : "";
   };
 
   return (
-    <div style={{ 
-      width: '300px', 
-      padding: '20px',
-      position: 'sticky',
-      height: 'fit-content',
-      overflowY: 'auto'
-    }}>
-     
+    <div className={Styles.container}>
+      {/* ----------------------Sort Section--------------- */}
+      <div className={Styles.h4Section}>
+        <h4 onClick={() => toggleSection("sort")}>
+          Sort{" "}
+          <span
+            className={Styles.expand}
+            style={{
+              transform: expandedSections.sort ? "rotate(0deg)" : "rotate(-90deg)",
+            }}
+          >
+            ▼
+          </span>
+        </h4>
+      </div>
 
-          <div style={{ 
-            marginBottom: '20px',
-            backgroundColor: '#fff',
-            border: '1px solid #dee2e6',
-            borderRadius: '8px',
-            boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-            overflow: 'hidden'
-          }}>
-            <h4 
-              onClick={() => toggleSection('sort')}
-              style={{ 
-                margin: 0,
-                color: '#555',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                padding: '12px 16px',
-                backgroundColor: '#f8f9fa',
-                borderBottom: '1px solid #dee2e6',
-                fontSize: '16px',
-                fontWeight: '500'
-              }}
-            >
-              Sort Results By
-              <span style={{ 
-                fontSize: '12px',
-                display: 'inline-block',
-                transform: expandedSections.sort ? 'rotate(0deg)' : 'rotate(-90deg)',
-                transition: 'transform 0.2s ease'
-              }}>
-                ▼
-              </span>
-            </h4>
-            {expandedSections.sort && (
-              <div style={{ padding: '16px' }}>
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)} 
-                  style={{
-                    width: '100%',
-                    padding: '8px',
-                    borderRadius: '4px',
-                    border: '1px solid #ddd',
-                    backgroundColor: '#fff'
-                  }}
-                >
-                  {sortOptions.map(option => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            )}
-          </div>
-{/******************************************/}
-          <div style={{ 
-            marginBottom: '20px',
-            backgroundColor: '#fff',
-            border: '1px solid #dee2e6',
-            borderRadius: '8px',
-            boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-            overflow: 'hidden'
-          }}>
-            <h4 
-              onClick={() => toggleSection('year')}
-              style={{ 
-                margin: 0,
-                color: '#555',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                padding: '12px 16px',
-                backgroundColor: '#f8f9fa',
-                borderBottom: '1px solid #dee2e6',
-                fontSize: '16px',
-                fontWeight: '500'
-              }}
-            >
-              {getYearLabel()}
-              <span style={{ 
-                fontSize: '12px',
-                display: 'inline-block',
-                transform: expandedSections.year ? 'rotate(0deg)' : 'rotate(-90deg)',
-                transition: 'transform 0.2s ease'
-              }}>
-                ▼
-              </span>
-            </h4>
-            {expandedSections.year && (
-              <div style={{ padding: '16px' }}>
-                <select
-                  value={selectedYear}
-                  onChange={(e) => setSelectedYear(e.target.value)} 
-                  style={{
-                    width: '100%',
-                    padding: '8px',
-                    borderRadius: '4px',
-                    border: '1px solid #ddd',
-                    backgroundColor: '#fff'
-                  }}
-                >
-                  <option value="">All Years</option>
-                  {Array.from({ length: 25 }, (_, i) => 2025 - i).map(year => (
-                    <option key={year} value={year}>{year}</option>
-                  ))}
-                </select>
-              </div>
-            )}
+      {expandedSections.sort && (
+        <div className={Styles.sectionContent}>
+          <p>Sort Result By</p>
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            className={Styles.sortDropdownSelect}
+          >
+            {sortOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
+
+      {/* -----------------Filter Section ----------------------*/}
+      <div className={Styles.h4Section}>
+        <h4 onClick={() => toggleSection("Filter")}>
+          Filter{" "}
+          <span
+            className={Styles.expand}
+            style={{
+              transform: expandedSections.Filter ? "rotate(0deg)" : "rotate(-90deg)",
+            }}
+          >
+            ▼
+          </span>
+        </h4>
+      </div>
+
+      {expandedSections.Filter && (
+        <div className={Styles.sectionContent}>
+          {/* --------------Show me section  haik bs ------------*/}
+          <div className={Styles.Showme}>
+            <p>Show me</p>
+            <input type="radio" name="showme" defaultChecked />
+            <label> everything</label> <br />
+            <input type="radio" name="showme" />
+            <label> {mediaType} I haven't seen</label> <br />
+            <input type="radio" name="showme" />
+            <label> {mediaType} I have seen</label> <br />
           </div>
 
-{/******************************************/}
-          <div style={{ 
-            marginBottom: '20px',
-            backgroundColor: '#fff',
-            border: '1px solid #dee2e6',
-            borderRadius: '8px',
-            boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-            overflow: 'hidden'
-          }}>
-            <h4 
-              onClick={() => toggleSection('dateRange')}
-              style={{ 
-                margin: 0,
-                color: '#555',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                padding: '12px 16px',
-                backgroundColor: '#f8f9fa',
-                borderBottom: '1px solid #dee2e6',
-                fontSize: '16px',
-                fontWeight: '500'
-              }}
-            >
-              {getDateLabel()}
-              <span style={{ 
-                fontSize: '12px',
-                display: 'inline-block',
-                transform: expandedSections.dateRange ? 'rotate(0deg)' : 'rotate(-90deg)',
-                transition: 'transform 0.2s ease'
-              }}>
-                ▼
-              </span>
-            </h4>
-            {expandedSections.dateRange && (
-              <div style={{ padding: '16px' }}>
-                <div style={{ marginBottom: '10px' }}>
-                  <label style={{ display: 'block', marginBottom: '5px', fontSize: '14px', color: '#666' }}>
-                    From Date:
-                  </label>
-                  <input
-                    type="date"
-                    value={fromDate}
-                    onChange={(e) => setFromDate(e.target.value)}
-                    style={{
-                      width: '100%',
-                      padding: '8px',
-                      borderRadius: '4px',
-                      border: '1px solid #ddd',
-                      fontSize: '14px',
-                      backgroundColor: '#fff'
+          <div className={Styles.Avalabilites}>
+            <input type="checkbox" name="Avalabilites" defaultChecked />
+            <label> Search all availabilities?</label>
+          </div>
+
+          {/* _---------------Release Dates--------------------- */}
+          <div className={Styles.ReleaseDates}>
+            <p>Release Dates</p>
+            <label>from:</label>
+            <input
+              type="date"
+              value={fromDate}
+              onChange={(e) => setFromDate(e.target.value)}
+              className={Styles.fromDate}
+            />
+            <label>to:</label>
+            <input
+              type="date"
+              value={toDate}
+              onChange={(e) => setToDate(e.target.value)}
+              className={Styles.ToDate}
+            />
+          </div>
+
+          {/* ---------------Genres-------------------------- */}
+          <div className={Styles.genres}>
+            <p>Genres</p>
+            <ul className={Styles.genreList}>
+              {fetchedGenres.map((genre) => (
+                <li key={genre.id}>
+                  <a
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      toggleGenre(genre.id);
                     }}
-                  />
-                </div>
-                <div>
-                  <label style={{ display: 'block', marginBottom: '5px', fontSize: '14px', color: '#666' }}>
-                    To Date:
-                  </label>
-                  <input
-                    type="date"
-                    value={toDate}
-                    onChange={(e) => setToDate(e.target.value)}
-                    style={{
-                      width: '100%',
-                      padding: '8px',
-                      borderRadius: '4px',
-                      border: '1px solid #ddd',
-                      fontSize: '14px',
-                      backgroundColor: '#fff'
+                    className={`${Styles.genreLink} ${
+                      selectedGenres.includes(genre.id) ? Styles.selected : ""
+                    }`}
+                  >
+                    {genre.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/*---------------------Language-----------------------------*/}
+          <div className={Styles.Lang} ref={dropdownRef}>
+            <p>Language</p>
+            <div className={Styles.languageDropdown}>
+              <input
+                type="text"
+                placeholder="Search language..."
+                value={dropdownOpen ? languageSearch : getSelectedLanguageName()}
+                onChange={(e) => {
+                  setLanguageSearch(e.target.value);
+                  setDropdownOpen(true);
+                }}
+                onFocus={() => setDropdownOpen(true)}
+                readOnly={!dropdownOpen}
+                className={Styles.languageSearchInput}
+              />
+
+              {dropdownOpen && (
+                <ul className={Styles.languageList}>
+                  <li
+                    onClick={() => {
+                      setSelectedLanguage("");
+                      setLanguageSearch("");
+                      setDropdownOpen(false);
                     }}
-                  />
-                </div>
-                {(fromDate || toDate) && (
-                  <div style={{ marginTop: '10px', textAlign: 'center' }}>
-                    <button
+                    className={!selectedLanguage ? Styles.selected : ""}
+                  >
+                    All Languages
+                  </li>
+                  {filteredLanguages.map((lang) => (
+                    <li
+                      key={lang.iso_639_1}
                       onClick={() => {
-                        setFromDate('');
-                        setToDate('');
+                        setSelectedLanguage(lang.iso_639_1);
+                        setLanguageSearch("");
+                        setDropdownOpen(false);
                       }}
-                      style={{
-                        padding: '4px 8px',
-                        fontSize: '12px',
-                        backgroundColor: '#01b4e4',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '3px',
-                        cursor: 'pointer'
-                      }}
+                      className={
+                        selectedLanguage === lang.iso_639_1 ? Styles.selected : ""
+                      }
                     >
-                      Clear Date Range
-                    </button>
-                  </div>
-                )}
-              </div>
-            )}
+                      {lang.english_name}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
           </div>
+        </div>
+      )}
 
-
-{/******************************************/}
-          <div style={{ 
-            marginTop: '20px',
-            textAlign: 'center'
-          }}>
-            <button
-              onClick={onSearch}
-              style={{
-                width: '100%',
-                padding: '12px 20px',
-                backgroundColor: '#01b4e4',
-                color: 'white',
-                border: 'none',
-                borderRadius: '8px',
-                fontSize: '16px',
-                fontWeight: 'bold',
-                cursor: 'pointer',
-                boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-                transition: 'background-color 0.2s ease'
-              }}
-              onMouseOver={(e) => {
-                e.target.style.backgroundColor = '#0099cc';
-              }}
-              onMouseOut={(e) => {
-                e.target.style.backgroundColor = '#01b4e4';
-              }}
-            >
-             Search
-            </button>
-          </div>
+      {/*--------------------Search Button----------------------------*/}
+      <div style={{ width: "100%" }}>
+        <button
+          className={Styles.searchButton}
+          onClick={() => {
+            onSearch({
+              language: selectedLanguage,
+              genres: selectedGenres,
+              fromDate,
+              toDate,
+              sortBy,
+            });
+          }}
+        >
+          Search
+        </button>
+      </div>
     </div>
   );
 };

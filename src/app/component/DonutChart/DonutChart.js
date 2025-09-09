@@ -27,7 +27,6 @@ export default function DonutChart({ percentage = 0, size = 34 }) {
         }}
       ></div>
 
-      {/* Center text */}
       <span
         style={{
           position: "absolute",

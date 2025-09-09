@@ -90,30 +90,11 @@ const Navbar = () => {
           <button className={styles.joinBtn}>Join TMDB</button>
         </div>
 
-        <button className={styles.mobileMenuBtn} onClick={toggleMenu}>
-          <span className={styles.hamburger}></span>
-          <span className={styles.hamburger}></span>
-          <span className={styles.hamburger}></span>
-        </button>
-
         <div className={styles.rightIcons}>
           <SearchIcon />
         </div>
       </div>
 
-      {/* Mobile Navigation */}
-      {isMenuOpen && (
-        <div className={styles.mobileNav}>
-          <ul className={styles.mobileNavList}>
-            <li><Link href="/movie" className={styles.mobileNavLink}>Movies</Link></li>
-            <li><Link href="/TV" className={styles.mobileNavLink}>TV Shows</Link></li>
-            <li><Link href="/login" className={styles.mobileLoginBtn}>
-              Login
-            </Link></li>
-            <li><button className={styles.mobileJoinBtn}>Join TMDB</button></li>
-          </ul>
-        </div>
-      )}
     </nav>
   );
 };

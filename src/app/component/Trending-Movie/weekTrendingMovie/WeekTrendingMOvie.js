@@ -2,10 +2,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import DonutChart from '../../DonutChart/DonutChart';
 import styles from '../trending.module.css';
-
-const API_KEY = 'e2161fa6a40f29be185672567ac4df00';
-
-
+import { fetchTrendingWeekMovies } from "../fetchingTrends.js/fetching";
+const IMAGE_BASE = process.env.NEXT_PUBLIC_IMAGE_BASE;
 const TrendingWeekMovies = () => {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
@@ -17,17 +15,8 @@ const TrendingWeekMovies = () => {
       try {
         setLoading(true);
         setError(null);
-        
-        const url = `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`;
-        
-        const response = await fetch(url);
-        
-        if (!response.ok) {
-          throw new Error(`Failed to fetch movies: ${response.status}`);
-        }
-        
-        const data = await response.json();
-        setMovies(data.results || []);
+        const results = await fetchTrendingWeekMovies();
+        setMovies(results);
       } catch (err) {
         console.error('Fetch error:', err);
         setError(err.message);
@@ -39,16 +28,13 @@ const TrendingWeekMovies = () => {
     fetchMovies();
   }, []);
 
-
   return (
     <div style={{ padding: '1rem', fontFamily: 'Arial', maxWidth: '100%', overflow: 'hidden' }}>
-      
       {error && (
         <p style={{ color: 'red', textAlign: 'center' }}>
           Error: {error}
         </p>
       )}
-      
       {loading ? (
         <p style={{ textAlign: 'center' }}>Loading popular movies...</p>
       ) : movies.length === 0 ? (
@@ -59,7 +45,7 @@ const TrendingWeekMovies = () => {
             <div key={movie.id} className={styles.trendingCard}>
               {movie.poster_path ? (
                 <img
-                  src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                  src={`${IMAGE_BASE}/w200${movie.poster_path}`}
                   alt={movie.title}
                 />
               ) : (
