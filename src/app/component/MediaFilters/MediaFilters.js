@@ -1,7 +1,160 @@
 'use client';
-import Styles from "./MediaFilter.module.css";
 import { useState, useEffect, useRef } from "react";
 import { fetchGenres, fetchLanguages } from "./fetching";
+import styled from "styled-components";
+const Container = styled.div`
+  padding: 1.25rem;
+  width: 18.75rem;
+  position: sticky;
+  height: fit-content;
+  overflow-y: auto;
+  background-color: #ffffff;
+  border-radius: .5rem;
+`;
+const H4Section = styled.div`
+margin-top: 1.25rem;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .75rem 1rem;
+  background-color: white;
+  border: .0625rem solid #dee2e6;
+  border-radius: .375rem;
+  font-size: 1rem;
+  font-weight: 500;
+    box-shadow: 0 .125rem .375rem rgba(0, 0, 0, 0.05); 
+
+`;
+const Expand= styled.span`font-size: .75rem;
+  display: inline-block;
+  transition: transform 0.2s ease;
+  margin-left: .5rem;`;
+const SectionContent = styled.div`  padding: 1rem;
+  border: .0625rem solid #e6e6e6;
+  border-radius: .375rem;
+  margin-top: .5rem;
+  background-color: white;`;
+
+const SortDropdownSelect= styled.select`
+width: 100%;
+  padding: .5rem;
+  border-radius: .25rem;
+  border: .0625rem solid #ddd;
+  background-color: #fff;
+  font-size: .875rem;`;
+  const Showme= styled.div`  margin-bottom: 1rem;`;
+  const Avalabilites= styled.div`  margin-bottom: 1rem;`;
+  const ReleaseDates= styled.div`  margin-bottom: 1rem;`;
+const ToDate= styled.input` width: 100%;
+  padding: .5rem .625rem;
+  margin-top: .375rem;
+  margin-bottom: .75rem;
+  border: .0625rem solid #ccc;
+  border-radius: .375rem;
+  background-color: #fff;
+  font-size: .875rem;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+   &:focus {
+  outline: none;
+  border-color: #007bff;
+}
+  
+  `;
+
+const FromDate= styled.input` width: 100%;
+  padding: .5rem .625rem;
+  margin-top: .375rem;
+  margin-bottom: .75rem;
+  border: .0625rem solid #ccc;
+  border-radius: .375rem;
+  background-color: #fff;
+  font-size: .875rem;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+  &:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+  `;
+  const GenreList= styled.ul`   padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .375rem;
+  margin-top: .5rem;`;
+  const GenreItem= styled.li``;
+  const GenreLink= styled.a`display: inline-block;
+  padding: .25rem .625rem;
+  font-size: .75rem;
+  margin: 0;
+  text-decoration: none;
+  color: #333;
+  border: .0625rem solid #ccc;
+  border-radius: 1.5625rem;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+   background-color: ${({ selected }) => (selected ? '#007bff' : 'transparent')};
+  color: ${({ selected }) => (selected ? 'white' : '#333')};
+  border-color: ${({ selected }) => (selected ? '#007bff' : '#ccc')};
+  &:hover {
+  background-color: #f0f0f0;
+}
+
+  `;
+
+const LanguageListItem = styled.li`
+  padding: 0.375rem 0.5rem;
+  background-color: ${({ selected }) => (selected ? '#007bff' : 'transparent')};
+  color: ${({ selected }) => (selected ? 'white' : 'inherit')};
+`;
+  const LanguageDropdown= styled.div` 
+  width: 100%;
+  position: relative;
+  font-size: .875rem;
+  margin-top: .5rem;
+  `;
+  const LanguageSearchInput= styled.input`   width: 100%;
+  padding: .375rem .5rem;
+  box-sizing: border-box;
+  margin-bottom: .25rem;
+  border: .0625rem solid #ccc;
+  border-radius: .25rem;`;
+const LanguageList= styled.ul` max-height: 9.375rem;
+  overflow-y: auto;
+  border: .0625rem solid #ccc;
+  border-radius: .25rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  background: white;
+  li {
+  padding: .375rem .5rem;
+}
+  li:hover {
+  background-color: #f0f0f0;`;
+const Genres= styled.div`  margin-bottom: 1rem;`;
+const Language= styled.div`  margin-bottom: 1rem;`;
+const SearchButtonDiv= styled.div`width: 100%;`;
+const SearchButton= styled.button` 
+width: 100%;
+  background-color: #01b4e4;
+  color: #fff;
+  border: none;
+  padding: .875rem 0;
+  border-radius: .5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  transition: background 0.2s, color 0.2s;
+&:hover {
+  background-color: #0096c7;
+}
+`;
+
 const MediaFilters = ({
   mediaType = "movie",
   sortBy,
@@ -81,58 +234,55 @@ const MediaFilters = ({
   };
 
   return (
-    <div className={Styles.container}>
+    <Container>
       {/* ----------------------Sort Section--------------- */}
-      <div className={Styles.h4Section}>
+      <H4Section>
         <h4 onClick={() => toggleSection("sort")}>
           Sort{" "}
-          <span
-            className={Styles.expand}
+          <Expand
             style={{
               transform: expandedSections.sort ? "rotate(0deg)" : "rotate(-90deg)",
             }}
           >
             ▼
-          </span>
+          </Expand>
         </h4>
-      </div>
+      </H4Section>
 
       {expandedSections.sort && (
-        <div className={Styles.sectionContent}>
+        <SectionContent>
           <p>Sort Result By</p>
-          <select
+          <SortDropdownSelect
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className={Styles.sortDropdownSelect}
           >
             {sortOptions.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}
               </option>
             ))}
-          </select>
-        </div>
+          </SortDropdownSelect>
+        </SectionContent>
       )}
 
       {/* -----------------Filter Section ----------------------*/}
-      <div className={Styles.h4Section}>
+      <H4Section>
         <h4 onClick={() => toggleSection("Filter")}>
           Filter{" "}
-          <span
-            className={Styles.expand}
+          <Expand
             style={{
               transform: expandedSections.Filter ? "rotate(0deg)" : "rotate(-90deg)",
             }}
           >
             ▼
-          </span>
+          </Expand>
         </h4>
-      </div>
+      </H4Section>
 
       {expandedSections.Filter && (
-        <div className={Styles.sectionContent}>
+        <SectionContent>
           {/* --------------Show me section  haik bs ------------*/}
-          <div className={Styles.Showme}>
+          <Showme>
             <p>Show me</p>
             <input type="radio" name="showme" defaultChecked />
             <label> everything</label> <br />
@@ -140,60 +290,56 @@ const MediaFilters = ({
             <label> {mediaType} I haven't seen</label> <br />
             <input type="radio" name="showme" />
             <label> {mediaType} I have seen</label> <br />
-          </div>
+          </Showme>
 
-          <div className={Styles.Avalabilites}>
+          <Avalabilites>
             <input type="checkbox" name="Avalabilites" defaultChecked />
             <label> Search all availabilities?</label>
-          </div>
+          </Avalabilites>
 
           {/* _---------------Release Dates--------------------- */}
-          <div className={Styles.ReleaseDates}>
+          <ReleaseDates>
             <p>Release Dates</p>
             <label>from:</label>
-            <input
+            <FromDate
               type="date"
               value={fromDate}
               onChange={(e) => setFromDate(e.target.value)}
-              className={Styles.fromDate}
-            />
+           />
             <label>to:</label>
-            <input
+            <ToDate
               type="date"
               value={toDate}
               onChange={(e) => setToDate(e.target.value)}
-              className={Styles.ToDate}
             />
-          </div>
+          </ReleaseDates>
 
           {/* ---------------Genres-------------------------- */}
-          <div className={Styles.genres}>
+          <Genres>
             <p>Genres</p>
-            <ul className={Styles.genreList}>
+            <GenreList>
               {fetchedGenres.map((genre) => (
                 <li key={genre.id}>
-                  <a
+                  <GenreLink
                     href="#"
                     onClick={(e) => {
                       e.preventDefault();
                       toggleGenre(genre.id);
                     }}
-                    className={`${Styles.genreLink} ${
-                      selectedGenres.includes(genre.id) ? Styles.selected : ""
-                    }`}
+                    selected={selectedGenres.includes(genre.id)}
                   >
                     {genre.name}
-                  </a>
+                  </GenreLink>
                 </li>
               ))}
-            </ul>
-          </div>
+            </GenreList>
+          </Genres>
 
           {/*---------------------Language-----------------------------*/}
-          <div className={Styles.Lang} ref={dropdownRef}>
+          <Language ref={dropdownRef}>
             <p>Language</p>
-            <div className={Styles.languageDropdown}>
-              <input
+            <LanguageDropdown>
+              <LanguageSearchInput
                 type="text"
                 placeholder="Search language..."
                 value={dropdownOpen ? languageSearch : getSelectedLanguageName()}
@@ -203,11 +349,10 @@ const MediaFilters = ({
                 }}
                 onFocus={() => setDropdownOpen(true)}
                 readOnly={!dropdownOpen}
-                className={Styles.languageSearchInput}
               />
 
               {dropdownOpen && (
-                <ul className={Styles.languageList}>
+                <LanguageList>
                   <li
                     onClick={() => {
                       setSelectedLanguage("");
@@ -219,31 +364,28 @@ const MediaFilters = ({
                     All Languages
                   </li>
                   {filteredLanguages.map((lang) => (
-                    <li
+                    <LanguageListItem
                       key={lang.iso_639_1}
+                      selected={selectedLanguage === lang.iso_639_1}
                       onClick={() => {
                         setSelectedLanguage(lang.iso_639_1);
                         setLanguageSearch("");
                         setDropdownOpen(false);
                       }}
-                      className={
-                        selectedLanguage === lang.iso_639_1 ? Styles.selected : ""
-                      }
                     >
                       {lang.english_name}
-                    </li>
+                    </LanguageListItem>
                   ))}
-                </ul>
+                </LanguageList>
               )}
-            </div>
-          </div>
-        </div>
+            </LanguageDropdown>
+          </Language>
+  </SectionContent>
       )}
 
       {/*--------------------Search Button----------------------------*/}
-      <div style={{ width: "100%" }}>
-        <button
-          className={Styles.searchButton}
+      <SearchButtonDiv >
+        <SearchButton
           onClick={() => {
             onSearch({
               language: selectedLanguage,
@@ -255,9 +397,9 @@ const MediaFilters = ({
           }}
         >
           Search
-        </button>
-      </div>
-    </div>
+        </SearchButton>
+      </SearchButtonDiv>
+    </Container>
   );
 };
 

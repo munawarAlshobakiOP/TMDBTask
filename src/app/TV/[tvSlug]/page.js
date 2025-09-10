@@ -1,11 +1,78 @@
 "use client";
 import { useEffect, useState } from "react";
 import { use } from "react";
+import styled from "styled-components";
 import { FetchingCast, FetchingDetails } from "@/app/component/Details/fetching/fetchingDetails";
 import MediaDetailsContainer from "@/app/component/Details/cardDetails";
 import CastSection from "@/app/component/Details/casts/castsDetail";
 import Navbar from "../../component/Navbar/Navbar";
 import Footer from "../../component/Footer/Footer";
+
+const PageContainer = styled.div`
+  background-color: #ffffff;
+  min-height: 100vh;
+`;
+
+const MainContent = styled.main`
+  min-height: calc(100vh - 4rem);
+`;
+
+const LoadingContainer = styled.div`
+  background-color: #ffffff;
+  min-height: 100vh;
+`;
+
+const LoadingContent = styled.div`
+  padding: 1.25rem;
+  text-align: center;
+`;
+
+const LoadingText = styled.p`
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+`;
+
+const LoadingId = styled.p`
+  font-size: 0.9rem;
+  color: #999;
+  font-family: monospace;
+`;
+
+const NoDataContainer = styled.div`
+  background-color: #ffffff;
+  min-height: 100vh;
+`;
+
+const NoDataContent = styled.div`
+  padding: 1.25rem;
+  text-align: center;
+`;
+
+const NoDataMessage = styled.p`
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+`;
+
+const NoDataId = styled.p`
+  font-size: 0.9rem;
+  color: #999;
+  font-family: monospace;
+`;
+
+const CastSectionContainer = styled.div`
+  padding: 1.25rem;
+  margin-top: 1.25rem;
+`;
+
+const CastTitle = styled.h2`
+  margin-bottom: 1.25rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #032541;
+`;
+
 export default function TVPage({ params }) {
   const { tvSlug } = use(params);
   const mediaType = "tv"; 
@@ -46,45 +113,38 @@ export default function TVPage({ params }) {
 
   if (isLoading) {
     return (
-      <div style={{ backgroundColor: '#ffffff', minHeight: '100vh' }}>
-        <Navbar />
-        <div style={{ padding: '20px', textAlign: 'center' }}>
-          <p>Loading TV show details and cast...</p>
-          <p>ID: {tvSlug}</p>
-        </div>
-      </div>
+      <LoadingContainer>
+        <LoadingContent>
+          <LoadingText>Loading TV show details and cast...</LoadingText>
+        </LoadingContent>
+      </LoadingContainer>
     );
   }
   
   if (!mediaData) {
     return (
-      <div style={{ backgroundColor: '#ffffff', minHeight: '100vh' }}>
-        <Navbar />
-        <div style={{ padding: '20px', textAlign: 'center' }}>
-          <p>No TV show data found.</p>
-          <p>ID: {tvSlug}</p>
-        </div>
-      </div>
+      <NoDataContainer>
+        <NoDataContent>
+          <NoDataMessage>No TV show data found.</NoDataMessage>
+        </NoDataContent>
+      </NoDataContainer>
     );
   }
   
   return (
-    <div style={{ backgroundColor: '#ffffff', minHeight: '100vh' }}>
-      <Navbar />
-      <main style={{ minHeight: 'calc(100vh - 64px)' }}>
+    <PageContainer>
+      <MainContent>
         <MediaDetailsContainer
           media_type={mediaType}
           mediaId={tvSlug}
           mediaData={mediaData}
         />
         
-        <div style={{ padding: '20px', marginTop: '20px' }}>
-          <h2 style={{ marginBottom: '20px', fontSize: '24px', fontWeight: 'bold' }}>
-Top Billed Cast          </h2>
+        <CastSectionContainer>
+          <CastTitle>Top Billed Cast</CastTitle>
           <CastSection cast={castData} />
-        </div>
-      </main>
-      <Footer />
-    </div>
+        </CastSectionContainer>
+      </MainContent>
+    </PageContainer>
   );
 }

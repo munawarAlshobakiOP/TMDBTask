@@ -23,17 +23,14 @@ html, body {
 }
 
 
-/* Specific overrides for common elements */
 .page-container, .content-wrapper, .main-content {
   background: #ffffff !important;
 }
 
-/* Ensure navbar can have its own background and no white elements */
 .navbar, .navbar *, nav, nav * {
   background-color: initial !important;
 }
 
-/* Force navbar to maintain dark background */
 nav.navbar,
 .navbar,
 .navbar .navContainer,
@@ -41,6 +38,6 @@ nav.navbar,
 .navbar .desktopNav,
 .navbar .userActions,
 .navbar .mobileMenuBtn {
-  background: #032541 !important;
-  background-color: #032541 !important;
+  background: #007bff !important;
+  background-color: #007bff !important;
 }

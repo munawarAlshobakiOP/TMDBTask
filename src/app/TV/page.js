@@ -1,11 +1,162 @@
 'use client';
 import { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import MediaCard from '@/app/component/mediaCard/mediaCard';
 import Navbar from '../component/Navbar/Navbar';
 import MediaFilters from '../component/MediaFilters/MediaFilters';
 import Footer from '../component/Footer/Footer';
 const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE;
+
+const PageContainer = styled.div`
+  background-color: #ffffff;
+  min-height: 100vh;
+`;
+
+const MainLayout = styled.div`
+  display: flex;
+  margin-top: 5rem;
+`;
+
+const Sidebar = styled.div`
+  width: 18.75rem;
+  padding: 1.25rem;
+`;
+
+const ContentArea = styled.div`
+  flex: 1;
+  padding: 1.25rem;
+`;
+
+const TVShowsContainer = styled.div`
+  margin-bottom: 1.25rem;
+`;
+
+const ErrorContainer = styled.div`
+  background-color: #ffffff;
+  min-height: 100vh;
+`;
+
+const ErrorContent = styled.div`
+  padding: 1.25rem;
+  text-align: center;
+  color: red;
+`;
+
+const ErrorTitle = styled.h2`
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+`;
+
+const ErrorMessage = styled.p`
+  margin-bottom: 1rem;
+  line-height: 1.5;
+`;
+
+const RetryButton = styled.button`
+  background-color: #01b4e4;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #029ac7;
+    transform: translateY(-0.125rem);
+  }
+`;
+
+const NoShowsContainer = styled.div`
+  text-align: center;
+  padding: 2.5rem;
+  color: #666;
+  background-color: #ffffff;
+`;
+
+const NoShowsTitle = styled.h3`
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+`;
+
+const NoShowsMessage = styled.p`
+  font-size: 1.1rem;
+  line-height: 1.5;
+`;
+
+const ShowsGrid = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+`;
+
+const ShowCardWrapper = styled.div`
+  display: inline-block;
+  width: 12.5rem;
+  margin: 0.625rem;
+  vertical-align: top;
+`;
+
+const LoadingContainer = styled.div`
+  text-align: center;
+  padding: 2.5rem;
+  color: #666;
+`;
+
+const LoadingSpinner = styled.div`
+  display: inline-block;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 0.25rem solid #f3f3f3;
+  border-top: 0.25rem solid #01b4e4;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1.25rem;
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+`;
+
+const LoadingText = styled.p`
+  font-size: 1rem;
+  font-weight: 500;
+`;
+
+const LoadMoreContainer = styled.div`
+  text-align: center;
+  padding: 1.875rem;
+`;
+
+const LoadMoreButton = styled.button`
+  background-color: #01b4e4;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.875rem;
+  border-radius: 0.9375rem;
+  font-size: 1rem;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #029ac7;
+    transform: translateY(-0.125rem);
+    box-shadow: 0 0.25rem 0.75rem rgba(1, 180, 228, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+`;
 
 export default function TVGrid() {
   const handleScroll = () => {
@@ -131,22 +282,21 @@ export default function TVGrid() {
 
   if (error) {
     return (
-      <div style={{ backgroundColor: '#ffffff', minHeight: '100vh' }}>
+      <ErrorContainer>
         <Navbar />
-        <div style={{ padding: '20px', textAlign: 'center', color: 'red' }}>
-          <h2>Error Loading TV Shows</h2>
-          <p>{error}</p>
-          <button onClick={() => window.location.reload()}>Try Again</button>
-        </div>
-      </div>
+        <ErrorContent>
+          <ErrorTitle>Error Loading TV Shows</ErrorTitle>
+          <ErrorMessage>{error}</ErrorMessage>
+          <RetryButton onClick={() => window.location.reload()}>Try Again</RetryButton>
+        </ErrorContent>
+      </ErrorContainer>
     );
   }
 
   return (
-    <div>
-      <Navbar />
-      <div style={{ display: 'flex', marginTop: '80px' }}>
-        <div style={{ width: '300px', padding: '20px' }}>
+    <PageContainer>
+      <MainLayout>
+        <Sidebar>
           <MediaFilters 
             mediaType="tv"
             sortBy={sortBy}
@@ -159,79 +309,50 @@ export default function TVGrid() {
             setToDate={setToDate}
             filteredCount={tv.length}
             onClearFilters={handleClearFilters}
-  onSearch={({ language, genres, fromDate, toDate, sortBy }) => {
+            onSearch={({ language, genres, fromDate, toDate, sortBy }) => {
               setSelectedLanguage(language);
               setSelectedGenres(genres);
               setFromDate(fromDate);
               setToDate(toDate);
               setSortBy(sortBy);
               handleSearch();
-            }}          />
-        </div>
-        <div style={{ flex: 1, padding: '20px' }}>
-          <div style={{ marginBottom: '20px' }}>
-          </div>
+            }}
+          />
+        </Sidebar>
+        <ContentArea>
+          <TVShowsContainer />
 
           {tv.length === 0 && !isLoading ? (
-            <div style={{ textAlign: 'center', padding: '40px', color: '#666', backgroundColor: '#ffffff' }}>
-              <h3>No TV shows found</h3>
-              <p>Try refreshing the page to see more results.</p>
-            </div>
+            <NoShowsContainer>
+              <NoShowsTitle>No TV shows found</NoShowsTitle>
+              <NoShowsMessage>Try refreshing the page to see more results.</NoShowsMessage>
+            </NoShowsContainer>
           ) : (
-            <div>
+            <ShowsGrid>
               {tv.map(show => (
-                <div key={show.id} style={{ 
-                  display: 'inline-block', 
-                  width: '200px', 
-                  margin: '10px',
-                  verticalAlign: 'top'
-                }}>
+                <ShowCardWrapper key={show.id}>
                   <MediaCard media={show} media_type="TV" />
-                </div>
+                </ShowCardWrapper>
               ))}
-            </div>
+            </ShowsGrid>
           )}
 
           {isLoading && (
-            <div style={{ textAlign: 'center', padding: '40px', color: '#666' }}>
-              <div style={{ 
-                display: 'inline-block',
-                width: '40px',
-                height: '40px',
-                border: '4px solid #f3f3f3',
-                borderTop: '4px solid #01b4e4',
-                borderRadius: '50%',
-                animation: 'spin 1s linear infinite',
-                marginBottom: '20px'
-              }}></div>
-              <p style={{ fontSize: '16px', fontWeight: '500' }}>Loading TV shows...</p>
-            </div>
+            <LoadingContainer>
+              <LoadingSpinner />
+              <LoadingText>Loading TV shows...</LoadingText>
+            </LoadingContainer>
           )}
 
           {!isLoading && (
-            <div style={{ textAlign: 'center', padding: '30px' }}>
-              <button
-                onClick={handleLoadMoreClick}
-                style={{
-                  backgroundColor: '#01b4e4',
-                  color: 'white',
-                  border: 'none',
-                  padding: '12px 30px',
-                  borderRadius: '15px',
-                  fontSize: '16px',
-                  fontWeight: 'bold',
-                  width: '100%',
-                  textAlign: 'center'
-                }}
-              >
+            <LoadMoreContainer>
+              <LoadMoreButton onClick={handleLoadMoreClick}>
                 Load More
-              </button>
-           
-            </div>
+              </LoadMoreButton>
+            </LoadMoreContainer>
           )}
-        </div>
-      </div>
-      <Footer />
-    </div>
+        </ContentArea>
+      </MainLayout>
+    </PageContainer>
   );
 }
