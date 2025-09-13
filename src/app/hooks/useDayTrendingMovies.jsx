@@ -1,0 +1,32 @@
+import { useEffect, useState } from 'react';
+import * as fetching from '../services/fetching';
+
+export const useDayTrendingMovies = () => {
+  const [movies, setMovies] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const results = await fetching.fetchTrendingDayMovies();
+        setMovies(results);
+      } catch (err) {
+        console.error('Fetch error:', err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMovies();
+  }, []);
+
+  return {
+    movies,
+    error,
+    loading
+  };
+};

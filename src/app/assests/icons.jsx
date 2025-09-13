@@ -1,0 +1,23 @@
+import AddIcon from '@mui/icons-material/Add';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import OpenWithIcon from '@mui/icons-material/OpenWith';
+
+import SearchIcon from '@mui/icons-material/Search';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+export const Add_Icon=AddIcon;
+export const Search_Icon=SearchIcon;
+export const ChevronRight_Icon=ChevronRightIcon;
+export const ArrowRightAlt_Icon=ArrowRightAltIcon;
+export const PlayArrow_Icon=PlayArrowIcon;
+export const Bookmark_Icon=BookmarkIcon;
+export const Favorite_Icon=FavoriteIcon;
+export const FormatListBulleted_Icon=FormatListBulletedIcon;
+export const MoreHoriz_Icon=MoreHorizIcon;
+export const KeyboardArrowDown_Icon=KeyboardArrowDownIcon;
+export const OpenWith_Icon=OpenWithIcon;

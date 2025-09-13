@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./component/Navbar/Navbar";
 import Footer from "./component/Footer/Footer";
+import StyledComponentsRegistry from "./StyledComponentsRegistry";
 
 // ...existing code...
 
@@ -23,12 +24,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} style={{ backgroundColor: '#ffffff', margin: 0, padding: 0 }}>
-        <Navbar />
-        <main>
-          {children}
-        </main>
-        <Footer/>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} style={{ backgroundColor: '#ffffff', margin: 0, padding: 0 }} suppressHydrationWarning={true}>
+        <StyledComponentsRegistry>
+          <Navbar />
+          <main>
+            {children}
+          </main>
+          <Footer/>
+        </StyledComponentsRegistry>
       </body>
     </html>
   );
