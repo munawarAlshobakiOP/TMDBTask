@@ -14,12 +14,20 @@ export const TrendingCard = styled.div`
   position: relative;
   min-height: 26rem;
 
+  @media (max-width: 768px) {
+    width: 9.5rem;
+    min-width: 9.5rem;
+    max-width: 9.5rem;
+    flex: 0 0 9.5rem;
+    min-height: 24rem;
+  }
+
   @media (max-width: var(--breakpoint-sm)) {
     width: 9rem;
     min-width: 9rem;
     max-width: 9rem;
     flex: 0 0 9rem;
-    height: 20rem;
+    min-height: 20rem;
   }
 `;
 
@@ -28,6 +36,11 @@ export const MoviePoster = styled.img`
   height: var(--height-movie-poster);
   object-fit: cover;
   border-radius: var(--radius-lg);
+
+  @media (max-width: 768px) {
+    width: 9.5rem;
+    height: 14.25rem;
+  }
 
   @media (max-width: var(--breakpoint-sm)) {
     width: 9rem;
@@ -46,6 +59,11 @@ export const NoImagePlaceholder = styled.div`
   color: var(--color-text-light);
   font-size: var(--font-size-sm);
 
+  @media (max-width: 768px) {
+    width: 9.5rem;
+    height: 14.25rem;
+  }
+
   @media (max-width: var(--breakpoint-sm)) {
     width: 9rem;
     height: 13.5rem;
@@ -58,6 +76,16 @@ export const MovieTitle = styled.h4`
   margin: var(--spacing-xs) 0;
   color: var(--color-text-secondary);
   max-width: 8.125rem;
+
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+    max-width: 8.5rem;
+  }
+
+  @media (max-width: var(--breakpoint-sm)) {
+    font-size: 0.75rem;
+    max-width: 8rem;
+  }
 `;
 
 export const MovieRating = styled.div`
@@ -76,6 +104,14 @@ export const MovieYear = styled.p`
   font-size: 0.8rem;
   color: var(--color-gray-darker);
   margin: var(--spacing-xs) 0 0 0;
+
+  @media (max-width: 768px) {
+    font-size: 0.75rem;
+  }
+
+  @media (max-width: var(--breakpoint-sm)) {
+    font-size: 0.7rem;
+  }
 `;
 
 export const MoreButton = styled.button`

@@ -8,6 +8,10 @@ export const FooterC = styled.footer`
   margin-top: 3.75rem;
   border-top: 0.0625rem solid var(--color-border);
 
+  @media (max-width: 768px) {
+    padding: 2rem 0 1rem 0;
+  }
+
   @media (max-width: 30rem) {
     padding: 1.875rem 0 0.9375rem 0;
   }
@@ -17,6 +21,10 @@ export const FooterContainer = styled.div`
   max-width: var(--aligment-size);
   margin: 0 auto;
   padding: 0 1.25rem;
+
+  @media (max-width: 768px) {
+    padding: 0 1rem;
+  }
 
   @media (max-width: 30rem) {
     padding: 0 0.9375rem;
@@ -29,6 +37,12 @@ export const FooterContent = styled.div`
   justify-content: center;
   flex-wrap: wrap;
   align-items: flex-start;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
 
   @media (max-width: 48rem) {
     flex-direction: column;

@@ -6,6 +6,10 @@ export const ColumnWrapper = styled.div`
   margin: 0 auto;
   padding: 0 var(--spacing-lg);
 
+  @media (max-width: 768px) {
+    padding: 0 var(--spacing-sm);
+  }
+
   @media (max-width: var(--breakpoint-sm)) {
     padding: 0 var(--spacing-xs);
   }
@@ -26,6 +30,13 @@ export const ButtonContainer = styled.div`
   gap: var(--spacing-base);
   width: var(--width-container-max);
 
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+  }
+
   @media (max-width: var(--breakpoint-sm)) {
     flex-direction: column;
     align-items: flex-start;
@@ -39,6 +50,10 @@ export const ButtonContainer = styled.div`
     font-size: 1.3rem;
     color: var(--color-text);
 
+    @media (max-width: 768px) {
+      font-size: 1.1rem;
+    }
+
     @media (max-width: var(--breakpoint-sm)) {
       font-size: 1rem;
     }
@@ -49,6 +64,10 @@ export const SwitchContainer = styled.div`
   border: var(--border-width-thin) solid var(--color-dark);
   border-radius: var(--radius-3xl);
   min-width: 12.5rem;
+
+  @media (max-width: 768px) {
+    min-width: 11rem;
+  }
 
   @media (max-width: var(--breakpoint-sm)) {
     min-width: 10rem;
@@ -120,6 +139,11 @@ export const TrendingScroller = styled.div`
   scroll-behavior: smooth;
   margin: 0 auto;
   position: relative;
+
+  @media (max-width: 768px) {
+    padding: 0.5rem;
+    gap: 0.5rem;
+  }
 
   @media (max-width: var(--breakpoint-sm)) {
     padding: 0.25rem;

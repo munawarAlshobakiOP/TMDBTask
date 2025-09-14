@@ -27,10 +27,15 @@ export const NavContainer = styled.div`
   overflow: hidden;
   box-sizing: border-box;
 
-  @media (max-width: 480px) {
+  @media (max-width: 768px) {
     width: 100%;
-    padding: 0 0.5rem;
+    padding: 0 1rem;
     height: 3.5rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 0.75rem;
+    height: 3.25rem;
   }
 `;
 
@@ -38,6 +43,10 @@ export const LeftGroup = styled.div`
   display: flex;
   align-items: center;
   gap: 2rem;
+
+  @media (max-width: 768px) {
+    gap: 1rem;
+  }
 
   @media (max-width: 480px) {
     gap: 0.5rem;
@@ -66,6 +75,11 @@ export const StyledLogo = styled(Image)`
   height: 5rem;
   transition: all 0.3s ease;
 
+  @media (max-width: 768px) {
+    width: 7.5rem;
+    height: 4.5rem;
+  }
+
   @media (max-width: 480px) {
     width: 6.25rem;
     height: 3.75rem;
@@ -78,7 +92,7 @@ export const DesktopNav = styled.div`
   justify-content: flex-start;
   gap: 2rem;
 
-  @media (max-width: 480px) {
+  @media (max-width: 768px) {
     display: none;
   }
 `;
@@ -112,6 +126,11 @@ export const UserActions = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
+
+  @media (max-width: 768px) {
+    gap: 0.5rem;
+    flex-wrap: nowrap;
+  }
 
   @media (max-width: 480px) {
     gap: 0.25rem;
@@ -186,7 +205,7 @@ export const LoginButton = styled.a`
   border-radius: 0.25rem;
   transition: all 0.3s ease;
 
-  @media (max-width: 480px) {
+  @media (max-width: 768px) {
     display: none;
   }
 `;
@@ -202,7 +221,7 @@ export const JoinButton = styled.button`
   font-weight: 600;
   cursor: pointer;
 
-  @media (max-width: 480px) {
+  @media (max-width: 768px) {
     display: none;
   }
 `;
@@ -243,7 +262,7 @@ export const MobileMenuButton = styled.button`
   transition: all 0.3s ease;
   cursor: pointer;
 
-  @media (max-width: 480px) {
+  @media (max-width: 768px) {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -274,7 +293,7 @@ export const MobileMenu = styled.div.withConfig({
   box-shadow: var(--shadow-lg);
   z-index: var(--z-dropdown);
 
-  @media (max-width: 480px) {
+  @media (max-width: 768px) {
     display: ${props => props.isOpen ? 'block' : 'none'};
   }
 `;

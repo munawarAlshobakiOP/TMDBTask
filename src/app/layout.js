@@ -18,6 +18,7 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "TMDB Movie Database",
   description: "Browse movies, TV shows, and people from The Movie Database",
+  viewport: "width=device-width, initial-scale=1",
 };
 
 export default function RootLayout({ children }) {

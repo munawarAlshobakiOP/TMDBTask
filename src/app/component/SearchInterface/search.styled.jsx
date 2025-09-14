@@ -16,9 +16,14 @@ export const SearchBarContainer = styled.div`
   border-bottom: var(--border-width-thin) solid var(--color-border);
   box-shadow: var(--shadow-sm);
 
-  @media (max-width: 480px) {
-    padding: 0 0.5rem;
+  @media (max-width: 768px) {
+    padding: 0 1rem;
     top: 3.5rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 0.75rem;
+    top: 3.25rem;
   }
 `;
 
@@ -27,6 +32,10 @@ export const SearchForm2 = styled.form`
   align-items: center;
   gap: var(--spacing-md);
   width: 100%;
+
+  @media (max-width: 768px) {
+    gap: 0.5rem;
+  }
 
   @media (max-width: 480px) {
     gap: 0.25rem;
@@ -45,6 +54,12 @@ export const SearchInputWrapper = styled.div`
   border-radius: var(--radius-lg);
   background: var(--color-white);
   transition: var(--transition-all);
+
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 0 0.75rem 0 1rem;
+    min-height: 2.5rem;
+  }
 
   @media (max-width: 480px) {
     width: 100%;
@@ -67,6 +82,12 @@ export const SearchInputWrapper = styled.div`
     height: 1.25rem;
     z-index: 1;
 
+    @media (max-width: 768px) {
+      left: 3.5rem;
+      width: 1.125rem;
+      height: 1.125rem;
+    }
+
     @media (max-width: 480px) {
       left: 3rem;
       width: 1rem;
@@ -76,6 +97,11 @@ export const SearchInputWrapper = styled.div`
   
   & input {
     padding-left: 5.5rem; 
+
+    @media (max-width: 768px) {
+      padding-left: 5rem;
+      font-size: 0.9rem;
+    }
 
     @media (max-width: 480px) {
       padding-left: 4.5rem;
@@ -98,6 +124,11 @@ export const SearchInput2 = styled.input`
     opacity: 1;
   }
 
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+    padding: 0.75rem 0.75rem 0.75rem 5rem;
+  }
+
   @media (max-width: 480px) {
     font-size: 0.875rem;
     padding: 0.625rem 0.5rem 0.625rem 4.5rem;
@@ -115,6 +146,11 @@ export const Dropdown = styled.div`
   max-height: 25rem;
   overflow-y: auto;
   z-index: var(--z-dropdown);
+
+  @media (max-width: 768px) {
+    max-height: 22rem;
+    border-radius: 0 0 0.75rem 0.75rem;
+  }
 
   @media (max-width: 480px) {
     max-height: 20rem;
@@ -159,6 +195,11 @@ export const ResultItem = styled.div`
     background-color: var(--color-border-light);
   }
 
+  @media (max-width: 768px) {
+    padding: 0.75rem 0.75rem;
+    gap: 0.75rem;
+  }
+
   @media (max-width: 480px) {
     padding: 0.5rem 0.5rem;
     gap: 0.5rem;
@@ -175,6 +216,11 @@ export const ResultIcon = styled.div`
   align-items: center;
   justify-content: center;
   
+  @media (max-width: 768px) {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
   @media (max-width: 480px) {
     width: 2rem;
     height: 2rem;
@@ -184,6 +230,11 @@ export const ResultIcon = styled.div`
     width: var(--spacing-base);
     height: var(--spacing-base);
     color: var(--color-black);
+
+    @media (max-width: 768px) {
+      width: 1.375rem;
+      height: 1.375rem;
+    }
 
     @media (max-width: 480px) {
       width: 1.25rem;
@@ -201,6 +252,11 @@ export const ResultTitle = styled.h4`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+    line-height: 1.25;
+  }
 
   @media (max-width: 480px) {
     font-size: 0.75rem;

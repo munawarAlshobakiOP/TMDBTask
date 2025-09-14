@@ -33,6 +33,12 @@ export const WelcomeSectionContainer = styled.section.withConfig({
     }
   }
 
+  @media (max-width: 768px) {
+    height: 18.75rem;
+    padding: var(--spacing-lg) 0;
+    margin-bottom: var(--spacing-4xl);
+  }
+
   @media (max-width: var(--breakpoint-sm)) {
     height: 15.625rem;
     padding: var(--spacing-lg) 0;
@@ -57,6 +63,10 @@ export const Content = styled.div`
   text-align: left;
   color: var(--color-white) !important;
   box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    padding: 0 var(--spacing-2xl);
+  }
 
   @media (max-width: 48rem) {
     padding: 0 var(--spacing-3xl);
@@ -84,6 +94,11 @@ export const WelcomeTitle = styled.h1`
   letter-spacing: -0.02rem;
   color: var(--color-white) !important;
 
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-md);
+  }
+
   @media (max-width: 48rem) {
     margin-bottom: var(--spacing-md);
   }
@@ -105,6 +120,11 @@ export const WelcomeSubtitle = styled.h2`
   opacity: 1;
   color: var(--color-white) !important;
 
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-3xl);
+  }
+
   @media (max-width: 48rem) {
     margin-bottom: var(--spacing-3xl);
   }
@@ -121,6 +141,10 @@ export const WelcomeSubtitle = styled.h2`
 export const Search = styled.div`
   width: 100%;
   margin-top: var(--spacing-lg);
+
+  @media (max-width: 768px) {
+    margin-top: var(--spacing-md);
+  }
 
   @media (max-width: 30rem) {
     margin-top: var(--spacing-md);
@@ -144,6 +168,10 @@ export const SearchInput = styled.div`
   align-items: center;
   border: var(--border-width-medium) solid transparent;
   width: 100%;
+
+  @media (max-width: 768px) {
+    padding: var(--spacing-sm) 8rem var(--spacing-sm) var(--spacing-lg);
+  }
 
   @media (max-width: 48rem) {
     padding: var(--spacing-sm) 7.5rem var(--spacing-sm) var(--spacing-md);
