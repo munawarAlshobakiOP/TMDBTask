@@ -14,7 +14,6 @@ export const useWeekTrendingMovies = () => {
         const results = await fetching.fetchTrendingWeekMovies();
         setMovies(results);
       } catch (err) {
-        console.error('Fetch error:', err);
         setError(err.message);
       } finally {
         setLoading(false);

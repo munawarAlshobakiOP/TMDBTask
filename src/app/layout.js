@@ -4,7 +4,6 @@ import Navbar from "./component/Navbar/Navbar";
 import Footer from "./component/Footer/Footer";
 import StyledComponentsRegistry from "./StyledComponentsRegistry";
 
-// ...existing code...
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,7 +23,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} style={{ backgroundColor: '#ffffff', margin: 0, padding: 0 }} suppressHydrationWarning={true}>
+      <body suppressHydrationWarning={true}>
         <StyledComponentsRegistry>
           <Navbar />
           <main>

@@ -30,16 +30,14 @@ export default function TrendingMovieCard({ movie }) {
       ) : (
         <TrendingStyled.NoImagePlaceholder>No Image</TrendingStyled.NoImagePlaceholder>
       )}
-
-      <TrendingStyled.MovieTitle>{movie.title}</TrendingStyled.MovieTitle>
-
       <TrendingStyled.MovieRating>
         <DonutChart
           percentage={movie.vote_average ? Math.round(movie.vote_average * 10) : 0}
           size={34}
         />
       </TrendingStyled.MovieRating>
-
+      <TrendingStyled.MovieDetail>
+      <TrendingStyled.MovieTitle>{movie.title}</TrendingStyled.MovieTitle>
       <TrendingStyled.MovieYear>
         {movie.release_date
           ? new Date(movie.release_date).toLocaleDateString("en-US", {
@@ -49,7 +47,7 @@ export default function TrendingMovieCard({ movie }) {
             })
           : "Unknown"}
       </TrendingStyled.MovieYear>
-
+      </TrendingStyled.MovieDetail>
       <TrendingStyled.MoreButton onClick={handleMoreClick} type="button">
         <MoreHoriz_Icon />
       </TrendingStyled.MoreButton>

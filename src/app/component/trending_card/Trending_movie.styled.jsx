@@ -12,6 +12,15 @@ export const TrendingCard = styled.div`
   margin: 0;
   scroll-snap-align: start;
   position: relative;
+  min-height: 26rem;
+
+  @media (max-width: var(--breakpoint-sm)) {
+    width: 9rem;
+    min-width: 9rem;
+    max-width: 9rem;
+    flex: 0 0 9rem;
+    height: 20rem;
+  }
 `;
 
 export const MoviePoster = styled.img`
@@ -19,6 +28,11 @@ export const MoviePoster = styled.img`
   height: var(--height-movie-poster);
   object-fit: cover;
   border-radius: var(--radius-lg);
+
+  @media (max-width: var(--breakpoint-sm)) {
+    width: 9rem;
+    height: 13.5rem;
+  }
 `;
 
 export const NoImagePlaceholder = styled.div`
@@ -31,18 +45,23 @@ export const NoImagePlaceholder = styled.div`
   justify-content: center;
   color: var(--color-text-light);
   font-size: var(--font-size-sm);
+
+  @media (max-width: var(--breakpoint-sm)) {
+    width: 9rem;
+    height: 13.5rem;
+  }
 `;
 
 export const MovieTitle = styled.h4`
   font-size: 0.83rem;
   font-weight: var(--font-weight-semibold);
-  margin: var(--spacing-sm) 0;
+  margin: var(--spacing-xs) 0;
   color: var(--color-text-secondary);
   max-width: 8.125rem;
 `;
 
 export const MovieRating = styled.div`
-  margin: -3.75rem 0 var(--spacing-xs) 0;
+  margin: -1.5rem 0 var(--spacing-xs) 0;
   color: var(--color-secondary);
   font-weight: var(--font-weight-medium);
   font-size: var(--font-size-sm);
@@ -56,7 +75,7 @@ export const MovieRating = styled.div`
 export const MovieYear = styled.p`
   font-size: 0.8rem;
   color: var(--color-gray-darker);
-  margin: var(--spacing-sm) 0 0 0;
+  margin: var(--spacing-xs) 0 0 0;
 `;
 
 export const MoreButton = styled.button`
@@ -135,4 +154,9 @@ export const MoreBoxItem = styled.a`
     background-color: var(--color-dark);
     color: var(--color-white);
   }
+`;
+export const MovieDetail = styled.div`
+  word-break: break-word;
+  white-space: normal;
+  margin-top: var(--spacing-sm);
 `;

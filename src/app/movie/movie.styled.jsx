@@ -53,14 +53,12 @@ export const SectionTitle = styled.h1`
 export const MoviesGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: var(--spacing-base) 0;
+  gap: var(--spacing-base);
   padding: var(--spacing-xs);
-  @media (max-width: 1200px) {
-    grid-template-columns: repeat(auto-fit, 1fr);
-  }
-
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(auto-fit, 1fr);
+  
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
   }
 `;
 

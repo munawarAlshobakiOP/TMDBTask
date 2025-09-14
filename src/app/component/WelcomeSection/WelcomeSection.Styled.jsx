@@ -10,6 +10,7 @@ export const WelcomeSectionContainer = styled.section.withConfig({
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  margin-bottom: var(--spacing-2xl);
 
   background-image: ${({ backgroundImage }) =>
     backgroundImage ? `url(${backgroundImage})` : 'none'};
@@ -32,17 +33,10 @@ export const WelcomeSectionContainer = styled.section.withConfig({
     }
   }
 
-  @media (max-width: 48rem) {
-    height: 17.5rem;
-    padding: var(--spacing-lg) 0;
-  }
-
-  @media (max-width: 30rem) {
+  @media (max-width: var(--breakpoint-sm)) {
     height: 15.625rem;
-  }
-
-  @media (max-width: 22.5rem) {
-    height: 13.75rem;
+    padding: var(--spacing-lg) 0;
+    margin-bottom: var(--spacing-4xl);
   }
 `;
 
@@ -87,7 +81,7 @@ export const WelcomeTitle = styled.h1`
   font-size: var(--font-size-5xl);
   margin: 0 0 var(--spacing-lg) 0;
   line-height: 1.1;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.02rem;
   color: var(--color-white) !important;
 
   @media (max-width: 48rem) {
@@ -126,7 +120,6 @@ export const WelcomeSubtitle = styled.h2`
 
 export const Search = styled.div`
   width: 100%;
-  max-width: 56.25rem;
   margin-top: var(--spacing-lg);
 
   @media (max-width: 30rem) {
@@ -210,7 +203,7 @@ export const SearchButton = styled.button`
   color: var(--color-white);
   border: none;
   border-radius: var(--radius-3xl);
-  padding: 0.64rem var(--spacing-2xl);
+  padding: 0.54rem var(--spacing-2xl);
   cursor: pointer;
   transition: var(--transition-all);
   display: flex;

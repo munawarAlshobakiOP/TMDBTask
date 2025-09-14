@@ -6,7 +6,7 @@ export const Container = styled.div.withConfig({
     background-size: cover;
     background-position: center;
     position: relative;
-    min-height: 70vh;
+    min-height: 43.75rem;
     background-image: ${({ backdropUrl }) =>
       backdropUrl ? `url(${backdropUrl})` : 'none'};
     background-color: #0f1419;
@@ -26,13 +26,29 @@ export const Container = styled.div.withConfig({
             z-index: 1;
             display: flex;
             align-items: flex-start;
-            min-height: 60vh;
+            min-height: 37.5rem;
             padding: var(--spacing-base) var(--spacing-base);
             padding-top: var(--spacing-3xl);
               max-width: var(--aligment-size);
     margin: 0 auto;
     padding: var(--spacing-2xl) 1.25rem;
     margin-top: 3.7rem;
+
+    @media (max-width: var(--breakpoint-lg)) {
+      max-width: var(--aligment-size-mobile);
+      padding: var(--spacing-xl) 1rem;
+    }
+
+    @media (max-width: var(--breakpoint-md)) {
+      padding: var(--spacing-lg) 0.75rem;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: var(--breakpoint-sm)) {
+      padding: var(--spacing-md) 0.5rem;
+      margin-top: 2.5rem;
+      flex-direction: column;
+    }
   `;
      export const PosterImage = styled.img`
       transition: var(--transition-base);
@@ -42,6 +58,17 @@ export const Container = styled.div.withConfig({
       border-radius: var(--radius-lg);
       box-shadow: 0 .625rem .9375rem -0.1875rem rgba(0, 0, 0, 0.1);
       transition: opacity var(--transition-base);
+
+      @media (max-width: var(--breakpoint-md)) {
+        width: 15rem;
+      }
+
+      @media (max-width: var(--breakpoint-sm)) {
+        width: 12rem;
+        height: auto;
+        align-self: center;
+        margin-bottom: var(--spacing-lg);
+      }
       `;
   export const LayOut= styled.div`
     display: flex;
@@ -50,7 +77,7 @@ export const Container = styled.div.withConfig({
     width: 100%;
     max-width: var(--aligment-size);
     margin: 0 auto;
-    @media (min-width: 48rem) {
+    @media (min-width: 30rem) {
       flex-direction: row;
       align-items: stretch;
       gap: var(--spacing-3xl);
@@ -257,7 +284,7 @@ export const Container = styled.div.withConfig({
       bottom: 100%;
       left: 50%;
       transform: translateX(-50%);
-      border: 5px solid transparent;
+      border: 0.3125rem solid transparent;
     }`;
     
    export const IconHeart = styled.span`
@@ -349,7 +376,6 @@ export const Detailgrid = styled.div`
     
     `;
 
-// Emoji Components
 export const EmojiContainer = styled.div`
   display: flex;
   align-items: center;
@@ -373,9 +399,9 @@ export const EmojiButton = styled.button`
   width: 2rem;
   height: 2rem;
   border-radius: var(--radius-full);
-  border: 2px solid transparent;
+  border: 0.125rem solid transparent;
   background: transparent;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(0.625rem);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -389,8 +415,8 @@ export const EmojiButton = styled.button`
   }
   
   img {
-    width: 32px;
-    height: 32px;
+    width: 2rem;
+    height: 2rem;
     transition: var(--transition-all);
   }
   
@@ -408,11 +434,11 @@ export const EmojiTooltip = styled.div`
   color: var(--color-white);
   padding: var(--spacing-xs) var(--spacing-sm);
   border-radius: var(--spacing-xs);
-  border: 1px solid var(--color-white);
+  border: 0.0625rem solid var(--color-white);
   font-size: 0.5rem;
   font-weight: var(--font-weight-normal);
   white-space: nowrap;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.3);
   visibility: hidden;
   opacity: 0;
   transition: var(--transition-base);

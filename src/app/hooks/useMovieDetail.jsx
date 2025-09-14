@@ -21,7 +21,6 @@ export const useMovieDetail = (movieSlug) => {
         setMediaData(details);
         setCastData(cast);
       } catch (err) {
-        console.error('Error fetching movie data:', err);
         setError(err.message);
       } finally {
         setIsLoading(false);

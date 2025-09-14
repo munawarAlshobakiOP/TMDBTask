@@ -6,6 +6,8 @@ const BASE_URL = process.env.NEXT_PUBLIC_API_BASE;
 
 export const useMovies = (filters) => {
   const [movies, setMovies] = useState([]);
+  const [allMovies, setAllMovies] = useState([]);
+  const [displayedCount, setDisplayedCount] = useState(20);
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -56,7 +58,7 @@ export const useMovies = (filters) => {
       
       const data = await res.json();
       
-      setMovies(prev => {
+      setAllMovies(prev => {
         if (page === 1) {
           return data.results;
         }
@@ -66,7 +68,6 @@ export const useMovies = (filters) => {
       
       setTotalPages(data.total_pages);
     } catch (err) {
-      console.error('Error fetching movies:', err);
       setError(err.message);
     } finally {
       setIsLoading(false);
@@ -80,16 +81,22 @@ export const useMovies = (filters) => {
   }, [isLoading, page, totalPages]);
 
   const handleLoadMoreClick = useCallback(() => {
-    loadMoreMovies();
+    if (displayedCount < allMovies.length) {
+      setDisplayedCount(prev => Math.min(prev + 20, allMovies.length));
+    } else {
+      loadMoreMovies();
+    }
     setAutoLoadEnabled(true);
-  }, [loadMoreMovies]);
+  }, [displayedCount, allMovies.length, loadMoreMovies]);
 
   const handleScroll = useCallback(() => {
-    if (!autoLoadEnabled || isLoading) return;
-    
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     const windowHeight = window.innerHeight;
     const documentHeight = document.documentElement.scrollHeight;
+    
+    if (!autoLoadEnabled || isLoading || page >= totalPages) {
+      return;
+    }
     
     if (scrollTop + windowHeight >= documentHeight - 200) {
       if (loadMoreTimeout) {
@@ -102,20 +109,25 @@ export const useMovies = (filters) => {
       
       setLoadMoreTimeout(timeout);
     }
-  }, [autoLoadEnabled, isLoading, loadMoreTimeout, loadMoreMovies]);
+  }, [autoLoadEnabled, isLoading, loadMoreTimeout, loadMoreMovies, page, totalPages]);
 
   const resetMovies = useCallback(() => {
     setPage(1);
     setMovies([]);
+    setAllMovies([]);
+    setDisplayedCount(20);
     setError(null);
+    setAutoLoadEnabled(false);
   }, []);
 
-  // Fetch movies when dependencies change
   useEffect(() => {
     fetchMovies();
   }, [fetchMovies]);
 
-  // Handle scroll event for auto-loading
+  useEffect(() => {
+    setMovies(allMovies.slice(0, displayedCount));
+  }, [allMovies, displayedCount]);
+
   useEffect(() => {
     if (autoLoadEnabled) {
       window.addEventListener('scroll', handleScroll);
@@ -133,8 +145,7 @@ export const useMovies = (filters) => {
     isLoading,
     error,
     totalPages,
-    hasMore: page < totalPages,
-    loadMoreMovies,
+    hasMore: displayedCount < allMovies.length || page < totalPages,
     handleLoadMoreClick,
     resetMovies
   };

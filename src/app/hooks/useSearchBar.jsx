@@ -34,7 +34,6 @@ export const useSearchBar = (onSearchResults) => {
       setShowDropdown(processedResults.length > 0);
       onSearchResults(processedResults);
     } catch (error) {
-      console.error('Error searching:', error);
       setError(error.message);
       setResults([]);
       setShowDropdown(false);

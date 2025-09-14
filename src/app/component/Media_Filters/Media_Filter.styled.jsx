@@ -45,38 +45,41 @@ export const H4Section = styled.div`
   align-items: center;
   padding: .75rem 1rem;
   background-color: transparent;
-  border: 1px solid #e0e0e0;
+  border: 0.0625rem solid #e0e0e0;
   border-radius: .375rem;
   font-size: 1rem;
   font-weight: 500;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.2);
 
 `;
 export const SectionWrapper = styled.div`
   background-color: transparent ;
   border-radius: 0.7rem;
-  border: 1px solid #e0e0e0;
+  border: 0.0625rem solid #e0e0e0;
   padding: 0.85rem 0.9rem;
   margin-bottom: 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.15);
   width: 100%;
 `;
 
-export const Expand = styled.span`
+export const Expand = styled.span.withConfig({
+  shouldForwardProp: (prop) => prop !== 'isExpanded',
+})`
     font-size: 0.75rem;
     font-weight:bold;
   display: inline-block;
   transition: transform 0.2s ease;
   position:relative;
   left:7.9rem;
+  transform: ${props => props.isExpanded ? "rotate(90deg)" : "rotate(0deg)"};
 `;
 export const SectionContent = styled.div`
   padding: 1rem;
-  border-top: 1px solid #333;
+  border-top: 0.0625rem solid #333;
   border-left: none;
   border-right: none;
   border-bottom: none;
-  border-radius: 0 0 .375rem .375rem; /* Rounded only at bottom */
+  border-radius: 0 0 .375rem .375rem;
   margin-top: 0; 
   background-color: transparent;
 `;
@@ -98,7 +101,7 @@ export const SortDropdownSelect = styled.select`
   -moz-appearance: none !important;
   position: relative;
   z-index: 1;
-  border: 1px solid #333 !important;
+  border: 0.0625rem solid #333 !important;
   
  
 `;
@@ -116,19 +119,19 @@ export const SortDropdownIcon = styled.div`
 export const Showme = styled.div`
   margin-bottom: 1rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #333;
+  border-bottom: 0.0625rem solid #333;
 `;
 
 export const Avalabilites = styled.div`
   margin-bottom: 1rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #333;
+  border-bottom: 0.0625rem solid #333;
 `;
 
 export const ReleaseDates = styled.div`
   margin-bottom: 1rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #333;
+  border-bottom: 0.0625rem solid #333;
 `;
 export const ToDate = styled.input`
   width: 100%;
@@ -240,13 +243,13 @@ export const LanguageList = styled.ul`
 export const Genres = styled.div`
   margin-bottom: 1rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #333;
+  border-bottom: 0.0625rem solid #333;
 `;
 
 export const Language = styled.div`
   margin-bottom: 1rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #333;
+  border-bottom: 0.0625rem solid #333;
 `;
 
 export const SearchButtonDiv = styled.div`

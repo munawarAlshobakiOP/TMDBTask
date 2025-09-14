@@ -21,7 +21,6 @@ export const useTVDetail = (tvSlug) => {
         setMediaData(details);
         setCastData(cast);
       } catch (err) {
-        console.error('Error fetching TV show data:', err);
         setError(err.message);
       } finally {
         setIsLoading(false);

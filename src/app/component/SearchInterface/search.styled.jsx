@@ -15,6 +15,11 @@ export const SearchBarContainer = styled.div`
   box-sizing: border-box;
   border-bottom: var(--border-width-thin) solid var(--color-border);
   box-shadow: var(--shadow-sm);
+
+  @media (max-width: 480px) {
+    padding: 0 0.5rem;
+    top: 3.5rem;
+  }
 `;
 
 export const SearchForm2 = styled.form`
@@ -22,9 +27,9 @@ export const SearchForm2 = styled.form`
   align-items: center;
   gap: var(--spacing-md);
   width: 100%;
-  @media (max-width: 48rem) {
-    flex-direction: column;
-    gap: var(--spacing-sm);
+
+  @media (max-width: 480px) {
+    gap: 0.25rem;
   }
 `;
 
@@ -36,21 +41,46 @@ export const SearchInputWrapper = styled.div`
   align-items: center;
   padding: 0 var(--spacing-base) 0 var(--spacing-lg);
   min-height: 2.5rem;
-  border: none;
+  border: var(--border-width-thin) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-white);
   transition: var(--transition-all);
-  @media (max-width: 48rem) {
+
+  @media (max-width: 480px) {
     width: 100%;
+    padding: 0 0.5rem 0 0.75rem;
+    min-height: 2.25rem;
+  }
+
+  &:focus-within {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 0.125rem rgba(1, 180, 228, 0.2);
   }
 
   & svg {
     color: var(--color-black);
-    margin-right: var(--spacing-sm);
-    flex-shrink: 0;
     position: absolute;
-    left: 2.1rem;
+    left: 4rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.25rem;
+    height: 1.25rem;
+    z-index: 1;
+
+    @media (max-width: 480px) {
+      left: 3rem;
+      width: 1rem;
+      height: 1rem;
+    }
   }
+  
   & input {
-    padding-left: 3rem; 
+    padding-left: 5.5rem; 
+
+    @media (max-width: 480px) {
+      padding-left: 4.5rem;
+      font-size: 0.875rem;
+    }
   }
 `;
 
@@ -61,11 +91,16 @@ export const SearchInput2 = styled.input`
   font-size: var(--font-size-base);
   background: transparent;
   color: var(--color-text-secondary);
-  padding: 0 0 0 1.875rem;
+  padding: 0.75rem 0.75rem 0.75rem 5.5rem;
   
   &::placeholder {
     color: var(--color-text-lighter);
     opacity: 1;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.875rem;
+    padding: 0.625rem 0.5rem 0.625rem 4.5rem;
   }
 `;
 
@@ -80,6 +115,11 @@ export const Dropdown = styled.div`
   max-height: 25rem;
   overflow-y: auto;
   z-index: var(--z-dropdown);
+
+  @media (max-width: 480px) {
+    max-height: 20rem;
+    border-radius: 0 0 0.5rem 0.5rem;
+  }
 `;
 
 export const LoadingIndicator = styled.div`
@@ -111,12 +151,17 @@ export const ResultItem = styled.div`
     bottom: 0;
     left: var(--spacing-md);          
     right: var(--spacing-md);
-    height: 0.02rem;
+    height: 0.125rem;
     background-color: var(--color-white);
   }
 
   &:hover {
     background-color: var(--color-border-light);
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.5rem 0.5rem;
+    gap: 0.5rem;
   }
 `;
 
@@ -129,14 +174,21 @@ export const ResultIcon = styled.div`
   color: var(--color-black);
   align-items: center;
   justify-content: center;
-  @media (max-width: 30rem) {
-    align-self: center;
+  
+  @media (max-width: 480px) {
+    width: 2rem;
+    height: 2rem;
   }
   
   & svg {
     width: var(--spacing-base);
     height: var(--spacing-base);
     color: var(--color-black);
+
+    @media (max-width: 480px) {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
   }
 `;
 
@@ -149,4 +201,9 @@ export const ResultTitle = styled.h4`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  @media (max-width: 480px) {
+    font-size: 0.75rem;
+    line-height: 1.2;
+  }
 `;

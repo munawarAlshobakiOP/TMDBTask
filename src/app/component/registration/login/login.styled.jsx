@@ -9,6 +9,14 @@ export const LoginContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: var(--spacing-4xl);
+
+  @media (max-width: 480px) {
+    padding: var(--spacing-lg);
+    width: 100%;
+    margin-left: 0;
+    margin-top: var(--spacing-2xl);
+    min-height: 50vh;
+  }
 `;
 
 export const ButtonContainer = styled.div`
@@ -16,6 +24,12 @@ export const ButtonContainer = styled.div`
   gap: var(--spacing-base);
   align-items: center;
   margin-top: var(--spacing-base);
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-sm);
+  }
 `;
 
 export const LoginTitle = styled.h1`
@@ -23,6 +37,11 @@ export const LoginTitle = styled.h1`
   font-size: var(--font-size-xl);
   margin-bottom: var(--spacing-base);
   color: var(--color-text-dark); 
+
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-sm);
+  }
 `;
 
 export const LoginDescription = styled.p`
@@ -30,15 +49,29 @@ export const LoginDescription = styled.p`
   font-size: var(--font-size-lg);
   line-height: 1.5;
   color: var(--color-text-secondary);
+
+  @media (max-width: 480px) {
+    font-size: var(--font-size-base);
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.4;
+  }
 `;
 
 export const LoginForm = styled.form`
   width: 100%;
   margin-top: var(--spacing-xl);
+
+  @media (max-width: 480px) {
+    margin-top: var(--spacing-lg);
+  }
 `;
 
 export const FieldContainer = styled.div`
   margin-bottom: var(--spacing-base);
+
+  @media (max-width: 480px) {
+    margin-bottom: var(--spacing-sm);
+  }
 `;
 
 export const FieldLabel = styled.label`
@@ -46,6 +79,11 @@ export const FieldLabel = styled.label`
   font-weight: var(--font-weight-medium);
   margin-bottom: var(--spacing-sm);
   color: var(--color-text-secondary); 
+
+  @media (max-width: 480px) {
+    font-size: var(--font-size-sm);
+    margin-bottom: 0.25rem;
+  }
 `;
 
 export const FieldInput = styled.input`
@@ -62,6 +100,11 @@ export const FieldInput = styled.input`
     box-shadow: var(--shadow-primary);
     outline: none;
   }
+
+  @media (max-width: 480px) {
+    padding: 0.75rem;
+    font-size: 1rem;
+  }
 `;
 export const LoginButton = styled.button`
   background-color: var(--color-gray-dark); 
@@ -77,6 +120,12 @@ export const LoginButton = styled.button`
   &:hover {
     background-color: var(--color-gray-darker); 
   }
+
+  @media (max-width: 480px) {
+    padding: 0.75rem 1rem;
+    font-size: var(--font-size-base);
+    width: 100%;
+  }
 `;
 
 
@@ -89,6 +138,11 @@ export const ResetPasswordLink = styled(Link)`
   &:hover {
     text-decoration: underline;
     text-decoration-color: var(--color-primary);
+  }
+
+  @media (max-width: 480px) {
+    text-align: center;
+    padding: 0.5rem;
   }
 `;
 

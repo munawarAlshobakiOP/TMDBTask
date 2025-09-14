@@ -5,6 +5,10 @@ export const ColumnWrapper = styled.div`
   max-width: var(--width-container-max);
   margin: 0 auto;
   padding: 0 var(--spacing-lg);
+
+  @media (max-width: var(--breakpoint-sm)) {
+    padding: 0 var(--spacing-xs);
+  }
 `;
 
 export const ContentWrapper = styled.div`
@@ -22,72 +26,72 @@ export const ButtonContainer = styled.div`
   gap: var(--spacing-base);
   width: var(--width-container-max);
 
+  @media (max-width: var(--breakpoint-sm)) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+  }
+
   p {
     font-weight: var(--font-weight-bold);
     margin: 0;
     font-size: 1.3rem;
     color: var(--color-text);
+
+    @media (max-width: var(--breakpoint-sm)) {
+      font-size: 1rem;
+    }
   }
 `;
-
 export const SwitchContainer = styled.div`
-  position: relative;
   display: flex;
-  border: var(--border-width-thin) solid var(--color-black);
+  border: var(--border-width-thin) solid var(--color-dark);
   border-radius: var(--radius-3xl);
-  padding: var(--spacing-xs);
-  gap: 0;
+  min-width: 12.5rem;
+
+  @media (max-width: var(--breakpoint-sm)) {
+    min-width: 10rem;
+  }
+
 `;
 
 export const SwitchButton = styled.button`
-  padding: var(--spacing-xs) 1.2rem;
-  border: none;
-  border-radius: var(--radius-3xl);
+  padding: var(--spacing-xs) 1.5rem;
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
-  transition: var(--transition-all);
+  transition: var(all 0.4s cubic-bezier(0.4, 0, 0.2, 1));
+
   background: transparent;
   color: var(--color-black);
-  position: relative;
-  z-index: 2;
-  min-width: 4.375rem;
+  flex: 1;
+  text-align: center;
+  cursor: pointer;
+
+
+  white-space: nowrap;
+
+  &:first-child {
+    border-radius: var(--radius-3xl) 0 0 var(--radius-3xl);
+  }
+
+  &:last-child {
+    border-radius: 0 var(--radius-3xl) var(--radius-3xl) 0;
+  }
 
   &.active {
-    background: linear-gradient(
-      135deg,
-      var(--color-primary),
-      var(--color-primary2)
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    border-radius: 1.5rem;
+
+    color: rgb(var(--tmdbLightGreen));
+    background: var(--color-dark);
   }
 
   &.inactive {
-    color: var(--color-black);
-    background: transparent;
-  }
+    color: var(--color-dark);
+    background: #ffffff;
+  }
 `;
 
-export const SwitchSlider = styled.div`
-  position: absolute;
-  top: var(--spacing-xs);
-  left: var(--spacing-xs);
-  width: calc(50% - var(--spacing-xs));
-  height: calc(100% - var(--spacing-xs));
-  background: var(--color-dark);
-  border-radius: var(--radius-3xl);
-  transition: var(--transition-all);
-  z-index: 1;
-
-  &.sliderLeft {
-    transform: translateX(0);
-  }
-
-  &.sliderRight {
-    transform: translateX(100%);
-  }
-`;
 
 export const ColumnContent = styled.div`
   width: 100%;
@@ -100,7 +104,6 @@ export const Container = styled.div`
 `;
 
 export const ErrorMessage = styled.p`
-  color: var(--color-error);
   text-align: center;
 `;
 
@@ -114,11 +117,14 @@ export const TrendingScroller = styled.div`
   scroll-snap-type: x mandatory;
   width: 100%;
   box-sizing: border-box;
-  white-space: nowrap;
   scroll-behavior: smooth;
-  height: 21.875rem;
   margin: 0 auto;
   position: relative;
+
+  @media (max-width: var(--breakpoint-sm)) {
+    padding: 0.25rem;
+    gap: 0.25rem;
+  }
 
   &::-webkit-scrollbar {
     height: var(--spacing-sm);

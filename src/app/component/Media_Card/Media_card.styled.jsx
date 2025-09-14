@@ -112,11 +112,11 @@ export const Date = styled.p`
 
 export const Score = styled.div`
   position: absolute;
-  top: 13.5rem; /* Moved down further */
+  top: 13.5rem;
   left: 0.4rem;
   color: #222;
   border-radius: 50%;
-  width: 2.25rem; /* Reduced from 3rem */
+  width: 2.25rem;
   height: 2.25rem;
   font-size: 0.75rem;
   font-weight: bold;
@@ -165,9 +165,9 @@ export const Morebox = styled.div`
   border-radius: 0.4rem;
   box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.15);
   z-index: 20;
-  min-width: 6rem; /* Slightly smaller */
+  min-width: 6rem;
   overflow: hidden;
-  filter: none !important; /* Ensure the dropdown is never blurred */
+  filter: none !important;
 `;
 
 export const MoreBoxContent = styled.div`
@@ -175,7 +175,7 @@ export const MoreBoxContent = styled.div`
   flex-direction: column;
 
   p {
-    font-size: 0.6rem; /* Reduced from .6875rem */
+    font-size: 0.6rem;
     font-weight: bold;
     margin: 0.25rem 0.5rem 0.1rem 0.5rem;
     color: #333;
@@ -193,7 +193,7 @@ export const MoreBoxItem = styled.a`
   border: none;
   padding: 0.2rem 0.5rem;
   text-align: left;
-  font-size: 0.55rem; /* Reduced from .625rem */
+  font-size: 0.55rem;
   text-decoration: none;
   transition: background-color 0.2s ease;
   display: block;

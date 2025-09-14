@@ -1,24 +1,26 @@
 @import "tailwindcss";
 
 :root {
-  /* Background Colors */
+  --breakpoint-xs: 20rem;
+  --breakpoint-sm: 30rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+  --breakpoint-2xl: 96rem;
   --background: #ffffff;
   --foreground: #171717;
   
-  /* Primary Colors */
   --color-primary: #01b4e4;
   --color-primary-hover: #029ac7;
   --color-secondary: #007bff;
   --color-dark: #032541;
   
-  /* Text Colors */
   --color-text: #171717;
   --color-text-secondary: #1f1f1f;
   --color-text-light: #666464;
   --color-text-lighter: #888;
   --color-text-lightest: #999;
   
-  /* Gray Scale */
   --color-gray-light: #f3f3f3;
   --color-gray-medium1: #7e7d7d;
   --color-gray-medium: #666;
@@ -27,7 +29,6 @@
   --color-primary2:#01d4aa;
   --color-primary3:#1ed5a9;
   
-  /* Border Colors */
   --color-border: #e3e3e3;
   --color-border-light: #dee2e6;
   --color-border-lighter: #e6e6e6;
@@ -157,6 +158,11 @@
   --width-container-max: 85rem;
   --border-width-thin: 0.0625rem;
   --border-width-medium: 0.125rem;
+
+  /* Mobile Component Sizes */
+  --width-movie-card-mobile: 9rem;
+  --height-movie-poster-mobile: 13.5rem;
+  --aligment-size-mobile: 100%;
 }
 
 @theme inline {
@@ -166,13 +172,12 @@
   --font-mono: var(--font-geist-mono);
 }
 
-/* Force white background for all pages */
 html, body {
   font-family: "Source Sans Pro",Arial,sans-serif;
   color: #171717;
   margin: 0;
   padding: 0;
-  min-height: 100vh;
+  background-color: #ffffff;
 }
 
 

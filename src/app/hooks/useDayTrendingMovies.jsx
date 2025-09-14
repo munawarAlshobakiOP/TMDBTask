@@ -14,7 +14,6 @@ export const useDayTrendingMovies = () => {
         const results = await fetching.fetchTrendingDayMovies();
         setMovies(results);
       } catch (err) {
-        console.error('Fetch error:', err);
         setError(err.message);
       } finally {
         setLoading(false);

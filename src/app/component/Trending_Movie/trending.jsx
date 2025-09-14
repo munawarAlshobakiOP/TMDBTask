@@ -26,7 +26,6 @@ export default function Trending(){
               >
                 This Week
               </TrendingStyled.SwitchButton>
-              <TrendingStyled.SwitchSlider className={period === "week" ? "sliderRight" : "sliderLeft"} />
             </TrendingStyled.SwitchContainer>
           </TrendingStyled.ButtonContainer>
           

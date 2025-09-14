@@ -8,9 +8,7 @@ export default function H1Section({ sectionId, title, expandedSections, toggleSe
       <h1>
         {title}{" "}
         <Styles.Expand
-          style={{
-            transform: expandedSections[sectionId] ? "rotate(90deg)" : "rotate(0deg)",
-          }}
+          isExpanded={expandedSections[sectionId]}
         >
           <ChevronRight_Icon />
         </Styles.Expand>
