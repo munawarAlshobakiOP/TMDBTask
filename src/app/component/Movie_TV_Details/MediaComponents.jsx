@@ -55,7 +55,7 @@ export const UserScore = ({ data, emojiReactions, size = 50, ringThickness = 3 }
 export const MediaInfo = ({ data, formatDate, formatRuntime, formatGenres, showGenres = false }) => (
   <styled.HeaderInfo>
     <styled.Certificate>
-      {data.certificate ?? 'N/A'}
+      {data.certification ?? 'N/A'}
     </styled.Certificate>
     <styled.Genres>
       {formatDate(data.release_date || data.first_air_date)}

@@ -173,21 +173,24 @@ export const SearchInput = styled.div`
   border: var(--border-width-medium) solid transparent;
   width: 100%;
 
-  @media (max-width: 768px) {
-    padding: var(--spacing-sm) 8rem var(--spacing-sm) var(--spacing-lg);
-  }
 
   @media (max-width: 48rem) {
     padding: var(--spacing-sm) 7.5rem var(--spacing-sm) var(--spacing-md);
+        height:2.9rem;
+
   }
 
   @media (max-width: 30rem) {
     padding: var(--spacing-sm) 6.25rem var(--spacing-sm) var(--spacing-md);
     border-radius: var(--radius-3xl);
+        height:2.9rem;
+
   }
 
   @media (max-width: 22.5rem) {
     padding: var(--spacing-xs) 5rem var(--spacing-xs) var(--spacing-sm);
+        height:2.9rem;
+
   }
 `;
 
@@ -207,6 +210,7 @@ export const SearchInputInner = styled.input`
 
   @media (max-width: 48rem) {
     font-size: var(--font-size-lg);
+    
   }
 
   @media (max-width: 30rem) {
@@ -251,17 +255,22 @@ export const SearchButton = styled.button`
   @media (max-width: 48rem) {
     padding: var(--spacing-sm) var(--spacing-xl);
     font-size: var(--font-size-lg);
+    height:2.9rem;
   }
 
   @media (max-width: 30rem) {
     padding: var(--spacing-xs) var(--spacing-lg);
     font-size: var(--font-size-base);
     border-radius: var(--radius-2xl);
+        height:2.9rem;
+
   }
 
   @media (max-width: 22.5rem) {
     padding: var(--spacing-xs) var(--spacing-base);
     font-size: var(--font-size-sm);
+        height:2.9rem;
+
   }
 `;
 

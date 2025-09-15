@@ -129,6 +129,7 @@ export const useTVShows = () => {
     setAllTv([]);
     setDisplayedCount(20);
     setAutoLoadEnabled(false);
+
   };
 
   useEffect(() => {

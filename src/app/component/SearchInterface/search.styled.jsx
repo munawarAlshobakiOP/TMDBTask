@@ -7,7 +7,7 @@ export const SearchBarContainer = styled.div`
   display: flex;
   align-items: center;
   position: fixed;
-  top: 3.5rem;
+  top: 4rem;
   left: 0;
   right: 0;
   background: var(--color-white);
@@ -30,7 +30,7 @@ export const SearchBarContainer = styled.div`
 export const SearchForm2 = styled.form`
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
+  gap: 2rem;
   width: 100%;
 
   @media (max-width: 768px) {
@@ -41,7 +41,6 @@ export const SearchForm2 = styled.form`
     gap: 0.25rem;
   }
 `;
-
 export const SearchInputWrapper = styled.div`
   flex: 1;
   position: relative;
@@ -49,8 +48,7 @@ export const SearchInputWrapper = styled.div`
   width: var(--width-container-max);
   align-items: center;
   padding: 0 var(--spacing-base) 0 var(--spacing-lg);
-  min-height: 2rem;
-  border: var(--border-width-thin) solid var(--color-border);
+  min-height: 3rem;
   border-radius: var(--radius-lg);
   background: var(--color-white);
   transition: var(--transition-all);
@@ -67,49 +65,30 @@ export const SearchInputWrapper = styled.div`
     min-height: 1.75rem;
   }
 
-  &:focus-within {
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 0.125rem rgba(1, 180, 228, 0.2);
-  }
-
   & svg {
     color: var(--color-black);
     position: absolute;
-    left: 4rem;
+    left: 2rem; 
     top: 50%;
     transform: translateY(-50%);
-    width: 1.125rem;
-    height: 1.125rem;
+    width: 1.25rem;
+    height: 1.25rem;
     z-index: 1;
 
     @media (max-width: 768px) {
-      left: 3.5rem;
+      left: 0.75rem;
       width: 1rem;
       height: 1rem;
     }
 
     @media (max-width: 480px) {
-      left: 3rem;
+      left: 0.5rem;
       width: 0.875rem;
       height: 0.875rem;
     }
   }
 
-  & input {
-    padding-left: 5.5rem;
-
-    @media (max-width: 768px) {
-      padding-left: 5rem;
-      font-size: 0.9rem;
-    }
-
-    @media (max-width: 480px) {
-      padding-left: 4.5rem;
-      font-size: 0.875rem;
-    }
-  }
 `;
-
 export const SearchInput2 = styled.input`
   border: none;
   outline: none;
@@ -117,7 +96,7 @@ export const SearchInput2 = styled.input`
   font-size: var(--font-size-base);
   background: transparent;
   color: var(--color-text-secondary);
-  padding: 0.5rem 0.75rem 0.5rem 5.5rem;
+  padding: 0.5rem 0.75rem 0.5rem 3.2rem;
 
   &::placeholder {
     color: var(--color-text-lighter);
@@ -126,12 +105,12 @@ export const SearchInput2 = styled.input`
 
   @media (max-width: 768px) {
     font-size: 0.9rem;
-    padding: 0.5rem 0.75rem 0.5rem 5rem;
+    padding: 0.5rem 0.75rem 0.5rem 2rem;
   }
 
   @media (max-width: 480px) {
     font-size: 0.875rem;
-    padding: 0.375rem 0.5rem 0.375rem 4.5rem;
+    padding: 0.375rem 0.5rem 0.375rem 1.5rem;
   }
 `;
 
@@ -173,7 +152,7 @@ export const ResultsList = styled.div`
 export const ResultItem = styled.div`
   display: flex;
   align-items: center;
-  gap: var(--spacing-xs);
+  gap: 2.5rem;
   padding: var(--spacing-xs) var(--spacing-md);
   transition: var(--transition-base);
   border-bottom: var(--border-width-thin) solid var(--color-border);
@@ -208,6 +187,7 @@ export const ResultItem = styled.div`
 
 export const ResultIcon = styled.div`
   flex-shrink: 0;
+  display:flex;
   width: 2.5rem;
   height: 2.5rem;
   border-radius: var(--radius-full);
@@ -227,8 +207,10 @@ export const ResultIcon = styled.div`
   }
 
   & svg {
-    width: var(--spacing-base);
-    height: var(--spacing-base);
+      position: absolute;
+       width: 1.25rem;
+    height: 1.25rem;
+    left:3.5rem;
     color: var(--color-black);
 
     @media (max-width: 768px) {
