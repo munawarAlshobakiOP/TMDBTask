@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { fetchGenres, fetchLanguages } from '../services/fetching';
+import { fetchGenres, fetchLanguages } from '../../services/fetching';
 
 export const useMediaFilters = (mediaType = 'movie', selectedLang = 'en') => {
   const [expandedSections, setExpandedSections] = useState({

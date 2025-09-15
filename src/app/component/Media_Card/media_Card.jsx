@@ -4,7 +4,8 @@ import DonutChart from '../Donut_Chart/Donut_Chart';
 import * as styled from './Media_card.styled';
 import { moreBoxContent } from '../../data/dataG';
 import { MoreHoriz_Icon } from '../../assests/icons';
-import useClickOutside from '../../hooks/useClickOutside';
+import {formatDate} from "../../libs/get_date"
+import useClickOutside from '../../libs/hooks/useClickOutside';
 const IMAGE_BASE = process.env.NEXT_PUBLIC_IMAGE_BASE;
 const DEFAULT_IMAGE = process.env.NEXT_PUBLIC_DEFAULT_IMAGE;
 
@@ -21,18 +22,7 @@ export default function MediaCard({ media, media_type }) {
   const rawDate = media.release_date || media.first_air_date;
   const score = media.vote_average
     ? Math.round(media.vote_average * 10)
-    : 'N/A';
-
-  const formatDate = dateString => {
-    if (!dateString) return '';
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-    });
-  };
-
+    : 'N/A';  
   const displayDate = formatDate(rawDate);
 
   const linkUrl =

@@ -1,9 +1,9 @@
 'use client';
 import { useState, Suspense } from 'react';
-import MediaFilters from '../component/Media_Filters/Media_Filters.jsx';
+import MediaFilters from '../../component/Media_Filters/Media_Filters.jsx';
 import * as MovieStyled from './movie.styled.jsx';
-import MediaCard from '../component/Media_Card/media_Card.jsx';
-import { useMovies } from '../hooks/useMovies.jsx';
+import MediaCard from '../../component/Media_Card/media_Card.jsx';
+import { useMovies } from '../../libs/hooks/useMovies.jsx';
 
 export default function MovieGrid() {
   const [sortBy, setSortBy] = useState('popularity.desc');

@@ -1,5 +1,4 @@
 'use client';
-import Link from 'next/link';
 import * as Styled from './login.styled.jsx';
 import { formFields } from '../../../data/dataG';
 

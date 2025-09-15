@@ -1,9 +1,9 @@
 'use client';
 import { Suspense, use } from 'react';
-import MediaDetailsContainer from '../../component/Movie_TV_Details/card_Details';
-import CastSection from '../../component/casts/castsDetail';
+import MediaDetailsContainer from '../../../component/Movie_TV_Details/card_Details';
+import CastSection from '../../../component/casts/castsDetail';
 import * as MovieStyled from '../movie.styled.jsx';
-import { useMovieDetail } from '../../hooks/useMovieDetail';
+import { useMovieDetail } from '../../../libs/hooks/useMovieDetail';
 
 export default function MoviePage({ params }) {
   const { movieDslug } = use(params);

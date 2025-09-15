@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import styled from 'styled-components';
 
 export const NavbarWrapper = styled.nav`
@@ -216,7 +217,7 @@ export const LanguageSelector = styled.div`
   }
 `;
 
-export const LoginButton = styled.a`
+export const LoginButton = styled(Link)`
   background: transparent;
   border: none;
   color: var(--background);

@@ -2,7 +2,7 @@
 import React, { useRef } from 'react';
 import * as TrendingStyled from '../Trending.styled.jsx';
 import TrendingMovieCard from '../../trending_card/Trending_Card.jsx';
-import { useWeekTrendingMovies } from '../../../hooks/useWeekTrendingMovies';
+import { useWeekTrendingMovies } from '../../../libs/hooks/useWeekTrendingMovies';
 
 const TrendingWeekMovies = () => {
   const { movies, error, loading } = useWeekTrendingMovies();

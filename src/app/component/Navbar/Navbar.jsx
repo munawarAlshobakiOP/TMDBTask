@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Nav_link_data_Left } from '../../data/dataG';
 
 import * as NavbarS from './navbar.styled.jsx';
+
 import { Search_Icon, Menu_Icon } from '../../assests/icons';
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

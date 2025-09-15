@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import * as fetching from '../services/fetching';
+import * as fetching from '../../services/fetching';
 
-export const useDayTrendingMovies = () => {
+export const useWeekTrendingMovies = () => {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -11,7 +11,7 @@ export const useDayTrendingMovies = () => {
       try {
         setLoading(true);
         setError(null);
-        const results = await fetching.fetchTrendingDayMovies();
+        const results = await fetching.fetchTrendingWeekMovies();
         setMovies(results);
       } catch (err) {
         setError(err.message);

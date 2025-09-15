@@ -22,12 +22,13 @@ export const ButtonContainer = styled.div`
   display: flex;
   gap: var(--spacing-base);
   align-items: center;
-  justify-content: center;
   margin-top: var(--spacing-base);
 
   @media (max-width: 480px) {
     flex-direction: row;
     align-items: center;
+      justify-content: center;
+
     gap: var(--spacing-sm);
   }
 `;

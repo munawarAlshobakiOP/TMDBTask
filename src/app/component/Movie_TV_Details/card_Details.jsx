@@ -1,11 +1,12 @@
 'use client';
-import Image from 'next/image';
-import DonutChart from '../Donut_Chart/Donut_Chart';
-import Link from 'next/link';
+
 import * as styled from './card_Details.styled';
 import { actionItems, emojiReactions } from '../../data/dataG';
 import { MediaTitle, UserScore, MediaInfo, OverviewSection, ActionButtons } from './MediaComponents';
 import { OpenWith_Icon } from '../../assests/icons';
+import {format_Date_NumericAll} from "../../libs/get_date"
+import {formatRuntime} from "../../libs/run_time_format"
+import {formatGenres} from "../../libs/genre_format"
 const DEFAULT_IMAGE = process.env.NEXT_PUBLIC_DEFAULT_IMAGE;
 const IMAGE_BASE = process.env.NEXT_PUBLIC_IMAGE_BASE;
 
@@ -18,29 +19,6 @@ export default function MediaDetailsContainer({ mediaData }) {
   const backdropUrl = data.backdrop_path
     ? `${IMAGE_BASE}/original${data.backdrop_path}`
     : null;
-
-  function formatRuntime(minutes) {
-    if (!minutes) return 'Runtime not available';
-    const h = Math.floor(minutes / 60);
-    const m = minutes % 60;
-    return `${h}h ${m}m`;
-  }
-
-  function formatDate(dateString) {
-    if (!dateString) return 'Release date not available';
-    return new Date(dateString).toLocaleDateString('en-GB', {
-      month: 'numeric',
-      day: 'numeric',
-      year: 'numeric',
-    });
-  }
-
-  function formatGenres(genres) {
-    if (!genres || genres.length === 0) return 'Genre not specified';
-    return genres.map(genre => genre.name).join(', ');
-  }
-
-
   return (
     <>
       <styled.TopSection backdropUrl={backdropUrl}>
@@ -59,7 +37,7 @@ export default function MediaDetailsContainer({ mediaData }) {
           <UserScore data={data} emojiReactions={emojiReactions} />
           <MediaInfo 
             data={data} 
-            formatDate={formatDate} 
+            formatDate={format_Date_NumericAll} 
             formatRuntime={formatRuntime} 
             formatGenres={formatGenres} 
           />
@@ -91,7 +69,7 @@ export default function MediaDetailsContainer({ mediaData }) {
               <styled.INfoSection>
                 <MediaInfo 
                   data={data} 
-                  formatDate={formatDate} 
+                  formatDate={format_Date_NumericAll} 
                   formatRuntime={formatRuntime} 
                   formatGenres={formatGenres} 
                   showGenres={true} 

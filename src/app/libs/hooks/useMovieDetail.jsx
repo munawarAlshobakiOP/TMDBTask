@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { FetchingCast, FetchingDetails } from '../services/fetching';
+import { FetchingCast, FetchingDetails } from '../../services/fetching';
 
 export const useMovieDetail = movieSlug => {
   const [mediaData, setMediaData] = useState(null);

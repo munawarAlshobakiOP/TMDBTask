@@ -4,7 +4,7 @@ import DonutChart from '../Donut_Chart/Donut_Chart';
 import * as TrendingStyled from '../trending_card/Trending_movie.styled';
 import { moreBoxContent } from '../../data/dataG';
 import { MoreHoriz_Icon } from '../../assests/icons';
-import useClickOutside from '../../hooks/useClickOutside';
+import useClickOutside from '../../libs/hooks/useClickOutside';
 
 const IMAGE_BASE = process.env.NEXT_PUBLIC_IMAGE_BASE;
 

@@ -2,7 +2,7 @@
 import React from 'react';
 import * as TrendingStyled from '../Trending.styled.jsx';
 import TrendingMovieCard from '../../trending_card/Trending_Card.jsx';
-import { useDayTrendingMovies } from '../../../hooks/useDayTrendingMovies';
+import { useDayTrendingMovies } from '../../../libs/hooks/useDayTrendingMovies';
 
 const TrendingMovies = () => {
   const { movies, error, loading } = useDayTrendingMovies();

@@ -3,9 +3,9 @@ import { sortOptions, showMeOptions } from '../../data/dataG';
 import * as Styles from './Media_Filter.styled';
 import H1Section from './Box_filter';
 import { KeyboardArrowDown_Icon } from '../../assests/icons';
-import { useMediaFilters } from '../../hooks/useMediaFilters';
-import { useLanguageFilter } from '../../hooks/useLanguageFilter';
-import { useGenreFilter } from '../../hooks/useGenreFilter';
+import { useMediaFilters } from '../../libs/hooks/useMediaFilters';
+import { useLanguageFilter } from '../../libs/hooks/useLanguageFilter';
+import { useGenreFilter } from '../../libs/hooks/useGenreFilter';
 
 const MediaFilters = ({
   mediaType = 'movie',

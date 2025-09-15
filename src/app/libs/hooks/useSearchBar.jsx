@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { fetchSearchResults } from '../services/fetching';
+import { fetchSearchResults } from '../../services/fetching';
 
 export const useSearchBar = onSearchResults => {
   const [query, setQuery] = useState('');

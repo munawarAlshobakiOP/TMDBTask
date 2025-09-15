@@ -1,7 +1,7 @@
 'use client';
 import * as SearchStyled from './search.styled.jsx';
 import SearchIcon from '@mui/icons-material/Search';
-import { useSearchBar } from '../../hooks/useSearchBar';
+import { useSearchBar } from '../../libs/hooks/useSearchBar';
 
 export default function SearchBar({ onSearchResults }) {
   const {

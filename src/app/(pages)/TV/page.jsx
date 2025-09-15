@@ -1,8 +1,8 @@
 'use client';
-import MediaCard from '../component/Media_Card/media_Card';
-import MediaFilters from '../component/Media_Filters/Media_Filters';
+import MediaCard from '../../component/Media_Card/media_Card';
+import MediaFilters from '../../component/Media_Filters/Media_Filters';
 import * as TVStyled from './TV.styled.jsx';
-import { useTVShows } from '../hooks/useTVShows';
+import { useTVShows } from '../../libs/hooks/useTVShows';
 
 export default function TVGrid() {
   const {
