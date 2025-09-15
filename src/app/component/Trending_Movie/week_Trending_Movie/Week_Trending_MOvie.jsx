@@ -21,10 +21,12 @@ const TrendingWeekMovies = () => {
           Loading weekly trending movies...
         </TrendingStyled.LoadingMessage>
       ) : movies.length === 0 ? (
-        <TrendingStyled.LoadingMessage>No weekly trending movies found.</TrendingStyled.LoadingMessage>
+        <TrendingStyled.LoadingMessage>
+          No weekly trending movies found.
+        </TrendingStyled.LoadingMessage>
       ) : (
         <TrendingStyled.TrendingScroller ref={scrollContainerRef}>
-          {movies.map((movie) => (
+          {movies.map(movie => (
             <TrendingMovieCard key={movie.id} movie={movie} />
           ))}
         </TrendingStyled.TrendingScroller>

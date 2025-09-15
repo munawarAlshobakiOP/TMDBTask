@@ -1,19 +1,19 @@
-"use client";
-import Image from "next/image";
-import DonutChart from "../Donut_Chart/Donut_Chart";
-import Link from "next/link";
-import * as styled from "./card_Details.styled";
-import { actionItems, emojiReactions } from "../../data/dataG";
-import { OpenWith_Icon } from "../../assests/icons";
+'use client';
+import Image from 'next/image';
+import DonutChart from '../Donut_Chart/Donut_Chart';
+import Link from 'next/link';
+import * as styled from './card_Details.styled';
+import { actionItems, emojiReactions } from '../../data/dataG';
+import { MediaTitle, UserScore, MediaInfo, OverviewSection, ActionButtons } from './MediaComponents';
+import { OpenWith_Icon } from '../../assests/icons';
 const DEFAULT_IMAGE = process.env.NEXT_PUBLIC_DEFAULT_IMAGE;
 const IMAGE_BASE = process.env.NEXT_PUBLIC_IMAGE_BASE;
-
 
 export default function MediaDetailsContainer({ mediaData }) {
   const data = mediaData;
   const imageUrl = data.poster_path
     ? `${IMAGE_BASE}/w500${data.poster_path}`
-    :`${DEFAULT_IMAGE}`;
+    : `${DEFAULT_IMAGE}`;
 
   const backdropUrl = data.backdrop_path
     ? `${IMAGE_BASE}/original${data.backdrop_path}`
@@ -31,7 +31,7 @@ export default function MediaDetailsContainer({ mediaData }) {
     return new Date(dateString).toLocaleDateString('en-GB', {
       month: 'numeric',
       day: 'numeric',
-      year: 'numeric'
+      year: 'numeric',
     });
   }
 
@@ -40,138 +40,76 @@ export default function MediaDetailsContainer({ mediaData }) {
     return genres.map(genre => genre.name).join(', ');
   }
 
-  
+
   return (
-    <styled.Container backdropUrl={backdropUrl}>
-   
-      <styled.Udiv/>
-     <styled.Content>
-        <styled.LayOut >
-          <styled.Poster>
-            <styled.PosterImage
-              src={imageUrl}
-              alt={data.title || data.name}
-            />
-            <styled.PosterOverlay>
-              <styled.PosterOverlayText>  <OpenWith_Icon /> Expand </styled.PosterOverlayText>
-            </styled.PosterOverlay>
-            
-          </styled.Poster>
+    <>
+      <styled.TopSection backdropUrl={backdropUrl}>
+        <styled.BackgroundOverlay />
+        <styled.TopContent>
+          <styled.LeftPoster>
+            <styled.PosterImage src={imageUrl} alt={data.title || data.name} />
+          </styled.LeftPoster>
+          <styled.RightBackground />
+        </styled.TopContent>
+      </styled.TopSection>
 
-          <styled.DetailsDiv>
-            <styled.Title>
-              <styled.TitleNAme>{data.title || data.name} </styled.TitleNAme> 
-              <styled.Syear>
-               ( {(data.release_date || data.first_air_date)?.slice(0, 4) ??
-                  "Unknown"} )
-              </styled.Syear>
-            </styled.Title>
-        
+      <styled.MobileDetailsSection>
+        <styled.MobileDetailsContent>
+          <MediaTitle data={data} />
+          <UserScore data={data} emojiReactions={emojiReactions} />
+          <MediaInfo 
+            data={data} 
+            formatDate={formatDate} 
+            formatRuntime={formatRuntime} 
+            formatGenres={formatGenres} 
+          />
+          <styled.GenresSection>
+            {formatGenres(data.genres)}
+          </styled.GenresSection>
+          <OverviewSection data={data} />
+          <styled.Detailgrid></styled.Detailgrid>
+        </styled.MobileDetailsContent>
+      </styled.MobileDetailsSection>
+      
+      {/* Desktop layout */}
+      <styled.DesktopContainer backdropUrl={backdropUrl}>
+        <styled.Udiv />
+        <styled.Content>
+          <styled.LayOut>
+            <styled.Poster>
+              <styled.PosterImage src={imageUrl} alt={data.title || data.name} />
+              <styled.PosterOverlay>
+                <styled.PosterOverlayText>
+                  {' '}
+                  <OpenWith_Icon /> Expand{' '}
+                </styled.PosterOverlayText>
+              </styled.PosterOverlay>
+            </styled.Poster>
 
-            <styled.INfoSection>
-              <styled.HeaderInfo>
-                <styled.Certificate>
-                  {data.certificate ?? 'N/A'}
-                </styled.Certificate>
-
-                <styled.Genres>
-                {formatDate(data.release_date || data.first_air_date)}
-                </styled.Genres>
-                
-                <styled.Genres>
-                • {formatGenres(data.genres)}
-                </styled.Genres>
-
-                <styled.Genres>
-                   • {formatRuntime(data.runtime)}
-                </styled.Genres>
-
-              </styled.HeaderInfo>
-
-              <styled.RatingSection>
-                <styled.UserScore >
-                  <DonutChart
-                    percentage={
-                      data.vote_average ? Math.round(data.vote_average * 10) : 0
-                    }
-                    size={60}
-                    textClassName="detail-page-donut-text"
-                    ringThickness={4}
-                  />
-                </styled.UserScore>
-                <styled.h1>
-                  User <br /> Score
-                </styled.h1>
-                <styled.EmojiContainer>
-                  {emojiReactions.map((emoji, index) => (
-                    <styled.EmojiItem key={emoji.id} index={index}>
-                      <styled.EmojiButton>
-                        <img
-                          src={emoji.image}
-                          alt={emoji.alt}
-                          width={24}
-                          height={24}
-                        />
-                        <styled.EmojiTooltip>
-                          {emoji.description}
-                        </styled.EmojiTooltip>
-                      </styled.EmojiButton>
-                    </styled.EmojiItem>
-                  ))}
-                </styled.EmojiContainer>
-                <styled.VibeText>
-                  what's your &nbsp;
-                  <styled.Spanvibes> Vibe </styled.Spanvibes> ?
-                </styled.VibeText>
-              </styled.RatingSection>
-              <styled.LiSection>
-                <styled.ActionList>
-                  {actionItems.map((item) => {
-                    const IconComponent = item.icon;
-                    return (
-                      <li key={item.id} title={item.title}>
-                        {item.isPlayButton ? (
-                          <styled.IConPlay>
-                            <styled.PlayIcon>
-                              <IconComponent />
-                            </styled.PlayIcon>
-                            <styled.PlayText>{item.title}</styled.PlayText>
-                          </styled.IConPlay>
-                        ) : (
-                          <styled.IconCircle>
-                            <styled.IconHeart>
-                              <Link href={item.href}>
-                                <styled.ActionIcon>
-                                  <IconComponent />
-                                </styled.ActionIcon>
-                              </Link>
-                              <styled.ToolTip>{item.tooltip}</styled.ToolTip>
-                            </styled.IconHeart>
-                          </styled.IconCircle>
-                        )}
-                      </li>
-                    );
-                  })}
-                </styled.ActionList>
-              </styled.LiSection>
-
-              <styled.OverviewSection>
-                <styled.TaglineTitle>
-                  {data.tagline ?? "no tagline"}
-                </styled.TaglineTitle>
-
-                <styled.OverviewTitle>Overview</styled.OverviewTitle>
-              
-                <styled.OverviewText>
-                  {data.overview ?? "No overview available."}
-                </styled.OverviewText>
-              </styled.OverviewSection>
-
-              <styled.Detailgrid></styled.Detailgrid>
-                </styled.INfoSection>
-          </styled.DetailsDiv>
+            <styled.DetailsDiv>
+              <MediaTitle data={data} />
+              <styled.INfoSection>
+                <MediaInfo 
+                  data={data} 
+                  formatDate={formatDate} 
+                  formatRuntime={formatRuntime} 
+                  formatGenres={formatGenres} 
+                  showGenres={true} 
+                />
+                <UserScore 
+                  data={data} 
+                  emojiReactions={emojiReactions} 
+                  size={60} 
+                  ringThickness={4} 
+                />
+                <ActionButtons actionItems={actionItems} />
+                <OverviewSection data={data} />
+                <styled.Detailgrid></styled.Detailgrid>
+              </styled.INfoSection>
+            </styled.DetailsDiv>
         </styled.LayOut>
       </styled.Content>
-    </styled.Container>
+      </styled.DesktopContainer>
+    </>
   );
 }

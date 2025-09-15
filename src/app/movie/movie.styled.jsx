@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const PageContainer = styled.div`
   background-color: var(--color-white);
@@ -13,6 +13,10 @@ export const MainLayout = styled.div`
   margin-left: auto;
   margin-right: auto;
   padding: 0 var(--spacing-base);
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 export const Sidebar = styled.div`
@@ -22,6 +26,13 @@ export const Sidebar = styled.div`
   max-width: var(--width-container-max);
   margin-left: auto;
   margin-right: auto;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    position: static;
+    order: -1;
+    margin-bottom: var(--spacing-base);
+  }
 `;
 
 export const ContentArea = styled.div`
@@ -55,14 +66,19 @@ export const MoviesGrid = styled.div`
   grid-template-columns: repeat(5, 1fr);
   gap: var(--spacing-base);
   padding: var(--spacing-xs);
-  
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 0;
+  }
+
   @media (max-width: 480px) {
     grid-template-columns: 1fr;
-    gap: var(--spacing-sm);
+    gap: 0;
+    padding: 0;
   }
 `;
-
-
 
 export const MovieCardWrapper = styled.div`
   width: 100%;
@@ -135,8 +151,12 @@ export const LoadingSpinner = styled.div`
   margin-bottom: var(--spacing-lg);
 
   @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 `;
 
@@ -217,5 +237,3 @@ export const CastTitle = styled.h2`
   font-weight: var(--font-weight-bold);
   color: var(--color-dark);
 `;
-
-

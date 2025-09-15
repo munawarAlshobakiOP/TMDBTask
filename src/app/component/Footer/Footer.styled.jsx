@@ -40,13 +40,13 @@ export const FooterContent = styled.div`
 
   @media (max-width: 768px) {
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: 1.25rem;
   }
 
   @media (max-width: 48rem) {
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
   }
 `;
 
@@ -64,6 +64,10 @@ export const StyledFooterLogo = styled(Image)`
   max-height: 5.625rem;
   object-fit: contain;
   margin-bottom: 1rem;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const JoinCommunityBtn = styled.button`
@@ -78,6 +82,11 @@ export const JoinCommunityBtn = styled.button`
   &:hover {
     background-color: var(--color-gray-light);
   }
+
+  @media (max-width: 768px) {
+    background: var(--color-white) !important;
+    color:rgb(2, 103, 210)!important;
+  }
 `;
 
 export const FooterSection = styled.div`
@@ -86,6 +95,11 @@ export const FooterSection = styled.div`
   min-width: 10rem;
   align-items: center;
   text-align: center;
+
+  @media (max-width: 768px) {
+    align-items: flex-start;
+    text-align: left;
+  }
 `;
 
 export const FooterTitle = styled.h3`
@@ -104,6 +118,7 @@ export const FooterLink = styled.a`
 
   &:hover {
     color: var(--color-primary);
+
   }
 `;
 
@@ -114,5 +129,6 @@ export const FooterList = styled.ul`
 
   li {
     margin-bottom: 0.1875rem;
+  
   }
 `;

@@ -12,6 +12,10 @@ export const MainLayout = styled.div`
   margin-left: auto;
   margin-right: auto;
   padding: 0 var(--spacing-base);
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 export const Sidebar = styled.div`
@@ -21,6 +25,13 @@ export const Sidebar = styled.div`
   max-width: var(--width-container-max);
   margin-left: auto;
   margin-right: auto;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    position: static;
+    order: -1;
+    margin-bottom: var(--spacing-base);
+  }
 `;
 
 export const ContentArea = styled.div`
@@ -114,10 +125,17 @@ export const ShowsGrid = styled.div`
   grid-template-columns: repeat(5, 1fr);
   gap: var(--spacing-base);
   padding: var(--spacing-xs);
-  
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 0;
+  }
+
   @media (max-width: 480px) {
     grid-template-columns: 1fr;
-    gap: var(--spacing-sm);
+    gap: 0;
+    padding: 0;
   }
 `;
 
@@ -143,8 +161,12 @@ export const LoadingSpinner = styled.div`
   margin-bottom: var(--spacing-lg);
 
   @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 `;
 
@@ -182,17 +204,14 @@ export const LoadMoreButton = styled.button`
   }
 `;
 
-
 export const MainContent = styled.main`
   min-height: calc(100vh - var(--height-navbar));
 `;
-
 
 export const LoadingContent = styled.div`
   padding: var(--spacing-lg);
   text-align: center;
 `;
-
 
 export const LoadingId = styled.p`
   font-size: var(--font-size-sm);

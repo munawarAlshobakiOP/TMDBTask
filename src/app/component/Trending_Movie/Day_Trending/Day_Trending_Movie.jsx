@@ -18,10 +18,12 @@ const TrendingMovies = () => {
           Loading trending movies...
         </TrendingStyled.LoadingMessage>
       ) : movies.length === 0 ? (
-        <TrendingStyled.LoadingMessage>No trending movies found.</TrendingStyled.LoadingMessage>
+        <TrendingStyled.LoadingMessage>
+          No trending movies found.
+        </TrendingStyled.LoadingMessage>
       ) : (
         <TrendingStyled.TrendingScroller>
-          {movies.map((movie) => (
+          {movies.map(movie => (
             <TrendingMovieCard key={movie.id} movie={movie} />
           ))}
         </TrendingStyled.TrendingScroller>

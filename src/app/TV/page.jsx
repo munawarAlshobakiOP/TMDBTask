@@ -4,7 +4,6 @@ import MediaFilters from '../component/Media_Filters/Media_Filters';
 import * as TVStyled from './TV.styled.jsx';
 import { useTVShows } from '../hooks/useTVShows';
 
-
 export default function TVGrid() {
   const {
     tv,
@@ -22,7 +21,7 @@ export default function TVGrid() {
     setSelectedLanguage,
     handleLoadMoreClick,
     handleClearFilters,
-    handleSearch
+    handleSearch,
   } = useTVShows();
 
   if (error) {
@@ -30,7 +29,9 @@ export default function TVGrid() {
       <TVStyled.ErrorContainer>
         <TVStyled.ErrorContent>
           <TVStyled.ErrorTitle>Error Loading TV Shows</TVStyled.ErrorTitle>
-          <TVStyled.RetryButton onClick={() => window.location.reload()}>Try Again</TVStyled.RetryButton>
+          <TVStyled.RetryButton onClick={() => window.location.reload()}>
+            Try Again
+          </TVStyled.RetryButton>
         </TVStyled.ErrorContent>
       </TVStyled.ErrorContainer>
     );
@@ -43,8 +44,8 @@ export default function TVGrid() {
       </TVStyled.TitleContainer>
       <TVStyled.MainLayout>
         <TVStyled.Sidebar>
-          <MediaFilters 
-            mediaType="tv"
+          <MediaFilters
+            mediaType='tv'
             sortBy={sortBy}
             setSortBy={setSortBy}
             selectedGenres={selectedGenres}
@@ -71,13 +72,15 @@ export default function TVGrid() {
           {tv.length === 0 && !isLoading ? (
             <TVStyled.NoShowsContainer>
               <TVStyled.NoShowsTitle>No TV shows found</TVStyled.NoShowsTitle>
-              <TVStyled.NoShowsMessage>Try refreshing the page to see more results.</TVStyled.NoShowsMessage>
+              <TVStyled.NoShowsMessage>
+                Try refreshing the page to see more results.
+              </TVStyled.NoShowsMessage>
             </TVStyled.NoShowsContainer>
           ) : (
             <TVStyled.ShowsGrid>
               {tv.map(show => (
                 <TVStyled.ShowCardWrapper key={show.id}>
-                  <MediaCard media={show} media_type="TV" />
+                  <MediaCard media={show} media_type='TV' />
                 </TVStyled.ShowCardWrapper>
               ))}
             </TVStyled.ShowsGrid>

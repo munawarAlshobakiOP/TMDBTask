@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const NavbarWrapper = styled.nav`
   background-color: var(--color-dark);
-  box-shadow: 0 .125rem .5rem var(--shadow-color-medium);
+  box-shadow: 0 0.125rem 0.5rem var(--shadow-color-medium);
   position: fixed;
   top: 0;
   left: 0;
@@ -43,9 +43,12 @@ export const LeftGroup = styled.div`
   display: flex;
   align-items: center;
   gap: 2rem;
+  flex: 1;
 
   @media (max-width: 768px) {
     gap: 1rem;
+    justify-content: center;
+    position: relative;
   }
 
   @media (max-width: 480px) {
@@ -69,20 +72,32 @@ export const LogoLink = styled.a`
   align-items: center;
 `;
 
-export const StyledLogo = styled(Image)`
+export const DesktopLogo = styled(Image)`
   display: block;
   width: 8.75rem;
   height: 5rem;
   transition: all 0.3s ease;
 
   @media (max-width: 768px) {
-    width: 7.5rem;
-    height: 4.5rem;
+    display: none;
+  }
+`;
+
+export const MobileLogo = styled(Image)`
+  display: none;
+  width: 5rem;
+  height: 2.5rem;
+  transition: all 0.3s ease;
+
+  @media (max-width: 768px) {
+    display: block;
+    width: 5rem;
+    height: 2.5rem;
   }
 
   @media (max-width: 480px) {
-    width: 6.25rem;
-    height: 3.75rem;
+    width: 4rem;
+    height: 2rem;
   }
 `;
 
@@ -113,7 +128,7 @@ export const NavLink = styled.a`
   text-decoration: none;
   padding: 1.25rem 1rem;
   display: block;
-  
+
   letter-spacing: 0.0187rem;
   transition: all 0.3s ease;
 
@@ -160,7 +175,7 @@ export const IconButton = styled.button`
     width: 2rem;
     height: 2rem;
     padding: 0.25rem;
-    
+
     & svg {
       width: 1.25rem;
       height: 1.25rem;
@@ -173,6 +188,10 @@ export const LanguageSelector = styled.div`
   transition: all 0.3s ease;
   color: var(--background);
 
+  @media (max-width: 768px) {
+    display: none;
+  }
+
   span {
     font-family: sans-serif;
     font-size: 0.9rem;
@@ -183,7 +202,7 @@ export const LanguageSelector = styled.div`
     display: inline-block;
     transition: all 0.3s ease;
     cursor: pointer;
-    
+
     &:hover {
       background: var(--background);
       color: var(--color-dark);
@@ -237,14 +256,10 @@ export const RightIcons = styled.div`
   transition: all 0.3s ease;
   cursor: pointer;
 
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-
   @media (max-width: 480px) {
     width: 2rem;
     height: 2rem;
-    
+
     & svg {
       width: 1.25rem;
       height: 1.25rem;
@@ -261,6 +276,10 @@ export const MobileMenuButton = styled.button`
   border-radius: 0.25rem;
   transition: all 0.3s ease;
   cursor: pointer;
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
 
   @media (max-width: 768px) {
     display: flex;
@@ -269,7 +288,7 @@ export const MobileMenuButton = styled.button`
     width: 2.25rem;
     height: 2.25rem;
   }
-  
+
   & svg {
     width: 1.5rem;
     height: 1.5rem;
@@ -280,21 +299,55 @@ export const MobileMenuButton = styled.button`
   }
 `;
 
-export const MobileMenu = styled.div.withConfig({
-  shouldForwardProp: (prop) => prop !== 'isOpen',
+export const MobileMenuBackdrop = styled.div.withConfig({
+  shouldForwardProp: prop => prop !== 'isOpen',
 })`
   display: none;
-  position: absolute;
-  top: 100%;
+  position: fixed;
+  top: 3.5rem;
   left: 0;
   right: 0;
-  background: var(--color-dark);
-  border-top: 0.0625rem solid var(--color-border);
-  box-shadow: var(--shadow-lg);
-  z-index: var(--z-dropdown);
+  bottom: 0;
+  z-index: calc(var(--z-dropdown) - 1);
+  visibility: ${props => (props.isOpen ? 'visible' : 'hidden')};
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 
   @media (max-width: 768px) {
-    display: ${props => props.isOpen ? 'block' : 'none'};
+    display: block;
+  }
+
+  @media (max-width: 480px) {
+    top: 3.25rem;
+  }
+`;
+
+export const MobileMenu = styled.div.withConfig({
+  shouldForwardProp: prop => prop !== 'isOpen',
+})`
+  display: none;
+  position: fixed;
+  top: 3.5rem;
+  left: 0;
+  width: 280px;
+  height: calc(100vh - 3.5rem);
+  background: var(--color-dark);
+  opacity: 0.99;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-right: 0.0625rem solid var(--color-border);
+  box-shadow: var(--shadow-lg);
+  z-index: var(--z-dropdown);
+  transform: ${props => (props.isOpen ? 'translateX(0)' : 'translateX(-100%)')};
+  transition: transform 0.3s ease, backdrop-filter 0.3s ease;
+  overflow-y: auto;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+
+  @media (max-width: 480px) {
+    top: 3.25rem;
+    height: calc(100vh - 3.25rem);
   }
 `;
 
@@ -303,18 +356,13 @@ export const MobileNavList = styled.ul`
   flex-direction: column;
   list-style: none;
   margin: 0;
-  padding: 0.5rem 0;
-  max-height: 80vh;
+  padding: 1rem 0;
+  height: 100%;
   overflow-y: auto;
 `;
 
 export const MobileNavItem = styled.li`
   width: 100%;
-  border-bottom: 0.0625rem solid rgba(255, 255, 255, 0.1);
-  
-  &:last-child {
-    border-bottom: none;
-  }
 `;
 
 export const MobileNavLink = styled.a`
@@ -327,32 +375,21 @@ export const MobileNavLink = styled.a`
   letter-spacing: 0.0187rem;
   transition: all 0.3s ease;
 
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: var(--color-primary);
-  }
 
   &:active {
     background-color: rgba(255, 255, 255, 0.2);
   }
 `;
 
-export const MobileJoinLink = styled.a`
-  color: var(--color-primary);
+export const MobileLoginLink = styled.a`
+  color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
-  padding: 0.75rem 1rem;
+  padding: 0.5rem 1rem;
   display: block;
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: 0.875rem;
+  font-weight: 500;
   letter-spacing: 0.0187rem;
   transition: all 0.3s ease;
 
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: var(--background);
-  }
 
-  &:active {
-    background-color: rgba(255, 255, 255, 0.2);
-  }
 `;

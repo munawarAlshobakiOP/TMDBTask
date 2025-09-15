@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --breakpoint-xs: 20rem;
@@ -9,37 +9,37 @@
   --breakpoint-2xl: 96rem;
   --background: #ffffff;
   --foreground: #171717;
-  
+
   --color-primary: #01b4e4;
   --color-primary-hover: #029ac7;
   --color-secondary: #007bff;
   --color-dark: #032541;
-  
+
   --color-text: #171717;
   --color-text-secondary: #1f1f1f;
   --color-text-light: #666464;
   --color-text-lighter: #888;
   --color-text-lightest: #999;
-  
+
   --color-gray-light: #f3f3f3;
   --color-gray-medium1: #7e7d7d;
   --color-gray-medium: #666;
   --color-gray-dark: #888;
   --color-gray-darker: #999;
-  --color-primary2:#01d4aa;
-  --color-primary3:#1ed5a9;
-  
+  --color-primary2: #01d4aa;
+  --color-primary3: #1ed5a9;
+
   --color-border: #e3e3e3;
   --color-border-light: #dee2e6;
   --color-border-lighter: #e6e6e6;
   --color-border-dark: #1c1c1c;
-  
+
   /* Shadow Colors */
   --shadow-color: rgba(0, 0, 0, 0.08);
   --shadow-color-medium: rgba(0, 0, 0, 0.1);
   --shadow-color-dark: rgba(0, 0, 0, 0.15);
   --shadow-primary: rgba(1, 180, 228, 0.3);
-  --gradient-color1:rgba(0, 119, 163, 0.5);
+  --gradient-color1: rgba(0, 119, 163, 0.5);
 
   /* Status Colors */
   --color-success: #90cea1;
@@ -52,29 +52,29 @@
   --aligment-size: 85rem;
 
   /* Enhanced Color System from provided CSS */
-  --scrollerGrey: 219,219,219;
-  --lightGrey: 227,227,227;
-  --darkerGrey: 200,200,200;
-  --vibrantDarkBlue: 6,37,65;
-  --vibrantLightBlue: 0,118,241;
-  --tmdbDarkBlue: 3,37,65;
-  --tmdbLightBlue: 1,180,228;
-  --tmdbLighterGreen: 192,254,207;
-  --tmdbLightGreen: 30,213,169;
-  --tmdbLogoGreen: 144,206,161;
-  --tmdbLogoOrange: 253,193,112;
-  --tmdbLogoRed: 217,59,99;
-  --accountSilver: 149,149,149;
-  --accountPink: 234,20,140;
-  --accountPurple: 128,91,231;
-  --accountGreen: 1,210,119;
-  --accountTeal: 1,198,172;
-  --accountLightBlue: 1,180,228;
-  --accountBlue: 1,119,210;
-  --accountOrange: 210,119,1;
-  --accountYellow: 210,144,1;
-  --accountRed: 212,2,66;
-  
+  --scrollerGrey: 219, 219, 219;
+  --lightGrey: 227, 227, 227;
+  --darkerGrey: 200, 200, 200;
+  --vibrantDarkBlue: 6, 37, 65;
+  --vibrantLightBlue: 0, 118, 241;
+  --tmdbDarkBlue: 3, 37, 65;
+  --tmdbLightBlue: 1, 180, 228;
+  --tmdbLighterGreen: 192, 254, 207;
+  --tmdbLightGreen: 30, 213, 169;
+  --tmdbLogoGreen: 144, 206, 161;
+  --tmdbLogoOrange: 253, 193, 112;
+  --tmdbLogoRed: 217, 59, 99;
+  --accountSilver: 149, 149, 149;
+  --accountPink: 234, 20, 140;
+  --accountPurple: 128, 91, 231;
+  --accountGreen: 1, 210, 119;
+  --accountTeal: 1, 198, 172;
+  --accountLightBlue: 1, 180, 228;
+  --accountBlue: 1, 119, 210;
+  --accountOrange: 210, 119, 1;
+  --accountYellow: 210, 144, 1;
+  --accountRed: 212, 2, 66;
+
   /* Chart specific colors */
   --chart-excellent: rgb(var(--tmdbLightGreen));
   --chart-good: rgb(var(--tmdbLogoGreen));
@@ -82,7 +82,7 @@
   --chart-poor: rgb(var(--tmdbLogoRed));
   --chart-background: rgb(var(--tmdbDarkBlue));
   --chart-border: rgba(255, 255, 255, 0.1);
-  
+
   /* Animation variables */
   --animation-duration: 0.6s;
   --animation-easing: cubic-bezier(0.4, 0, 0.2, 1);
@@ -173,8 +173,9 @@
   --font-mono: var(--font-geist-mono);
 }
 
-html, body {
-  font-family: "Source Sans Pro",Arial,sans-serif;
+html,
+body {
+  font-family: 'Source Sans Pro', Arial, sans-serif;
   color: #171717;
   margin: 0;
   padding: 0;
@@ -207,18 +208,21 @@ body {
 
 /* Ensure proper touch targets on mobile */
 @media (max-width: 768px) {
-  button, a, input, select, textarea {
+  button,
+  a,
+  input,
+  select,
+  textarea {
     min-height: 44px;
     min-width: 44px;
   }
 }
 
-
-.page-container, .content-wrapper, .main-content {
+.page-container,
+.content-wrapper,
+.main-content {
   background: #ffffff !important;
 }
-
-
 
 nav.navbar,
 .navbar,
@@ -241,4 +245,3 @@ footer {
   font-size: var(--font-size-base) !important;
   font-weight: var(--font-weight-extrabold) !important;
 }
-

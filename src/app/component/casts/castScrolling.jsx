@@ -1,7 +1,7 @@
-"use client"
+'use client';
 import { useState } from 'react';
 import CastCard from './castCard';
-import * as styled from "./cast.styled";
+import * as styled from './cast.styled';
 import { ArrowRightAlt_Icon } from '../../assests/icons';
 
 const CastScrolling = ({ cast }) => {
@@ -22,10 +22,10 @@ const CastScrolling = ({ cast }) => {
           />
         ))}
         <styled.LoadMoreCard>
-          <styled.LoadMoreA href="#" >
-            <styled.LoadMoreSpan >Load More</styled.LoadMoreSpan>
+          <styled.LoadMoreA href='#'>
+            <styled.LoadMoreSpan>Load More</styled.LoadMoreSpan>
             <ArrowRightAlt_Icon />
-            </styled.LoadMoreA>
+          </styled.LoadMoreA>
         </styled.LoadMoreCard>
       </styled.Scroller>
       {visibleCount < cast.length && (

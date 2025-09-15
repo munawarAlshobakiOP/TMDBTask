@@ -13,7 +13,7 @@ export const useTVShows = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [autoLoadEnabled, setAutoLoadEnabled] = useState(false);
   const [loadMoreTimeout, setLoadMoreTimeout] = useState(null);
-  
+
   const [sortBy, setSortBy] = useState('popularity.desc');
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [fromDate, setFromDate] = useState('');
@@ -24,11 +24,11 @@ export const useTVShows = () => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     const windowHeight = window.innerHeight;
     const documentHeight = document.documentElement.scrollHeight;
-    
+
     if (!autoLoadEnabled || isLoading || page >= totalPages) {
       return;
     }
-    
+
     if (scrollTop + windowHeight >= documentHeight - 200) {
       if (loadMoreTimeout) {
         clearTimeout(loadMoreTimeout);
@@ -45,15 +45,17 @@ export const useTVShows = () => {
     setError(null);
     try {
       if (!API_KEY || !BASE_URL) {
-        throw new Error('API configuration missing. Please check environment variables.');
+        throw new Error(
+          'API configuration missing. Please check environment variables.'
+        );
       }
-      
+
       let url = `${BASE_URL}/discover/tv?api_key=${API_KEY}&language=${selectedLanguage || 'en-US'}&page=${page}`;
-      
+
       if (sortBy) {
         url += `&sort_by=${sortBy}`;
       }
-      
+
       if (fromDate) {
         url += `&first_air_date.gte=${fromDate}`;
       }
@@ -63,11 +65,11 @@ export const useTVShows = () => {
       if (selectedGenres && selectedGenres.length > 0) {
         url += `&with_genres=${selectedGenres.join(',')}`;
       }
-      
+
       if (selectedLanguage && selectedLanguage !== 'en-US') {
         url += `&with_original_language=${selectedLanguage.split('-')[0]}`;
       }
-      
+
       const res = await fetch(url);
       if (!res.ok) {
         throw new Error(`Failed to fetch TV shows: ${res.status}`);
@@ -129,11 +131,9 @@ export const useTVShows = () => {
     setAutoLoadEnabled(false);
   };
 
-
   useEffect(() => {
     fetchShows();
   }, [page, sortBy, fromDate, toDate, selectedLanguage, selectedGenres]);
-
 
   useEffect(() => {
     setTv(allTv.slice(0, displayedCount));
@@ -156,21 +156,21 @@ export const useTVShows = () => {
     isLoading,
     error,
     totalPages,
-    
+
     sortBy,
     selectedGenres,
     fromDate,
     toDate,
     selectedLanguage,
-    
+
     setSortBy,
     setSelectedGenres,
     setFromDate,
     setToDate,
     setSelectedLanguage,
-    
+
     handleLoadMoreClick,
     handleClearFilters,
-    handleSearch
+    handleSearch,
   };
 };

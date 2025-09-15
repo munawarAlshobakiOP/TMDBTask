@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const WelcomeSectionContainer = styled.section.withConfig({
-  shouldForwardProp: (prop) => prop !== 'backgroundImage',
+  shouldForwardProp: prop => prop !== 'backgroundImage',
 })`
   position: relative;
   width: 100%;
@@ -50,7 +50,11 @@ export const Overlay = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, var(--shadow-primary), var(--gradient-color1));
+  background: linear-gradient(
+    135deg,
+    var(--shadow-primary),
+    var(--gradient-color1)
+  );
   z-index: 1;
 `;
 
@@ -227,7 +231,11 @@ export const SearchButton = styled.button`
   right: 0;
   top: 50%;
   transform: translateY(-50%);
-  background: linear-gradient(to right, var(--color-success), var(--color-primary));
+  background: linear-gradient(
+    to right,
+    var(--color-success),
+    var(--color-primary)
+  );
   color: var(--color-white);
   border: none;
   border-radius: var(--radius-3xl);
@@ -239,9 +247,6 @@ export const SearchButton = styled.button`
   gap: var(--spacing-sm);
   z-index: var(--z-dropdown);
 
-  &:hover {
-    color: var(--color-black);
-  }
 
   @media (max-width: 48rem) {
     padding: var(--spacing-sm) var(--spacing-xl);

@@ -24,21 +24,25 @@ export const useMediaFilters = (mediaType = 'movie', selectedLang = 'en') => {
     fetchData();
   }, [mediaType, selectedLanguage]);
 
-  const toggleSection = (section) => {
-    setExpandedSections((prev) => ({
+  const toggleSection = section => {
+    setExpandedSections(prev => ({
       ...prev,
       [section]: !prev[section],
     }));
   };
 
-  const toggleGenre = (genreId) => {
-    setSelectedGenres((prev) =>
-      prev.includes(genreId) ? prev.filter((g) => g !== genreId) : [...prev, genreId]
+  const toggleGenre = genreId => {
+    setSelectedGenres(prev =>
+      prev.includes(genreId)
+        ? prev.filter(g => g !== genreId)
+        : [...prev, genreId]
     );
   };
 
   const getSelectedLanguageName = () => {
-    const selected = languages.find((lang) => lang.iso_639_1 === selectedLanguage);
+    const selected = languages.find(
+      lang => lang.iso_639_1 === selectedLanguage
+    );
     return selected ? selected.english_name : '';
   };
 

@@ -9,12 +9,13 @@ export default function MoviePage({ params }) {
   const { movieDslug } = use(params);
   const { mediaData, castData, error, isLoading } = useMovieDetail(movieDslug);
 
-
   if (isLoading) {
     return (
       <MovieStyled.NoDataContainer>
         <MovieStyled.NoDataContent>
-          <MovieStyled.NoDataMessage>Loading movie details...</MovieStyled.NoDataMessage>
+          <MovieStyled.NoDataMessage>
+            Loading movie details...
+          </MovieStyled.NoDataMessage>
         </MovieStyled.NoDataContent>
       </MovieStyled.NoDataContainer>
     );
@@ -26,7 +27,9 @@ export default function MoviePage({ params }) {
         <MovieStyled.ErrorContent>
           <MovieStyled.ErrorTitle>Error Loading Movie</MovieStyled.ErrorTitle>
           <MovieStyled.ErrorMessage>{error}</MovieStyled.ErrorMessage>
-          <MovieStyled.ErrorMessage>Please try refreshing the page or check your internet connection.</MovieStyled.ErrorMessage>
+          <MovieStyled.ErrorMessage>
+            Please try refreshing the page or check your internet connection.
+          </MovieStyled.ErrorMessage>
         </MovieStyled.ErrorContent>
       </MovieStyled.ErrorContainer>
     );
@@ -36,7 +39,9 @@ export default function MoviePage({ params }) {
     return (
       <MovieStyled.NoDataContainer>
         <MovieStyled.NoDataContent>
-          <MovieStyled.NoDataMessage>No movie data found.</MovieStyled.NoDataMessage>
+          <MovieStyled.NoDataMessage>
+            No movie data found.
+          </MovieStyled.NoDataMessage>
         </MovieStyled.NoDataContent>
       </MovieStyled.NoDataContainer>
     );
@@ -47,7 +52,7 @@ export default function MoviePage({ params }) {
       <MovieStyled.PageContainer>
         <MovieStyled.MainContent>
           <MediaDetailsContainer
-            media_type="movie"
+            media_type='movie'
             mediaId={movieDslug}
             mediaData={mediaData}
           />

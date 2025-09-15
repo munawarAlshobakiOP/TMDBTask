@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE;
 
-export const useMovies = (filters) => {
+export const useMovies = filters => {
   const [movies, setMovies] = useState([]);
   const [allMovies, setAllMovies] = useState([]);
   const [displayedCount, setDisplayedCount] = useState(20);
@@ -19,7 +19,7 @@ export const useMovies = (filters) => {
 
   const buildMovieUrl = useCallback(() => {
     let url = `${BASE_URL}/discover/movie?api_key=${API_KEY}&language=${selectedLang || 'en-US'}&page=${page}&with_original_language=${selectedLang || 'en'}`;
-    
+
     if (sortBy) {
       url += `&sort_by=${sortBy}`;
     }
@@ -32,11 +32,11 @@ export const useMovies = (filters) => {
     if (selectedGenres && selectedGenres.length > 0) {
       url += `&with_genres=${selectedGenres.join(',')}`;
     }
-    
+
     return url;
   }, [page, sortBy, fromDate, toDate, selectedLang, selectedGenres]);
 
-  const deduplicateMovies = useCallback((allMovies) => {
+  const deduplicateMovies = useCallback(allMovies => {
     const uniqueMoviesMap = new Map();
     allMovies.forEach(movie => {
       uniqueMoviesMap.set(movie.id, movie);
@@ -47,7 +47,7 @@ export const useMovies = (filters) => {
   const fetchMovies = useCallback(async () => {
     setIsLoading(true);
     setError(null);
-    
+
     try {
       const url = buildMovieUrl();
       const res = await fetch(url);
@@ -55,9 +55,9 @@ export const useMovies = (filters) => {
       if (!res.ok) {
         throw new Error(`Failed to fetch movies: ${res.status}`);
       }
-      
+
       const data = await res.json();
-      
+
       setAllMovies(prev => {
         if (page === 1) {
           return data.results;
@@ -65,7 +65,7 @@ export const useMovies = (filters) => {
         const allMovies = [...prev, ...data.results];
         return deduplicateMovies(allMovies);
       });
-      
+
       setTotalPages(data.total_pages);
     } catch (err) {
       setError(err.message);
@@ -93,23 +93,30 @@ export const useMovies = (filters) => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     const windowHeight = window.innerHeight;
     const documentHeight = document.documentElement.scrollHeight;
-    
+
     if (!autoLoadEnabled || isLoading || page >= totalPages) {
       return;
     }
-    
+
     if (scrollTop + windowHeight >= documentHeight - 200) {
       if (loadMoreTimeout) {
         clearTimeout(loadMoreTimeout);
       }
-      
+
       const timeout = setTimeout(() => {
         loadMoreMovies();
       }, 500);
-      
+
       setLoadMoreTimeout(timeout);
     }
-  }, [autoLoadEnabled, isLoading, loadMoreTimeout, loadMoreMovies, page, totalPages]);
+  }, [
+    autoLoadEnabled,
+    isLoading,
+    loadMoreTimeout,
+    loadMoreMovies,
+    page,
+    totalPages,
+  ]);
 
   const resetMovies = useCallback(() => {
     setPage(1);
@@ -147,6 +154,6 @@ export const useMovies = (filters) => {
     totalPages,
     hasMore: displayedCount < allMovies.length || page < totalPages,
     handleLoadMoreClick,
-    resetMovies
+    resetMovies,
   };
 };

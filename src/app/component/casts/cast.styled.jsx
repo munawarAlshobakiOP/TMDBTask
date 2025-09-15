@@ -44,7 +44,6 @@ export const Character = styled.p`
   margin: 0;
 `;
 
-
 export const Scroller = styled.div`
   display: flex;
   overflow-x: auto;
@@ -66,8 +65,7 @@ export const Scroller = styled.div`
   }
 `;
 export const LoadMoreCard = styled.div`
-
-width: 11.25rem;
+  width: 11.25rem;
   min-width: 11.25rem;
   max-width: 11.25rem;
   flex: 0 0 11.25rem;
@@ -77,9 +75,8 @@ width: 11.25rem;
   align-items: center;
   justify-content: center;
   margin: 0 0.5rem;
-  
 `;
-export const LoadMoreA= styled.a`
+export const LoadMoreA = styled.a`
   text-decoration: none;
   color: inherit;
   width: 100%;
@@ -88,15 +85,15 @@ export const LoadMoreA= styled.a`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-`;  
+`;
 export const LoadMoreSpan = styled.span`
-  fontWeight: bold; 
-  fontSize: 1rem; 
-  marginBottom: 0.5rem;
+  fontweight: bold;
+  fontsize: 1rem;
+  marginbottom: 0.5rem;
 `;
 
 export const LoadMoreButton = styled.button`
-margin-top: 0.625rem;
+  margin-top: 0.625rem;
   padding: 0.5rem 1rem;
   color: white;
   border: none;
@@ -105,17 +102,15 @@ margin-top: 0.625rem;
 
   &:hover {
     background-color: #555;
-  } 
+  }
 `;
 
 export const CaStSectiondiv = styled.div`
-textAlign: center; 
-padding: 1.25rem;
-color: #666; 
+  textalign: center;
+  padding: 1.25rem;
+  color: #666;
 `;
-export const Pragraph = styled.p`
-
-`;
+export const Pragraph = styled.p``;
 
 export const CastSection = styled.div`
   margin-top: 2rem;

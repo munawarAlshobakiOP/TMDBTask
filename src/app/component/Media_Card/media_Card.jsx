@@ -19,27 +19,31 @@ export default function MediaCard({ media, media_type }) {
 
   const displayTitle = media.title || media.name;
   const rawDate = media.release_date || media.first_air_date;
-  const score = media.vote_average ? Math.round(media.vote_average * 10) : 'N/A';
+  const score = media.vote_average
+    ? Math.round(media.vote_average * 10)
+    : 'N/A';
 
-  const formatDate = (dateString) => {
+  const formatDate = dateString => {
     if (!dateString) return '';
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
-      day: 'numeric'
+      day: 'numeric',
     });
   };
 
   const displayDate = formatDate(rawDate);
 
-  const linkUrl = media_type?.toLowerCase() === 'tv' 
-    ? `/TV/${media.id}` 
-    : `/movie/${media.id}`;
+  const linkUrl =
+    media_type?.toLowerCase() === 'tv'
+      ? `/TV/${media.id}`
+      : `/movie/${media.id}`;
 
-   const handleMoreClick = (e) => {
+
+  const handleMoreClick = e => {
     e.preventDefault();
-    setShowMoreBox((prev) => !prev);
+    setShowMoreBox(prev => !prev);
   };
 
   const handleTitleMouseEnter = () => {
@@ -54,38 +58,33 @@ export default function MediaCard({ media, media_type }) {
   return (
     <styled.CardWrapper ref={cardRef}>
       <styled.Card className={showMoreBox ? 'blurred' : ''}>
+        <styled.ClickableOverlay href={linkUrl} />
         <styled.ImageWrapper>
-          <styled.CardLink href={linkUrl}>
-            <styled.Poster src={imageUrl} alt={displayTitle} loading="lazy" />
-          </styled.CardLink>
+          <styled.Poster src={imageUrl} alt={displayTitle} loading='lazy' />
         </styled.ImageWrapper>
         <styled.Details>
-          <styled.Title 
+          <styled.Title
             onMouseEnter={handleTitleMouseEnter}
             onMouseLeave={handleTitleMouseLeave}
           >
             {displayTitle}
-            {showTooltip && (
-              <styled.Tooltip>
-                {displayTitle}
-              </styled.Tooltip>
-            )}
+            {showTooltip && <styled.Tooltip>{displayTitle}</styled.Tooltip>}
           </styled.Title>
           <styled.Date>{displayDate}</styled.Date>
+          <styled.Description>{media.overview || 'No description available.'}</styled.Description>
         </styled.Details>
-          <styled.Score><DonutChart percentage={score} /></styled.Score>
+        <styled.Score>
+          <DonutChart percentage={score} />
+        </styled.Score>
 
-        <styled.MoreButton
-          onClick={handleMoreClick}
-          type="button"
-        >
+        <styled.MoreButton onClick={handleMoreClick} type='button'>
           <MoreHoriz_Icon />
         </styled.MoreButton>
       </styled.Card>
       {showMoreBox && (
         <styled.Morebox>
           <styled.MoreBoxContent>
-            {moreBoxContent.map((item) => (
+            {moreBoxContent.map(item => (
               <div key={item.id}>
                 <p>{item.text}</p>
                 <styled.MoreBoxItem href={item.href}>

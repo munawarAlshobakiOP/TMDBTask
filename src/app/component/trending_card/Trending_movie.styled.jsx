@@ -1,43 +1,14 @@
 import styled from 'styled-components';
 
-export const TrendingCard = styled.div`
-  width: var(--width-movie-card);
-  min-width: var(--width-movie-card);
-  max-width: var(--width-movie-card);
-  flex: 0 0 var(--width-movie-card);
-  flex-shrink: 0;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  scroll-snap-align: start;
-  position: relative;
-  min-height: 26rem;
-
-  @media (max-width: 768px) {
-    width: 9.5rem;
-    min-width: 9.5rem;
-    max-width: 9.5rem;
-    flex: 0 0 9.5rem;
-    min-height: 24rem;
-  }
-
-  @media (max-width: var(--breakpoint-sm)) {
-    width: 9rem;
-    min-width: 9rem;
-    max-width: 9rem;
-    flex: 0 0 9rem;
-    min-height: 20rem;
-  }
-`;
 
 export const MoviePoster = styled.img`
   width: var(--width-movie-card);
   height: var(--height-movie-poster);
   object-fit: cover;
   border-radius: var(--radius-lg);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-  @media (max-width: 768px) {
+  @media (max-width: 48rem) {
     width: 9.5rem;
     height: 14.25rem;
   }
@@ -59,7 +30,7 @@ export const NoImagePlaceholder = styled.div`
   color: var(--color-text-light);
   font-size: var(--font-size-sm);
 
-  @media (max-width: 768px) {
+  @media (max-width: 48rem) {
     width: 9.5rem;
     height: 14.25rem;
   }
@@ -77,7 +48,7 @@ export const MovieTitle = styled.h4`
   color: var(--color-text-secondary);
   max-width: 8.125rem;
 
-  @media (max-width: 768px) {
+  @media (max-width: 48rem) {
     font-size: 0.8rem;
     max-width: 8.5rem;
   }
@@ -105,7 +76,7 @@ export const MovieYear = styled.p`
   color: var(--color-gray-darker);
   margin: var(--spacing-xs) 0 0 0;
 
-  @media (max-width: 768px) {
+  @media (max-width: 48rem) {
     font-size: 0.75rem;
   }
 
@@ -164,7 +135,8 @@ export const MoreBoxContent = styled.div`
   p {
     font-size: 0.6875rem;
     font-weight: var(--font-weight-bold);
-    margin: var(--spacing-xs) var(--spacing-md) var(--spacing-xs) var(--spacing-md);
+    margin: var(--spacing-xs) var(--spacing-md) var(--spacing-xs)
+      var(--spacing-md);
     color: var(--color-text-secondary);
     text-align: left;
   }
@@ -191,8 +163,62 @@ export const MoreBoxItem = styled.a`
     color: var(--color-white);
   }
 `;
+
+
 export const MovieDetail = styled.div`
   word-break: break-word;
   white-space: normal;
   margin-top: var(--spacing-sm);
+`;
+
+export const TrendingCard = styled.div`
+  width: var(--width-movie-card);
+  min-width: var(--width-movie-card);
+  max-width: var(--width-movie-card);
+  flex: 0 0 var(--width-movie-card);
+  flex-shrink: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  scroll-snap-align: start;
+  position: relative;
+  min-height: 26rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+
+
+  @media (max-width: 48rem) {
+    width: 9.5rem;
+    min-width: 9.5rem;
+    max-width: 9.5rem;
+    flex: 0 0 9.5rem;
+    min-height: 24rem;
+  }
+
+  @media (max-width: var(--breakpoint-sm)) {
+    width: 9rem;
+    min-width: 9rem;
+    max-width: 9rem;
+    flex: 0 0 9rem;
+    min-height: 20rem;
+  }
+`;
+
+export const EmojiReaction = styled.div`
+  display: none;
+
+  @media (max-width: 48rem) {
+    display: flex;
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    font-size: 1.5rem;
+    z-index: 5;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.8);
+
+  }
 `;

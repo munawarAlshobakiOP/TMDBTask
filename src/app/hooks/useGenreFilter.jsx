@@ -3,9 +3,11 @@ import { useState } from 'react';
 export const useGenreFilter = () => {
   const [selectedGenres, setSelectedGenres] = useState([]);
 
-  const toggleGenre = (genreId) => {
-    setSelectedGenres((prev) =>
-      prev.includes(genreId) ? prev.filter((g) => g !== genreId) : [...prev, genreId]
+  const toggleGenre = genreId => {
+    setSelectedGenres(prev =>
+      prev.includes(genreId)
+        ? prev.filter(g => g !== genreId)
+        : [...prev, genreId]
     );
   };
 
@@ -13,9 +15,7 @@ export const useGenreFilter = () => {
     setSelectedGenres([]);
   };
 
-  const isGenreSelected = (genreId) => {
-    return selectedGenres.includes(genreId);
-  };
+  const isGenreSelected = genreId => selectedGenres.includes(genreId);
 
   return {
     selectedGenres,

@@ -1,64 +1,69 @@
-import { FormatListBulleted_Icon, Favorite_Icon, Bookmark_Icon, PlayArrow_Icon } from "../assests/icons";
-export const Nav_link_data_Left=[
-    {name:"Movies",Path:"/movie"},
-    {name:"TV Shows",Path:"/TV"},
+import {
+  FormatListBulleted_Icon,
+  Favorite_Icon,
+  Bookmark_Icon,
+  PlayArrow_Icon,
+} from '../assests/icons';
+export const Nav_link_data_Left = [
+  { name: 'Movies', Path: '/movie' },
+  { name: 'TV Shows', Path: '/TV' },
 ];
 
 export const FooterSections = [
   {
-    title: "The Basics",
+    title: 'The Basics',
     links: [
-      { name: "About TMDB", href: "/about" },
-      { name: "Contact Us", href: "/contact" },
-      { name: "Support Forums", href: "/support" },
-      { name: "API Documentation", href: "/api-docs" },
-      { name: "System Status", href: "/status" },
+      { name: 'About TMDB', href: '/about' },
+      { name: 'Contact Us', href: '/contact' },
+      { name: 'Support Forums', href: '/support' },
+      { name: 'API Documentation', href: '/api-docs' },
+      { name: 'System Status', href: '/status' },
     ],
   },
   {
-    title: "Get Involved",
+    title: 'Get Involved',
     links: [
-      { name: "Contribution Bible", href: "/contribute" },
-      { name: "Add New Movie", href: "/add-movie" },
-      { name: "Add New TV Show", href: "/add-tv" },
+      { name: 'Contribution Bible', href: '/contribute' },
+      { name: 'Add New Movie', href: '/add-movie' },
+      { name: 'Add New TV Show', href: '/add-tv' },
     ],
   },
   {
-    title: "Community",
+    title: 'Community',
     links: [
-      { name: "Guidelines", href: "/guidelines" },
-      { name: "Discussions", href: "/discussions" },
-      { name: "Leaderboard", href: "/leaderboard" },
+      { name: 'Guidelines', href: '/guidelines' },
+      { name: 'Discussions', href: '/discussions' },
+      { name: 'Leaderboard', href: '/leaderboard' },
     ],
   },
   {
-    title: "Legal",
+    title: 'Legal',
     links: [
-      { name: "Terms of Use", href: "/terms" },
-      { name: "API Terms of Use", href: "/api-terms" },
-      { name: "Privacy Policy", href: "/privacy" },
-      { name: "DMCA Policy", href: "/dmca" },
+      { name: 'Terms of Use', href: '/terms' },
+      { name: 'API Terms of Use', href: '/api-terms' },
+      { name: 'Privacy Policy', href: '/privacy' },
+      { name: 'DMCA Policy', href: '/dmca' },
     ],
   },
 ];
 export const sortOptions = [
-    { value: "popularity.desc", label: "Popularity Descending" },
-    { value: "popularity.asc", label: "Popularity Ascending" },
-    { value: "vote_average.desc", label: "Rating Descending" },
-    { value: "vote_average.asc", label: "Rating Ascending" },
-    { value: "title.asc", label: "Title (A-Z)" },
-    { value: "title.desc", label: "Title (Z-A)" },
-  ];
+  { value: 'popularity.desc', label: 'Popularity Descending' },
+  { value: 'popularity.asc', label: 'Popularity Ascending' },
+  { value: 'vote_average.desc', label: 'Rating Descending' },
+  { value: 'vote_average.asc', label: 'Rating Ascending' },
+  { value: 'title.asc', label: 'Title (A-Z)' },
+  { value: 'title.desc', label: 'Title (Z-A)' },
+];
 
 export const filterSections = [
-  { id: "sort", title: "Sort" },
-  { id: "Filter", title: "Filter" }
+  { id: 'sort', title: 'Sort' },
+  { id: 'Filter', title: 'Filter' },
 ];
 
 export const showMeOptions = [
-  { id: "everything", label: "everything", defaultChecked: true },
-  { id: "notSeen", label: "I haven't seen" },
-  { id: "seen", label: "I have seen" }
+  { id: 'everything', label: 'everything', defaultChecked: true },
+  { id: 'notSeen', label: "I haven't seen" },
+  { id: 'seen', label: 'I have seen' },
 ];
 
 export const actionItems = [
@@ -68,7 +73,7 @@ export const actionItems = [
     icon: FormatListBulleted_Icon,
     alt: 'List',
     href: '#',
-    tooltip: 'Login to create and edit custom lists'
+    tooltip: 'Login to create and edit custom lists',
   },
   {
     id: 'favorites',
@@ -76,7 +81,7 @@ export const actionItems = [
     icon: Favorite_Icon,
     alt: 'Heart',
     href: '#',
-    tooltip: 'Add to favourites'
+    tooltip: 'Add to favourites',
   },
   {
     id: 'watchlist',
@@ -84,7 +89,7 @@ export const actionItems = [
     icon: Bookmark_Icon,
     alt: 'Bookmark',
     href: '#',
-    tooltip: 'Add to watchlist'
+    tooltip: 'Add to watchlist',
   },
   {
     id: 'trailer',
@@ -93,22 +98,22 @@ export const actionItems = [
     alt: 'Play',
     href: '#',
     tooltip: 'Play Trailer',
-    isPlayButton: true
-  }
+    isPlayButton: true,
+  },
 ];
 export const moreBoxContent = [
   {
     id: 'login',
     text: 'Want to rate or add this item to a list?',
     linkText: 'login',
-    href: '/login'
+    href: '/login',
   },
   {
     id: 'signup',
     text: 'Not a member?',
     linkText: 'signup',
-    href: ''
-  }
+    href: '',
+  },
 ];
 
 export const formFields = [
@@ -116,14 +121,14 @@ export const formFields = [
     id: 'username',
     label: 'Username',
     type: 'text',
-    name: 'username'
+    name: 'username',
   },
   {
     id: 'password',
     label: 'Password',
     type: 'password',
-    name: 'password'
-  }
+    name: 'password',
+  },
 ];
 export const emojiReactions = [
   {
@@ -133,7 +138,6 @@ export const emojiReactions = [
     image: '/picture/icon/emojiVomit.svg',
     alt: 'Vomiting emoji',
     value: 'vomit',
-   
   },
   {
     id: 'laugh',
@@ -151,6 +155,5 @@ export const emojiReactions = [
     image: '/picture/icon/EmojiYawn.svg',
     alt: 'Yawning emoji',
     value: 'yawn',
-   
-  }
+  },
 ];

@@ -7,12 +7,12 @@ export const DonutWrapper = styled.div`
   background: ${({ percentage }) => {
     const angle = (percentage / 100) * 360;
 
-    
-    const ringColor = percentage >= 70
-      ? 'var(--color-success)'           
-      : percentage >= 40
-      ? 'var(--color-warning)'           
-      : 'var(--color-error)';           
+    const ringColor =
+      percentage >= 70
+        ? 'var(--color-success)'
+        : percentage >= 40
+          ? 'var(--color-warning)'
+          : 'var(--color-error)';
 
     return `conic-gradient(${ringColor} ${angle}deg, rgba(255, 255, 255, 0.3) 0deg)`;
   }};
@@ -26,7 +26,7 @@ export const DonutWrapper = styled.div`
 export const DonutInner = styled.div`
   width: ${({ size, thickness }) => `${(size - thickness * 2) / 16}rem`};
   height: ${({ size, thickness }) => `${(size - thickness * 2) / 16}rem`};
-  background-color: var(--color-border-dark); 
+  background-color: var(--color-border-dark);
   border-radius: 50%;
   position: absolute;
   border: 0.1875rem solid var(--color-border-dark);
@@ -45,17 +45,17 @@ export const PercentageText = styled.span`
   min-width: 1.5rem;
   text-align: center;
   line-height: 1;
-  
+
   &.detail-page-donut-text {
     font-size: 1.45rem !important;
   }
-  
+
   sup {
     font-size: 0.5rem;
     vertical-align: super;
     line-height: 0;
   }
-  
+
   &.detail-page-donut-text sup {
     font-size: 0.7rem;
   }

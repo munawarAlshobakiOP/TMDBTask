@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { FetchingCast, FetchingDetails } from '../services/fetching';
 
-export const useTVDetail = (tvSlug) => {
+export const useTVDetail = tvSlug => {
   const [mediaData, setMediaData] = useState(null);
   const [castData, setCastData] = useState([]);
   const [error, setError] = useState(null);
@@ -36,6 +36,6 @@ export const useTVDetail = (tvSlug) => {
     mediaData,
     castData,
     error,
-    isLoading
+    isLoading,
   };
 };

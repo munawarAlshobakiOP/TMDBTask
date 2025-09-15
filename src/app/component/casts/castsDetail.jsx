@@ -1,6 +1,6 @@
-"use client";
-import CastScrolling from "./castScrolling";
-import * as styled from "./cast.styled";
+'use client';
+import CastScrolling from './castScrolling';
+import * as styled from './cast.styled';
 
 const CastSection = ({ cast }) => {
   if (!cast || cast.length === 0) {

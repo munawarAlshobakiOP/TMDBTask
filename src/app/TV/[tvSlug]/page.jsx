@@ -13,7 +13,9 @@ export default function TVPage({ params }) {
     return (
       <TVStyled.NoDataContainer>
         <TVStyled.NoDataContent>
-          <TVStyled.NoDataMessage>Loading TV show details...</TVStyled.NoDataMessage>
+          <TVStyled.NoDataMessage>
+            Loading TV show details...
+          </TVStyled.NoDataMessage>
         </TVStyled.NoDataContent>
       </TVStyled.NoDataContainer>
     );
@@ -23,7 +25,9 @@ export default function TVPage({ params }) {
     return (
       <TVStyled.NoDataContainer>
         <TVStyled.NoDataContent>
-          <TVStyled.NoDataMessage>Error loading TV show: {error}</TVStyled.NoDataMessage>
+          <TVStyled.NoDataMessage>
+            Error loading TV show: {error}
+          </TVStyled.NoDataMessage>
         </TVStyled.NoDataContent>
       </TVStyled.NoDataContainer>
     );
@@ -33,7 +37,9 @@ export default function TVPage({ params }) {
     return (
       <TVStyled.NoDataContainer>
         <TVStyled.NoDataContent>
-          <TVStyled.NoDataMessage>No TV show data found.</TVStyled.NoDataMessage>
+          <TVStyled.NoDataMessage>
+            No TV show data found.
+          </TVStyled.NoDataMessage>
         </TVStyled.NoDataContent>
       </TVStyled.NoDataContainer>
     );
@@ -43,7 +49,7 @@ export default function TVPage({ params }) {
     <TVStyled.PageContainer>
       <TVStyled.MainContent>
         <MediaDetailsContainer
-          media_type="tv"
+          media_type='tv'
           mediaId={tvSlug}
           mediaData={mediaData}
         />

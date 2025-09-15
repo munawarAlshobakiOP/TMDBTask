@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { fetchSearchResults } from '../services/fetching';
 
-export const useSearchBar = (onSearchResults) => {
+export const useSearchBar = onSearchResults => {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -16,20 +16,20 @@ export const useSearchBar = (onSearchResults) => {
       setError(null);
       return;
     }
-    
+
     setLoading(true);
     setError(null);
-    
+
     try {
       const searchData = await fetchSearchResults(query.trim());
-      
+
       const processedResults = (searchData.results || []).map(item => {
         if (!item.media_type) {
           item.media_type = item.title ? 'movie' : 'tv';
         }
         return item;
       });
-      
+
       setResults(processedResults);
       setShowDropdown(processedResults.length > 0);
       onSearchResults(processedResults);
@@ -49,7 +49,7 @@ export const useSearchBar = (onSearchResults) => {
   }, [query]);
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleClickOutside = event => {
       if (showDropdown && !event.target.closest('[data-search-container]')) {
         setShowDropdown(false);
       }
@@ -61,12 +61,12 @@ export const useSearchBar = (onSearchResults) => {
     };
   }, [showDropdown]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     searchMovies();
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     setQuery(e.target.value);
   };
 
@@ -82,6 +82,6 @@ export const useSearchBar = (onSearchResults) => {
     showDropdown,
     handleSubmit,
     handleInputChange,
-    handleInputFocus
+    handleInputFocus,
   };
 };

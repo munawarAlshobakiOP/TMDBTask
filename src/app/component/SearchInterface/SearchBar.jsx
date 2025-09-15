@@ -12,25 +12,24 @@ export default function SearchBar({ onSearchResults }) {
     showDropdown,
     handleSubmit,
     handleInputChange,
-    handleInputFocus
+    handleInputFocus,
   } = useSearchBar(onSearchResults);
 
   return (
     <SearchStyled.SearchBarContainer data-search-container>
-
       <SearchStyled.SearchForm2 onSubmit={handleSubmit}>
         <SearchStyled.SearchInputWrapper>
           <SearchIcon />
-          <SearchStyled.SearchInput2 
-            type="text" 
-            placeholder="Search for a movie, TV show, person..." 
+          <SearchStyled.SearchInput2
+            type='text'
+            placeholder='Search for a movie, TV show, person...'
             value={query}
             onChange={handleInputChange}
             onFocus={handleInputFocus}
           />
         </SearchStyled.SearchInputWrapper>
       </SearchStyled.SearchForm2>
-      
+
       {showDropdown && (
         <SearchStyled.Dropdown>
           {loading && (
@@ -38,16 +37,16 @@ export default function SearchBar({ onSearchResults }) {
               <p>Searching for movies and TV shows...</p>
             </SearchStyled.LoadingIndicator>
           )}
-          
+
           {error && (
             <SearchStyled.LoadingIndicator>
               <p>Search failed: {error}</p>
             </SearchStyled.LoadingIndicator>
           )}
-          
+
           {results.length > 0 && (
             <SearchStyled.ResultsList>
-              {results.slice(0, 9).map((item) => {
+              {results.slice(0, 9).map(item => {
                 const title = item.title || item.name || 'Unknown Title';
 
                 return (

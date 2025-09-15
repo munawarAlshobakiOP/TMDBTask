@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { FetchingCast, FetchingDetails } from '../services/fetching';
 
-export const useMovieDetail = (movieSlug) => {
+export const useMovieDetail = movieSlug => {
   const [mediaData, setMediaData] = useState(null);
   const [castData, setCastData] = useState([]);
   const [error, setError] = useState(null);
@@ -11,13 +11,13 @@ export const useMovieDetail = (movieSlug) => {
     const fetchAll = async () => {
       setIsLoading(true);
       setError(null);
-      
+
       try {
         const [details, cast] = await Promise.all([
           FetchingDetails('movie', movieSlug),
           FetchingCast('movie', movieSlug),
         ]);
-        
+
         setMediaData(details);
         setCastData(cast);
       } catch (err) {
@@ -36,6 +36,6 @@ export const useMovieDetail = (movieSlug) => {
     mediaData,
     castData,
     error,
-    isLoading
+    isLoading,
   };
 };

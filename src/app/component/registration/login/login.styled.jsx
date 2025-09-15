@@ -18,16 +18,16 @@ export const LoginContainer = styled.div`
     min-height: 50vh;
   }
 `;
-
 export const ButtonContainer = styled.div`
   display: flex;
   gap: var(--spacing-base);
   align-items: center;
+  justify-content: center;
   margin-top: var(--spacing-base);
 
   @media (max-width: 480px) {
-    flex-direction: column;
-    align-items: stretch;
+    flex-direction: row;
+    align-items: center;
     gap: var(--spacing-sm);
   }
 `;
@@ -36,7 +36,7 @@ export const LoginTitle = styled.h1`
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-xl);
   margin-bottom: var(--spacing-base);
-  color: var(--color-text-dark); 
+  color: var(--color-text-dark);
 
   @media (max-width: 480px) {
     font-size: 1.5rem;
@@ -78,7 +78,7 @@ export const FieldLabel = styled.label`
   display: block;
   font-weight: var(--font-weight-medium);
   margin-bottom: var(--spacing-sm);
-  color: var(--color-text-secondary); 
+  color: var(--color-text-secondary);
 
   @media (max-width: 480px) {
     font-size: var(--font-size-sm);
@@ -96,7 +96,7 @@ export const FieldInput = styled.input`
   transition: var(--transition-base);
 
   &:focus {
-    border-color: var(--color-primary); 
+    border-color: var(--color-primary);
     box-shadow: var(--shadow-primary);
     outline: none;
   }
@@ -107,27 +107,25 @@ export const FieldInput = styled.input`
   }
 `;
 export const LoginButton = styled.button`
-  background-color: var(--color-gray-dark); 
-  color: var(--color-white);
-  border: none;
+  background-color: #dee2e6;
+  color: #212529;
+  border: 0.0625rem solid  #dee2e6 ;
   border-radius: var(--spacing-xs);
-  padding: var(--spacing-xs) var(--spacing-sm); 
+  padding: var(--spacing-xs) var(--spacing-sm);
   font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
+  font-weight: normal;
   cursor: pointer;
   transition: var(--transition-base);
 
   &:hover {
-    background-color: var(--color-gray-darker); 
+    background-color: var(--color-gray-darker);
   }
 
   @media (max-width: 480px) {
-    padding: 0.75rem 1rem;
-    font-size: var(--font-size-base);
-    width: 100%;
+    
+
   }
 `;
-
 
 export const ResetPasswordLink = styled(Link)`
   color: var(--color-primary);

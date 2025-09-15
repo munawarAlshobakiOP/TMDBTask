@@ -72,7 +72,6 @@ export const SwitchContainer = styled.div`
   @media (max-width: var(--breakpoint-sm)) {
     min-width: 10rem;
   }
-
 `;
 
 export const SwitchButton = styled.button`
@@ -110,7 +109,6 @@ export const SwitchButton = styled.button`
     background: #ffffff;
   }
 `;
-
 
 export const ColumnContent = styled.div`
   width: 100%;
@@ -273,7 +271,8 @@ export const MoreBoxContent = styled.div`
   p {
     font-size: 0.6875rem;
     font-weight: var(--font-weight-bold);
-    margin: var(--spacing-xs) var(--spacing-md) var(--spacing-xs) var(--spacing-md);
+    margin: var(--spacing-xs) var(--spacing-md) var(--spacing-xs)
+      var(--spacing-md);
     color: var(--color-text);
     text-align: left;
   }

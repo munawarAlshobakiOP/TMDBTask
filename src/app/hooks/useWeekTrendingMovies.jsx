@@ -26,6 +26,6 @@ export const useWeekTrendingMovies = () => {
   return {
     movies,
     error,
-    loading
+    loading,
   };
 };

@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
-import * as Fetching from "../../services/fetching";
+import * as Fetching from '../../services/fetching';
 import * as StyledW from './WelcomeSection.Styled.jsx';
 const WelcomeSection = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -11,13 +11,11 @@ const WelcomeSection = () => {
     Fetching.fetchRandomImg(setBackgroundImage, setIsLoading);
   }, []);
 
-  const handleSearch = (e) => {
+  const handleSearch = e => {
     e.preventDefault();
-   
   };
   return (
-   <StyledW.WelcomeSectionContainer backgroundImage={backgroundImage}>
-
+    <StyledW.WelcomeSectionContainer backgroundImage={backgroundImage}>
       <StyledW.Overlay />
       {isLoading && (
         <StyledW.LoadingIndicator>
@@ -26,29 +24,25 @@ const WelcomeSection = () => {
       )}
       <StyledW.Content>
         <StyledW.WelcomeContainer>
-          <StyledW.WelcomeTitle>
-            Welcome.
-          </StyledW.WelcomeTitle>
+          <StyledW.WelcomeTitle>Welcome.</StyledW.WelcomeTitle>
           <StyledW.WelcomeSubtitle>
             Millions of movies, TV shows and people to discover. Explore now.
           </StyledW.WelcomeSubtitle>
-          
+
           <StyledW.Search>
             <StyledW.SearchForm onSubmit={handleSearch}>
               <StyledW.SearchWrapper>
                 <StyledW.SearchInput>
-                  <StyledW.SearchInputInner 
-                    type="text" 
-                    placeholder="search for a person, movie, tv..." 
+                  <StyledW.SearchInputInner
+                    type='text'
+                    placeholder='search for a person, movie, tv...'
                     value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onChange={e => setSearchQuery(e.target.value)}
                   />
                 </StyledW.SearchInput>
               </StyledW.SearchWrapper>
 
-              <StyledW.SearchButton type="submit">
-                Search
-              </StyledW.SearchButton>
+              <StyledW.SearchButton type='submit'>Search</StyledW.SearchButton>
             </StyledW.SearchForm>
           </StyledW.Search>
         </StyledW.WelcomeContainer>

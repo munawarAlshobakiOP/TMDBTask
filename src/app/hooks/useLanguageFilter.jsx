@@ -1,12 +1,16 @@
 import { useState, useRef, useEffect } from 'react';
 
-export const useLanguageFilter = (languages = [], selectedLanguage, setSelectedLanguage) => {
+export const useLanguageFilter = (
+  languages = [],
+  selectedLanguage,
+  setSelectedLanguage
+) => {
   const [languageSearch, setLanguageSearch] = useState('');
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef();
 
   useEffect(() => {
-    const handleClickOutside = (e) => {
+    const handleClickOutside = e => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
         setDropdownOpen(false);
       }
@@ -15,16 +19,18 @@ export const useLanguageFilter = (languages = [], selectedLanguage, setSelectedL
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const filteredLanguages = languages.filter((lang) =>
+  const filteredLanguages = languages.filter(lang =>
     lang.english_name.toLowerCase().includes(languageSearch.toLowerCase())
   );
 
   const getSelectedLanguageName = () => {
-    const selected = languages.find((lang) => lang.iso_639_1 === selectedLanguage);
+    const selected = languages.find(
+      lang => lang.iso_639_1 === selectedLanguage
+    );
     return selected ? selected.english_name : '';
   };
 
-  const handleLanguageSelect = (langIso) => {
+  const handleLanguageSelect = langIso => {
     setSelectedLanguage(langIso);
     setLanguageSearch('');
     setDropdownOpen(false);
@@ -36,7 +42,7 @@ export const useLanguageFilter = (languages = [], selectedLanguage, setSelectedL
     setDropdownOpen(false);
   };
 
-  const handleSearchChange = (e) => {
+  const handleSearchChange = e => {
     setLanguageSearch(e.target.value);
     setDropdownOpen(true);
   };

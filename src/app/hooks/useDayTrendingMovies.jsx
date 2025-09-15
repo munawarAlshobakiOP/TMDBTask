@@ -26,6 +26,6 @@ export const useDayTrendingMovies = () => {
   return {
     movies,
     error,
-    loading
+    loading,
   };
 };
