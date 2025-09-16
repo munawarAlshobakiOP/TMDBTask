@@ -17,9 +17,10 @@ export const Card = styled.div`
 
 export const Image = styled.img`
   width: 11.25rem;
-  height: 16.875rem;
+  height: 12.875rem;
+  
   object-fit: cover;
-  border-radius: 0.5rem;
+  border-radius: 0.2rem;
 `;
 
 export const Info = styled.div`
