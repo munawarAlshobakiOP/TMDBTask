@@ -14,6 +14,12 @@ export const useTVShows = () => {
   const [autoLoadEnabled, setAutoLoadEnabled] = useState(false);
   const [loadMoreTimeout, setLoadMoreTimeout] = useState(null);
 
+  useEffect(() => {
+    if (allTv.length > displayedCount) {
+      setDisplayedCount(prev => Math.min(prev + 20, allTv.length));
+    }
+  }, [allTv]);
+
   const [sortBy, setSortBy] = useState('popularity.desc');
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [fromDate, setFromDate] = useState('');
@@ -157,6 +163,7 @@ export const useTVShows = () => {
     isLoading,
     error,
     totalPages,
+    hasMore: displayedCount < allTv.length || page < totalPages,
 
     sortBy,
     selectedGenres,

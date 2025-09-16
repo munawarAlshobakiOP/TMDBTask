@@ -1,3 +1,4 @@
+
 'use client';
 import { useState, useEffect, useCallback } from 'react';
 
@@ -14,6 +15,12 @@ export const useMovies = filters => {
   const [totalPages, setTotalPages] = useState(0);
   const [autoLoadEnabled, setAutoLoadEnabled] = useState(false);
   const [loadMoreTimeout, setLoadMoreTimeout] = useState(null);
+
+  useEffect(() => {
+    if (allMovies.length > displayedCount) {
+      setDisplayedCount(prev => Math.min(prev + 20, allMovies.length));
+    }
+  }, [allMovies]);
 
   const { sortBy, selectedGenres, fromDate, toDate, selectedLang } = filters;
 
@@ -156,4 +163,4 @@ export const useMovies = filters => {
     handleLoadMoreClick,
     resetMovies,
   };
-};
+}

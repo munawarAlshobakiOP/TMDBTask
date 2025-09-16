@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { fetchSearchResults } from '../../services/fetching';
+import { fetchSearchResults, fetchTrendingWeekMovies } from '../../services/fetching';
 
 export const useSearchBar = onSearchResults => {
   const [query, setQuery] = useState('');
@@ -7,6 +7,7 @@ export const useSearchBar = onSearchResults => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [trending, setTrending] = useState([]);
 
   const searchMovies = async () => {
     if (query.trim() === '') {
@@ -61,6 +62,18 @@ export const useSearchBar = onSearchResults => {
     };
   }, [showDropdown]);
 
+  useEffect(() => {
+    async function getTrending() {
+      try {
+        const data = await fetchTrendingWeekMovies();
+        setTrending(data.slice(0, 10));
+      } catch (err) {
+        setTrending([]);
+      }
+    }
+    getTrending();
+  }, []);
+
   const handleSubmit = e => {
     e.preventDefault();
     searchMovies();
@@ -71,7 +84,11 @@ export const useSearchBar = onSearchResults => {
   };
 
   const handleInputFocus = () => {
-    setShowDropdown(results.length > 0);
+    if (query.trim() === '') {
+      setShowDropdown(true);
+    } else {
+      setShowDropdown(results.length > 0);
+    }
   };
 
   return {
@@ -80,6 +97,7 @@ export const useSearchBar = onSearchResults => {
     loading,
     error,
     showDropdown,
+    trending,
     handleSubmit,
     handleInputChange,
     handleInputFocus,

@@ -1,8 +1,8 @@
 'use client';
 import { useState, Suspense } from 'react';
-import MediaFilters from '../../component/Media_Filters/Media_Filters.jsx';
-import * as MovieStyled from './movie.styled.jsx';
-import MediaCard from '../../component/Media_Card/media_Card.jsx';
+import MediaFilters from '../../Component/MediaFilters/MediaFilters.jsx';
+import * as MovieStyled from './movie.style.js';
+import MediaCard from '../../Component/MediaCard/MediaCard.jsx';
 import { useMovies } from '../../libs/hooks/useMovies.jsx';
 
 export default function MovieGrid() {
@@ -106,7 +106,7 @@ export default function MovieGrid() {
               </MovieStyled.LoadingContainer>
             )}
 
-            {!isLoading && (
+            {!isLoading && hasMore && (
               <MovieStyled.LoadMoreContainer>
                 <MovieStyled.LoadMoreButton onClick={handleLoadMoreClick}>
                   Load More

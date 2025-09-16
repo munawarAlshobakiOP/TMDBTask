@@ -1,8 +1,8 @@
 'use client';
 import { use } from 'react';
-import MediaDetailsContainer from '../../../component/Movie_TV_Details/card_Details';
-import CastSection from '../../../component/casts/castsDetail';
-import * as TVStyled from '../TV.styled.jsx';
+import MediaDetailsContainer from '../../../Component/MovieTvDetails/CardDetails';
+import CastSection from '../../../Component/Casts/CastsDetail';
+import * as TVStyled from '../TV.style.js';
 import { useTVDetail } from '../../../libs/hooks/useTVDetail';
 
 export default function TVPage({ params }) {

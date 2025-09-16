@@ -7,10 +7,12 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import OpenWithIcon from '@mui/icons-material/OpenWith';
-
+import EventIcon from '@mui/icons-material/Event';
 import SearchIcon from '@mui/icons-material/Search';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import MenuIcon from '@mui/icons-material/Menu';
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+
 export const Add_Icon = AddIcon;
 export const Search_Icon = SearchIcon;
 export const ChevronRight_Icon = ChevronRightIcon;
@@ -23,3 +25,5 @@ export const MoreHoriz_Icon = MoreHorizIcon;
 export const KeyboardArrowDown_Icon = KeyboardArrowDownIcon;
 export const OpenWith_Icon = OpenWithIcon;
 export const Menu_Icon = MenuIcon;
+export const Event_Icon= EventIcon;
+export const TrendingUp_Icon = TrendingUpIcon;

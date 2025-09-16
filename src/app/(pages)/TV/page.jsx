@@ -1,7 +1,7 @@
 'use client';
-import MediaCard from '../../component/Media_Card/media_Card';
-import MediaFilters from '../../component/Media_Filters/Media_Filters';
-import * as TVStyled from './TV.styled.jsx';
+import MediaCard from '../../Component/MediaCard/MediaCard';
+import MediaFilters from '../../Component/MediaFilters/MediaFilters';
+import * as TVStyled from './TV.style.js';
 import { useTVShows } from '../../libs/hooks/useTVShows';
 
 export default function TVGrid() {
@@ -22,6 +22,7 @@ export default function TVGrid() {
     handleLoadMoreClick,
     handleClearFilters,
     handleSearch,
+    hasMore,
   } = useTVShows();
 
   if (error) {
@@ -93,7 +94,7 @@ export default function TVGrid() {
             </TVStyled.LoadingContainer>
           )}
 
-          {!isLoading && (
+          {!isLoading && hasMore && (
             <TVStyled.LoadMoreContainer>
               <TVStyled.LoadMoreButton onClick={handleLoadMoreClick}>
                 Load More

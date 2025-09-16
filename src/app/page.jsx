@@ -1,8 +1,8 @@
 'use client';
 import { useState } from 'react';
-import Trending from './component/Trending_Movie/trending';
-import SearchBar from './component/SearchInterface/SearchBar';
-import WelcomeSection from './component/WelcomeSection/WelcomeSection';
+import Trending from './Component/TrendingMovie/Trending';
+import SearchBar from './Component/SearchInterface/SearchBar';
+import WelcomeSection from './Component/WelcomeSection/WelcomeSection';
 import { PageContainer, ContentWrapper, MainContent } from './page.styled';
 
 export default function Home() {
